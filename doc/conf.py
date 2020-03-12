@@ -13,11 +13,11 @@
 import os
 import sys
 import sphinx_rtd_theme
-sys.path.insert(0, os.path.abspath('../Main aplication'))
-sys.path.insert(0, os.path.abspath('../Main aplication/rutinas'))
-sys.path.insert(0, os.path.abspath('../Main aplication/handlers'))
-sys.path.insert(0, os.path.abspath('../Main aplication/promociones'))
-sys.path.insert(0, os.path.abspath('../Main aplication/handlers'))
+sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../rutinas'))
+sys.path.insert(0, os.path.abspath('../handlers'))
+sys.path.insert(0, os.path.abspath('../promociones'))
+sys.path.insert(0, os.path.abspath('../handlers'))
 
 def skip(app, what, name, obj, skip, options):
     if name == "__init__":
