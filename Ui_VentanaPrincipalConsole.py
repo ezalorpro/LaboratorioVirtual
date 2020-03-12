@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\VentanaPrincipal.ui'
+# Form implementation generated from reading ui file '.\VentanaPrincipalConsole.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -5040,6 +5040,30 @@ class Ui_MainWindow(object):
         self.verticalLayout_59.addLayout(self.horizontalLayout_44)
         self.gridLayout_109.addLayout(self.verticalLayout_59, 0, 0, 1, 1)
         self.principalTab.addTab(self.controlSimulacion, "")
+        self.qtconsole = QtWidgets.QWidget()
+        self.qtconsole.setObjectName("qtconsole")
+        self.gridLayout_115 = QtWidgets.QGridLayout(self.qtconsole)
+        self.gridLayout_115.setObjectName("gridLayout_115")
+        self.jupyterWidget = JupyterConsole(self.qtconsole)
+        self.jupyterWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.jupyterWidget.setObjectName("jupyterWidget")
+        self.gridLayout_115.addWidget(self.jupyterWidget, 0, 0, 1, 1)
+        self.horizontalLayout_50 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_50.setObjectName("horizontalLayout_50")
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_50.addItem(spacerItem17)
+        self.limpiarConsole = QtWidgets.QPushButton(self.qtconsole)
+        self.limpiarConsole.setObjectName("limpiarConsole")
+        self.horizontalLayout_50.addWidget(self.limpiarConsole)
+        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_50.addItem(spacerItem18)
+        self.agregarPathConsole = QtWidgets.QPushButton(self.qtconsole)
+        self.agregarPathConsole.setObjectName("agregarPathConsole")
+        self.horizontalLayout_50.addWidget(self.agregarPathConsole)
+        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_50.addItem(spacerItem19)
+        self.gridLayout_115.addLayout(self.horizontalLayout_50, 1, 0, 1, 1)
+        self.principalTab.addTab(self.qtconsole, "")
         self.gridLayout.addWidget(self.principalTab, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -5550,11 +5574,15 @@ class Ui_MainWindow(object):
         self.toolBox.setItemText(self.toolBox.indexOf(self.controladorPage), _translate("MainWindow", "Controlador"))
         self.simularButton.setText(_translate("MainWindow", "Simular"))
         self.principalTab.setTabText(self.principalTab.indexOf(self.controlSimulacion), _translate("MainWindow", "Simulación"))
+        self.limpiarConsole.setText(_translate("MainWindow", "Limpiar terminal"))
+        self.agregarPathConsole.setText(_translate("MainWindow", "Agregar PATH"))
+        self.principalTab.setTabText(self.principalTab.indexOf(self.qtconsole), _translate("MainWindow", "Terminal"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
         self.actionpelado.setText(_translate("MainWindow", "pelado"))
         self.actionAbout.setText(_translate("MainWindow", "About"))
 
 from promociones.focusLineEdit import FocusLineEdit
+from promociones.jupyterWidget import JupyterConsole
 from promociones.mlpwidget import MlpWidget, MlpWidget3D, MlpWidgetSubplot
 from promociones.pyqtgraphWidget import PgraphWidget, PgraphWidgetpid
 import imagenes_rc

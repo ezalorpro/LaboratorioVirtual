@@ -1,11 +1,12 @@
 """ Archivo principal, en orden de ejecutar la aplicacion, este es el archivo a ejecutar """
 
 
+from handlers.jupyterConsoleHandler import jupyterConsoleHandler
 from handlers.simulacionHandler import SimulacionHandler
+from Ui_VentanaPrincipalConsole import Ui_MainWindow
 from handlers.analisisHandler import AnalisisHandler
 from handlers.TuningHandler import TuningHandler
 from handlers.FuzzyHandler import FuzzyHandler
-from Ui_VentanaPrincipal import Ui_MainWindow
 from PySide2 import QtGui, QtWidgets
 
 import os
@@ -13,7 +14,7 @@ import os
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     """
-    Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definicion de toda la interfaz grafica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz grafica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les envia self y se recibe self y se sigue tratando como si fuera parte de la clase.
+    Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definicion de toda la interfaz grafica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz grafica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les envia self y se recibe self y se sigue tratando como si fuera parte de la clase
     
     :param QtWidgets: Clase base de ventana ofrecida por Qt
     :type QtWidgets: ObjectType
@@ -30,12 +31,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         """
 
         super(MainWindow, self).__init__(parent)
-        
+
         # Ventana principal, objeto de donde se manejara todo
         self.main = Ui_MainWindow()
         self.main.setupUi(self)
         self.showMaximized()
-
+        
         # Estableciendo del icono de la aplicacion
         icon = QtGui.QIcon()
         image_path = self.resource_path("icono.ico")
@@ -53,6 +54,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         TuningHandler(self)  # Handler para la pestaña de Tunning
         FuzzyHandler(self)  # Handler para la pestaña de diseño de controladores difusos
         SimulacionHandler(self)  # Handler para la pestaña de simulacion de sistemas de control
+        jupyterConsoleHandler(self)  # Handler para la pestaña de la qtconsole
 
     def resource_path(self, relative_path):
         """
@@ -66,7 +68,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         return os.path.join(base_path, relative_path)
 
     def closeEvent(self, event):
-        """ Evento pera el cerrado de la ventana """
+        """ Evento para el cerrado de la ventana """
 
         error_dialog = QtWidgets.QMessageBox.question(
             self,
@@ -77,6 +79,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         event.ignore()
         if error_dialog == QtWidgets.QMessageBox.Ok:
+            self.main.jupyterWidget.jupyter_widget.kernel_client.stop_channels()
+            self.main.jupyterWidget.jupyter_widget.kernel_manager.shutdown_kernel()
             event.accept()
 
 
