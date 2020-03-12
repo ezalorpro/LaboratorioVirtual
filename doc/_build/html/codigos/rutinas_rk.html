@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba" href="rk_generator.html" />
+    <link rel="prev" title="Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)" href="rutinas_simulacion.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rutinas_simulacion.html">Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rk_generator.html">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</a></li>
+<li class="toctree-l3"><a class="reference internal" href="discreto_generator.html">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a> &raquo;</li>
+        
+      <li>Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/rutinas_rk.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="archivo-para-definir-los-algoritmos-de-ajuste-del-tamano-de-paso-para-los-runge-kutta-explicitos-y-embebidos">
+<h1>Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos<a class="headerlink" href="#archivo-para-definir-los-algoritmos-de-ajuste-del-tamano-de-paso-para-los-runge-kutta-explicitos-y-embebidos" title="Enlazar permanentemente con este título">¶</a></h1>
+<span class="target" id="module-rutinas_rk"></span><p>Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos, en el caso de los métodos explícitos se utiliza el método de doble paso</p>
+<dl class="function">
+<dt id="rutinas_rk.rk_doble_paso_adaptativo">
+<code class="sig-prename descclassname">rutinas_rk.</code><code class="sig-name descname">rk_doble_paso_adaptativo</code><span class="sig-paren">(</span><em class="sig-param">systema</em>, <em class="sig-param">h_ant</em>, <em class="sig-param">tiempo</em>, <em class="sig-param">tbound</em>, <em class="sig-param">xVectB</em>, <em class="sig-param">entrada</em>, <em class="sig-param">metodo</em>, <em class="sig-param">ordenq</em>, <em class="sig-param">rtol</em>, <em class="sig-param">atol</em>, <em class="sig-param">max_step_increase</em>, <em class="sig-param">min_step_decrease</em>, <em class="sig-param">safety_factor</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_rk.html#rk_doble_paso_adaptativo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_rk.rk_doble_paso_adaptativo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función para definir y manejar el ajuste del tamaño de paso por el método de doble paso para Runge-kutta’s explícitos, la función está realizada de forma específica para trabajar con sistemas de control representados con ecuaciones de espacio de estados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>systema</strong> (<em>LTI</em>) – Representación del sistema de control</p></li>
+<li><p><strong>h_ant</strong> (<em>float</em>) – Tamaño de paso actual</p></li>
+<li><p><strong>tiempo</strong> (<em>float</em>) – Tiempo actual</p></li>
+<li><p><strong>tbound</strong> (<em>float</em>) – Tiempo máximo de simulación</p></li>
+<li><p><strong>xVectB</strong> (<em>numpyArray</em>) – Vector de estado</p></li>
+<li><p><strong>entrada</strong> (<em>float</em>) – Valor de entrada al sistema</p></li>
+<li><p><strong>metodo</strong> (<em>function</em>) – Runge-Kutta a utilizar: RK2, Rk3, etc.</p></li>
+<li><p><strong>ordenq</strong> (<em>int</em>) – Orden del método</p></li>
+<li><p><strong>rtol</strong> (<em>float</em>) – Tolerancia relativa</p></li>
+<li><p><strong>atol</strong> (<em>float</em>) – Tolerancia absoluta</p></li>
+<li><p><strong>max_step_increase</strong> (<em>float</em>) – Máximo incremento del tamaño de paso</p></li>
+<li><p><strong>min_step_decrease</strong> (<em>float</em>) – Mínimo decremento del tamaño de paso</p></li>
+<li><p><strong>safety_factor</strong> (<em>float</em>) – Factor de seguridad</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_rk.rk_embebido_adaptativo">
+<code class="sig-prename descclassname">rutinas_rk.</code><code class="sig-name descname">rk_embebido_adaptativo</code><span class="sig-paren">(</span><em class="sig-param">systema</em>, <em class="sig-param">h_ant</em>, <em class="sig-param">tiempo</em>, <em class="sig-param">tbound</em>, <em class="sig-param">xVectr</em>, <em class="sig-param">entrada</em>, <em class="sig-param">metodo</em>, <em class="sig-param">ordenq</em>, <em class="sig-param">rtol</em>, <em class="sig-param">atol</em>, <em class="sig-param">max_step_increase</em>, <em class="sig-param">min_step_decrease</em>, <em class="sig-param">safety_factor</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_rk.html#rk_embebido_adaptativo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_rk.rk_embebido_adaptativo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función para definir y manejar el ajuste del tamaño de paso para Runge-kutta’s embebidos, la función esta realizada de forma específica para trabajar con sistemas de control representados con ecuaciones de espacio de estados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>systema</strong> (<em>LTI</em>) – Representación del sistema de control</p></li>
+<li><p><strong>h_ant</strong> (<em>float</em>) – Tamaño de paso actual</p></li>
+<li><p><strong>tiempo</strong> (<em>float</em>) – Tiempo actual</p></li>
+<li><p><strong>tbound</strong> (<em>float</em>) – Tiempo máximo de simulación</p></li>
+<li><p><strong>xVectB</strong> (<em>numpyArray</em>) – Vector de estado</p></li>
+<li><p><strong>entrada</strong> (<em>float</em>) – Valor de entrada al sistema</p></li>
+<li><p><strong>metodo</strong> (<em>function</em>) – Runge-Kutta a utilizar: DOPRI54, RKF45, etc.</p></li>
+<li><p><strong>ordenq</strong> (<em>int</em>) – Valor del método de menor orden</p></li>
+<li><p><strong>rtol</strong> (<em>float</em>) – Tolerancia relativa</p></li>
+<li><p><strong>atol</strong> (<em>float</em>) – Tolerancia absoluta</p></li>
+<li><p><strong>max_step_increase</strong> (<em>float</em>) – Máximo incremento del tamaño de paso</p></li>
+<li><p><strong>min_step_decrease</strong> (<em>float</em>) – Mínimo decremento del tamaño de paso</p></li>
+<li><p><strong>safety_factor</strong> (<em>float</em>) – Factor de seguridad</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rk_generator.html" class="btn btn-neutral float-right" title="Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rutinas_simulacion.html" class="btn btn-neutral float-left" title="Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>modificadorMf &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Principal.html">Archivo principal (main)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+        
+      <li>modificadorMf</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Código fuente para modificadorMf</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Archivo para el cambio de definición entre funciones de membresía, los cambios se realizan en dos pasos:</span>
+
+<span class="sd">    old_mf  -&gt;  trimf</span>
+<span class="sd">    trimf   -&gt;  new_mf</span>
+<span class="sd">    </span>
+<span class="sd">De este modo se reduce el número de casos a codificar. Por otro lado, también contiene la función para realizar la validación de las definiciones ingresadas por el usuario </span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="update_definicionmf"><a class="viewcode-back" href="../codigos/modificadorMF.html#modificadorMf.update_definicionmf">[documentos]</a><span class="k">def</span> <span class="nf">update_definicionmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_mf</span><span class="p">,</span> <span class="n">definicion</span><span class="p">,</span> <span class="n">new_mf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Función para la transformación equivalente entre funciones de membresía</span>
+<span class="sd">    </span>
+<span class="sd">    :param old_mf: Nombre de la antigua función de membresía</span>
+<span class="sd">    :type old_mf: str</span>
+<span class="sd">    :param definicion: Lista con los valores correspondiente a la definición de la antigua función de membresía</span>
+<span class="sd">    :type definicion: list</span>
+<span class="sd">    :param new_mf: Nombre de la nueva función de membresía</span>
+<span class="sd">    :type new_mf: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;trimf&#39;</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">definicion</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;trimf&#39;</span><span class="p">:</span>
+            <span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;trapmf&#39;</span><span class="p">:</span>
+            <span class="n">na</span><span class="p">,</span> <span class="n">nd</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">nd</span><span class="p">],</span> <span class="s1">&#39;[a, b, c, d] con: a &lt;= b &lt;= c &lt;= d&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;gaussmf&#39;</span><span class="p">:</span>
+            <span class="n">mean</span> <span class="o">=</span> <span class="n">b</span>
+            <span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">/</span> <span class="mi">8</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mean</span><span class="p">],</span> <span class="s1">&#39;[sigma, media]&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;gauss2mf&#39;</span><span class="p">:</span>
+            <span class="n">mean1</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">sigma1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">/</span> <span class="mi">16</span>
+            <span class="n">mean2</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">sigma2</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">/</span> <span class="mi">16</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">sigma1</span><span class="p">,</span> <span class="n">mean1</span><span class="p">,</span> <span class="n">sigma2</span><span class="p">,</span> <span class="n">mean2</span><span class="p">],</span> <span class="s1">&#39;[sigma1, media1, sigma2, media2] con: media1 &lt;= media2&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;smf&#39;</span> <span class="ow">or</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;zmf&#39;</span><span class="p">:</span>
+            <span class="n">na</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">],</span> <span class="s1">&#39;[a, b] siendo a el inicio del cambio </span><span class="se">\n</span><span class="s1">y b el final del cambio&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;sigmf&#39;</span><span class="p">:</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="n">b</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">nc</span><span class="p">,</span> <span class="n">nb</span><span class="p">],</span> <span class="s1">&#39;[a, b] con:</span><span class="se">\n</span><span class="s1"> a como el ancho del sigmoide, puede ser negativo</span><span class="se">\n</span><span class="s1"> b el centro del sigmoide&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;dsigmf&#39;</span><span class="p">:</span>
+            <span class="n">nb1</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nc1</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+            <span class="n">nb2</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nc2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">nc1</span><span class="p">,</span> <span class="n">nb1</span><span class="p">,</span> <span class="n">nc2</span><span class="p">,</span> <span class="n">nb2</span><span class="p">],</span> <span class="s1">&#39;[a1, b1, a2, b2] con:</span><span class="se">\n</span><span class="s1"> b1, b2 como los centros de los sigmoides</span><span class="se">\n</span><span class="s1"> a1, a2 los anchos de los sigmoides, pueden ser negativos&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;psigmf&#39;</span><span class="p">:</span>
+            <span class="n">nb1</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nc1</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+            <span class="n">nb2</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nc2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">nc1</span><span class="p">,</span> <span class="n">nb1</span><span class="p">,</span> <span class="n">nc2</span><span class="p">,</span> <span class="n">nb2</span><span class="p">],</span> <span class="s1">&#39;[a1, b1, a2, b2] con:</span><span class="se">\n</span><span class="s1"> b1, b2 como los centros de los sigmoides</span><span class="se">\n</span><span class="s1"> a1, a2 los anchos de los sigmoides, pueden ser negativos&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;pimf&#39;</span><span class="p">:</span>
+            <span class="n">na</span><span class="p">,</span> <span class="n">nd</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">nd</span><span class="p">],</span> <span class="s1">&#39;[a, b, c, d] con:</span><span class="se">\n</span><span class="s1">a inicio de la subida y b su final por el lado izquierdo </span><span class="se">\n</span><span class="s1">c inicio de la bajada y d su final por el lado derecho&#39;</span>
+
+        <span class="k">if</span> <span class="n">new_mf</span> <span class="o">==</span> <span class="s1">&#39;gbellmf&#39;</span><span class="p">:</span>
+            <span class="n">na</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="n">b</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con:</span><span class="se">\n</span><span class="s1">a como el ancho de la campana</span><span class="se">\n</span><span class="s1">b pendiente de la campana, puede ser negativa</span><span class="se">\n</span><span class="s1">c centro de la campana&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;trapmf&#39;</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">d</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;gaussmf&#39;</span><span class="p">:</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="mi">4</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="mi">4</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;gauss2mf&#39;</span><span class="p">:</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="mi">4</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="mi">4</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;smf&#39;</span> <span class="ow">or</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;zmf&#39;</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;sigmf&#39;</span><span class="p">:</span>
+        <span class="n">c</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;dsigmf&#39;</span><span class="p">:</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="mf">1.25</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="n">d</span><span class="o">*</span><span class="mf">1.25</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;psigmf&#39;</span><span class="p">:</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="mf">1.25</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="n">d</span><span class="o">*</span><span class="mf">1.25</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;pimf&#39;</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">d</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span>
+
+    <span class="k">if</span> <span class="n">old_mf</span> <span class="o">==</span> <span class="s1">&#39;gbellmf&#39;</span><span class="p">:</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">definicion</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">nc</span><span class="p">],</span> <span class="s1">&#39;[a, b, c] con: a &lt;= b &lt;= c&#39;</span></div>
+
+
+<div class="viewcode-block" id="validacion_mf"><a class="viewcode-back" href="../codigos/modificadorMF.html#modificadorMf.validacion_mf">[documentos]</a><span class="k">def</span> <span class="nf">validacion_mf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">mf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para validar las definiciones ingresadas por el usuario</span>
+<span class="sd">    </span>
+<span class="sd">    :param _: Definicion</span>
+<span class="sd">    :type _: list</span>
+<span class="sd">    :param mf: Nombre de la funcion de membresia a validar</span>
+<span class="sd">    :type mf: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;trimf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b &lt;= c&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 3 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;trapmf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b &lt;= c &lt;= d&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;gaussmf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 2 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;gauss2mf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: media1 &lt;= media2&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;zmf&#39;</span> <span class="ow">or</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;smf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 2 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;sigmf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 2 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;dsigmf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;psigmf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;pimf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b &lt;= c &lt;= d&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+
+    <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;gbellmf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 3 valores&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

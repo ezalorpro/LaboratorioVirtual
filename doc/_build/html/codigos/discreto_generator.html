@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba" href="rk_generator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rutinas_simulacion.html">Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rutinas_rk.html">Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rk_generator.html">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a> &raquo;</li>
+        
+      <li>Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/discreto_generator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="archivo-para-compilar-las-funciones-encargadas-de-la-simulacion-en-tiempo-discreto-utilizando-numba">
+<h1>Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba<a class="headerlink" href="#archivo-para-compilar-las-funciones-encargadas-de-la-simulacion-en-tiempo-discreto-utilizando-numba" title="Enlazar permanentemente con este título">¶</a></h1>
+<span class="target" id="module-discreto_generator"></span><p>Archivo para compilar las funciones encargadas de la simulacion en tiempo discreto utilizando numba, las funciones quedan guardadas en el archivo: discreto_sim.cp37-win32.pyd y pueden ser importadas desde el archivo como una funcion de un modulo</p>
+<dl class="function">
+<dt id="discreto_generator.PID_discreto">
+<code class="sig-prename descclassname">discreto_generator.</code><code class="sig-name descname">PID_discreto</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">ts</em>, <em class="sig-param">s_integral</em>, <em class="sig-param">error_anterior</em>, <em class="sig-param">kp</em>, <em class="sig-param">ki</em>, <em class="sig-param">kd</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/discreto_generator.html#PID_discreto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#discreto_generator.PID_discreto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para calcular el PID en forma discreta</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>float</em>) – Señal de error</p></li>
+<li><p><strong>ts</strong> (<em>float</em>) – Periodo de muestreo</p></li>
+<li><p><strong>s_integral</strong> (<em>float</em>) – Acumulador de la señal integral</p></li>
+<li><p><strong>error_anterior</strong> (<em>deque Object</em>) – deque con el error anterior</p></li>
+<li><p><strong>kp</strong> (<em>float</em>) – Ganancia proporcional</p></li>
+<li><p><strong>ki</strong> (<em>float</em>) – Ganancia integral</p></li>
+<li><p><strong>kd</strong> (<em>float</em>) – Ganancia derivativa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="discreto_generator.derivadas_discretas">
+<code class="sig-prename descclassname">discreto_generator.</code><code class="sig-name descname">derivadas_discretas</code><span class="sig-paren">(</span><em class="sig-param">error</em>, <em class="sig-param">ts</em>, <em class="sig-param">error_anterior</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/discreto_generator.html#derivadas_discretas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#discreto_generator.derivadas_discretas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para calcular la derivada del error y la segunda derivada del error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error</strong> (<em>float</em>) – Señal de error</p></li>
+<li><p><strong>ts</strong> (<em>float</em>) – Periodo de muestreo</p></li>
+<li><p><strong>error_anterior</strong> (<em>deque Object</em>) – deque con el error anterior</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="discreto_generator.ss_discreta">
+<code class="sig-prename descclassname">discreto_generator.</code><code class="sig-name descname">ss_discreta</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">_</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/discreto_generator.html#ss_discreta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#discreto_generator.ss_discreta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para calcular la respuesta del sistema por medio de la representacion discreta de las ecuaciones de espacio de estados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ss</strong> (<em>LTI</em>) – Representacion del sistema</p></li>
+<li><p><strong>x</strong> (<em>numpyArray</em>) – Vector de estado</p></li>
+<li><p><strong>_</strong> (<em>float</em>) – No importa</p></li>
+<li><p><strong>inputValue</strong> (<em>float</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="rk_generator.html" class="btn btn-neutral float-left" title="Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

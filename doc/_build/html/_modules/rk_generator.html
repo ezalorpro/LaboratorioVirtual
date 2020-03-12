@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>rk_generator &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Principal.html">Archivo principal (main)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+        
+      <li>rk_generator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Código fuente para rk_generator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba, los metodos quedan guardados en el archivo: metodos_RK.cp37-win32.pyd y pueden ser importados desde el archivo como una funcion de un modulo </span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">numba.pycc</span> <span class="kn">import</span> <span class="n">CC</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">CC</span><span class="p">(</span><span class="s1">&#39;metodos_RK&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="norm"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.norm">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="s1">&#39;f8(f8[:,::1])&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Función para calcular la norma RMS de un vector. Función tomada de SciPy</span>
+<span class="sd">    </span>
+<span class="sd">    :param x: Vector</span>
+<span class="sd">    :type x: numpyArray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="o">**</span><span class="mf">0.5</span></div>
+
+
+<div class="viewcode-block" id="dopri54"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.dopri54">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;dopri54&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dopri54</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta embebido de Dormand-Prince 5(4), la integracion se continua con la salida de orden 5, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">40</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">40</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">44</span><span class="o">/</span><span class="mi">45</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mi">56</span><span class="o">/</span><span class="mi">15</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">32</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k5</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">19372</span><span class="o">/</span><span class="mi">6561</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mi">25360</span><span class="o">/</span><span class="mi">2187</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">64448</span><span class="o">/</span><span class="mi">6561</span> <span class="o">-</span> <span class="n">k4</span><span class="o">*</span><span class="mi">212</span><span class="o">/</span><span class="mi">729</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k6</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">9017</span><span class="o">/</span><span class="mi">3168</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mi">355</span><span class="o">/</span><span class="mi">33</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">46732</span><span class="o">/</span><span class="mi">5247</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">49</span><span class="o">/</span><span class="mi">176</span> <span class="o">-</span> <span class="n">k5</span><span class="o">*</span><span class="mi">5103</span><span class="o">/</span><span class="mi">18656</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k7</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">35</span><span class="o">/</span><span class="mi">384</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">500</span><span class="o">/</span><span class="mi">1113</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">125</span><span class="o">/</span><span class="mi">192</span> <span class="o">-</span> <span class="n">k5</span><span class="o">*</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span> <span class="o">+</span> <span class="n">k6</span><span class="o">*</span><span class="mi">11</span><span class="o">/</span><span class="mi">84</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x5th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">35</span><span class="o">/</span><span class="mi">384</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">500</span><span class="o">/</span><span class="mi">1113</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">125</span><span class="o">/</span><span class="mi">192</span> <span class="o">-</span> <span class="n">k5</span><span class="o">*</span><span class="mi">2187</span><span class="o">/</span><span class="mi">6784</span> <span class="o">+</span> <span class="n">k6</span><span class="o">*</span><span class="mi">11</span><span class="o">/</span><span class="mi">84</span><span class="p">)</span>
+    <span class="n">x4th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">5179</span><span class="o">/</span><span class="mi">57600</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">7571</span><span class="o">/</span><span class="mi">16695</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">393</span><span class="o">/</span><span class="mi">640</span> <span class="o">-</span> <span class="n">k5</span><span class="o">*</span><span class="mi">92097</span><span class="o">/</span><span class="mi">339200</span> <span class="o">+</span>
+                <span class="n">k6</span><span class="o">*</span><span class="mi">187</span><span class="o">/</span><span class="mi">2100</span> <span class="o">+</span> <span class="n">k7</span><span class="o">/</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">y5th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x5th</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y5th</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x5th</span><span class="p">,</span> <span class="n">x4th</span></div>
+
+
+<div class="viewcode-block" id="cash_karp45"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.cash_karp45">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;cash_karp45&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cash_karp45</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta embebido de Cash-Karp 4(5), la integracion se continua con la salida de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">40</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">40</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">10</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">10</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">6</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span><span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k5</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k1</span><span class="o">*</span><span class="mi">11</span><span class="o">/</span><span class="mi">54</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">5</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k3</span><span class="o">*</span><span class="mi">70</span><span class="o">/</span><span class="mi">27</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">35</span><span class="o">/</span><span class="mi">27</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k6</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">1631</span><span class="o">/</span><span class="mi">55296</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">175</span><span class="o">/</span><span class="mi">512</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">575</span><span class="o">/</span><span class="mi">13824</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">44275</span><span class="o">/</span><span class="mi">110592</span> <span class="o">+</span>
+                   <span class="n">k5</span><span class="o">*</span><span class="mi">253</span><span class="o">/</span><span class="mi">4096</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x5th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">37</span><span class="o">/</span><span class="mi">378</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">250</span><span class="o">/</span><span class="mi">621</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">125</span><span class="o">/</span><span class="mi">594</span> <span class="o">+</span> <span class="n">k6</span><span class="o">*</span><span class="mi">512</span><span class="o">/</span><span class="mi">1771</span><span class="p">)</span>
+    <span class="n">x4th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">2825</span><span class="o">/</span><span class="mi">27648</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">18575</span><span class="o">/</span><span class="mi">48384</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">13525</span><span class="o">/</span><span class="mi">55296</span> <span class="o">+</span> <span class="n">k5</span><span class="o">*</span><span class="mi">277</span><span class="o">/</span><span class="mi">14336</span> <span class="o">+</span> <span class="n">k6</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">y4th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x4th</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y4th</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x4th</span><span class="p">,</span> <span class="n">x5th</span></div>
+
+
+<div class="viewcode-block" id="fehlberg45"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.fehlberg45">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;fehlberg45&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fehlberg45</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta embebido de Fehlberg 4(5), la integracion se continua con la salida de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">32</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">32</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">1932</span><span class="o">/</span><span class="mi">2197</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mi">7200</span><span class="o">/</span><span class="mi">2197</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">7296</span><span class="o">/</span><span class="mi">2197</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k5</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">439</span><span class="o">/</span><span class="mi">216</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mi">8</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">3680</span><span class="o">/</span><span class="mi">513</span> <span class="o">-</span> <span class="n">k4</span><span class="o">*</span><span class="mi">845</span><span class="o">/</span><span class="mi">4104</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k6</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k1</span><span class="o">*</span><span class="mi">8</span><span class="o">/</span><span class="mi">27</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k3</span><span class="o">*</span><span class="mi">3544</span><span class="o">/</span><span class="mi">2565</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">1859</span><span class="o">/</span><span class="mi">4104</span> <span class="o">-</span> <span class="n">k5</span><span class="o">*</span><span class="mi">11</span><span class="o">/</span><span class="mi">40</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x5th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">16</span><span class="o">/</span><span class="mi">135</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">6656</span><span class="o">/</span><span class="mi">12825</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">28561</span><span class="o">/</span><span class="mi">56430</span> <span class="o">-</span> <span class="n">k5</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">50</span> <span class="o">+</span> <span class="n">k6</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">55</span><span class="p">)</span>
+    <span class="n">x4th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">25</span><span class="o">/</span><span class="mi">216</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">1408</span><span class="o">/</span><span class="mi">2565</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">2197</span><span class="o">/</span><span class="mi">4104</span> <span class="o">-</span> <span class="n">k5</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">y4th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x4th</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y4th</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x4th</span><span class="p">,</span> <span class="n">x5th</span></div>
+
+
+<div class="viewcode-block" id="bogacki_shampine23"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.bogacki_shampine23">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;bogacki_shampine23&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">bogacki_shampine23</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta embebido de Bogacki-Shampine 3(2), la integracion se continua con la salida de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">9</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x3th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">9</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">x2th</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">7</span><span class="o">/</span><span class="mi">24</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">4</span> <span class="o">+</span> <span class="n">k3</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k4</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">y2th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x3th</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y2th</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x3th</span><span class="p">,</span> <span class="n">x2th</span></div>
+
+
+<div class="viewcode-block" id="runge_kutta5"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.runge_kutta5">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;runge_kutta5&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">runge_kutta5</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta de orden 5, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">8</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k2</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">k3</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k5</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">16</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k6</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k1</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">7</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">7</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">12</span><span class="o">/</span><span class="mi">7</span> <span class="o">-</span> <span class="n">k4</span><span class="o">*</span><span class="mi">12</span><span class="o">/</span><span class="mi">7</span> <span class="o">+</span> <span class="n">k5</span><span class="o">*</span><span class="mi">8</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">7</span><span class="o">/</span><span class="mi">90</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">32</span><span class="o">/</span><span class="mi">90</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mi">12</span><span class="o">/</span><span class="mi">90</span> <span class="o">+</span> <span class="n">k5</span><span class="o">*</span><span class="mi">32</span><span class="o">/</span><span class="mi">90</span> <span class="o">+</span> <span class="n">k6</span><span class="o">*</span><span class="mi">7</span><span class="o">/</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="ralston4"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.ralston4">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;ralston4&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ralston4</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta Ralston con minimo error de truncamiento de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mf">0.4</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mf">0.29697761</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mf">0.15875964</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">*</span><span class="mf">0.21810040</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mf">3.05096516</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mf">3.83286476</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mf">0.17476028</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="mf">0.55148066</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mf">1.20553560</span> <span class="o">+</span> <span class="n">k4</span><span class="o">*</span><span class="mf">0.17118478</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="tres_octavos4"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.tres_octavos4">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;tres_octavos4&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">tres_octavos4</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta 3/8 de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k1</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">-</span> <span class="n">k2</span> <span class="o">+</span> <span class="n">k3</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">/</span><span class="mi">8</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">8</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">8</span> <span class="o">+</span> <span class="n">k4</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="runge_kutta4"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.runge_kutta4">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;runge_kutta4&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">runge_kutta4</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k3</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">/</span><span class="mi">6</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k3</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k4</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="SSPRK3"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.SSPRK3">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;SSPRK3&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SSPRK3</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta con preservado de estabilidad fuerte de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">4</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">/</span><span class="mi">6</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">6</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="ralston3"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.ralston3">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;ralston3&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ralston3</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta Ralston de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">9</span> <span class="o">+</span> <span class="n">k2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="heun3"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.heun3">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;heun3&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">heun3</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta Heun de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">/</span><span class="mi">4</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="runge_kutta3"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.runge_kutta3">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;runge_kutta3&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">runge_kutta3</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k1</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">/</span><span class="mi">6</span> <span class="o">+</span> <span class="n">k2</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">k3</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="runge_kutta2"><a class="viewcode-back" href="../codigos/rk_generator.html#rk_generator.runge_kutta2">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;runge_kutta2&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">runge_kutta2</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runge-Kutta de orden 2, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</span>
+<span class="sd">    </span>
+<span class="sd">    :param A: Matriz de estados</span>
+<span class="sd">    :type A: float64, 2d, F</span>
+<span class="sd">    :param B: Matriz de entrada</span>
+<span class="sd">    :type B: float64, 2d, C</span>
+<span class="sd">    :param C: Matriz de salida</span>
+<span class="sd">    :type C: float64, 2d, C</span>
+<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :type D: float64, 2d, C</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: float64, 2d, C</span>
+<span class="sd">    :param h: Tamaño de paso</span>
+<span class="sd">    :type h: float64</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float64</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">inputValue</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k2</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">cc</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

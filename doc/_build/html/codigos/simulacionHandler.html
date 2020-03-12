@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo Handler para la función de simulación de sistemas de control &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)" href="rutinas_simulacion.html" />
+    <link rel="prev" title="Archivo para el cambio de definición entre funciones de membresía" href="modificadorMF.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Archivo Handler para la función de simulación de sistemas de control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rutinas_simulacion.html">Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rutinas_rk.html">Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rk_generator.html">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</a></li>
+<li class="toctree-l3"><a class="reference internal" href="discreto_generator.html">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+      <li>Archivo Handler para la función de simulación de sistemas de control</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/simulacionHandler.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="archivo-handler-para-la-funcion-de-simulacion-de-sistemas-de-control">
+<h1>Archivo Handler para la función de simulación de sistemas de control<a class="headerlink" href="#archivo-handler-para-la-funcion-de-simulacion-de-sistemas-de-control" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Rutinas asociadas:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rutinas_simulacion.html">Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rutinas_rk.html">Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rk_generator.html">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="discreto_generator.html">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</a></li>
+</ul>
+</div>
+<span class="target" id="module-simulacionHandler"></span><p>Archivo para el manejo de la funcion de simulacion de sistemas de control, sirve de intermediario entre la interfaz grafica y la clase creada para manejar la simulacion en una hilo distinto, esto es debido al tiempo que puede llegar a tomar cada simulacion</p>
+<dl class="function">
+<dt id="simulacionHandler.N_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">N_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#N_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.N_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del valor N</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.SimulacionHandler">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">SimulacionHandler</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#SimulacionHandler"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.SimulacionHandler" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion principal para el manejo de la funcionalida de simulacion de sistemas de control, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.accion_esquema_selector">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">accion_esquema_selector</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#accion_esquema_selector"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.accion_esquema_selector" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para mostrar los widgets indicados en funcion del esquema seleccionado</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.accionadordem_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">accionadordem_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#accionadordem_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.accionadordem_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del denominador de la funcion de transferencia correspondiente al accionador</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.accionadornum_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">accionadornum_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#accionadornum_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.accionadornum_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del numerador de la funcion de transferencia correspondiente al accionador</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.atol_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">atol_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#atol_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.atol_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la tolerancia absoluta</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.calcular_simulacion">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">calcular_simulacion</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#calcular_simulacion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.calcular_simulacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para inicializar el QThread y realizar los calculos de la simulacion</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.configuration_data">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">configuration_data</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#configuration_data"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.configuration_data" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar la configuracion del solver a utilizar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.error_gui">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">error_gui</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">error</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#error_gui"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.error_gui" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para mostrar los errores que pudiesen ocurrir durante la simulacion, esta funcion es utilizada por el QThread</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>error</strong> (<em>int</em>) – Indicador del error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.escalonAvanzado_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">escalonAvanzado_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#escalonAvanzado_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.escalonAvanzado_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del escalon avanzado</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.escalon_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">escalon_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#escalon_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.escalon_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del escalon simple</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.get_pathcontroller1">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">get_pathcontroller1</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#get_pathcontroller1"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.get_pathcontroller1" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para obtener la direccion al archivo del controlador difuso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.get_pathcontroller2">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">get_pathcontroller2</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#get_pathcontroller2"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.get_pathcontroller2" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para obtener la direccion al archivo del controlador difuso 2 (PD)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.inferiorSaturador_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">inferiorSaturador_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#inferiorSaturador_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.inferiorSaturador_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del limite inferior del saturador</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.kd_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">kd_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#kd_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.kd_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la ganancia derivativa</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ki_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ki_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ki_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ki_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la ganancia integral</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.kp_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">kp_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#kp_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.kp_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la ganancia proporcional</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.maxstep_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">maxstep_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#maxstep_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.maxstep_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del incremento maximo de paso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.minstep_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">minstep_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#minstep_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.minstep_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del decremento minimo de paso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.pade_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">pade_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#pade_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.pade_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del orden del pade</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.plot_final_results">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">plot_final_results</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#plot_final_results"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.plot_final_results" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para graficar los resultados finales de la simulacion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>result</strong> (<em>list</em>) – Lista con los resultados obtenidos</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.restablecer_configuracion">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">restablecer_configuracion</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#restablecer_configuracion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.restablecer_configuracion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para restablecer la configuracion avanzada por defecto</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.rtol_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">rtol_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#rtol_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.rtol_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la tolerancia relativa</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.safetyFactor_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">safetyFactor_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#safetyFactor_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.safetyFactor_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del factor de seguridad</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.sensordem_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">sensordem_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#sensordem_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.sensordem_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del denominador de la funcion de transferencia correspondiente al sensor</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.sensornum_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">sensornum_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#sensornum_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.sensornum_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del numerador de la funcion de transferencia correspondiente al sensor</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.simulacion_stacked_to_ss">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">simulacion_stacked_to_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#simulacion_stacked_to_ss"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.simulacion_stacked_to_ss" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar de funcion de transferencia a ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.simulacion_stacked_to_tf">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">simulacion_stacked_to_tf</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#simulacion_stacked_to_tf"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.simulacion_stacked_to_tf" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar de ecuacion de espacio de estados a funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ssA_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ssA_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ssA_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ssA_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de estados de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ssB_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ssB_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ssB_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ssB_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de entrada de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ssC_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ssC_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ssC_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ssC_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de salida de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ssD_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ssD_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ssD_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ssD_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de transmision directa de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ssdelay_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ssdelay_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ssdelay_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ssdelay_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del delay de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.ssperiodo_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">ssperiodo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#ssperiodo_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.ssperiodo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del periodo de muestreo de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.superiorSaturador_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">superiorSaturador_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#superiorSaturador_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.superiorSaturador_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del limite superior del saturador</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.tfdelay_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">tfdelay_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#tfdelay_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.tfdelay_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del delay de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.tfdem_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">tfdem_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#tfdem_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.tfdem_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del denominador de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.tfnum_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">tfnum_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#tfnum_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.tfnum_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del numerador de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.tfperiodo_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">tfperiodo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#tfperiodo_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.tfperiodo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del periodo de muestreo de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.tiempo_validator">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">tiempo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#tiempo_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.tiempo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del tiempo de simulacion</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="simulacionHandler.update_progresBar_function">
+<code class="sig-prename descclassname">simulacionHandler.</code><code class="sig-name descname">update_progresBar_function</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/simulacionHandler.html#update_progresBar_function"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#simulacionHandler.update_progresBar_function" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar la barra de progreso de la simulacion, esta funcion es utilizada por el QThread</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Valor en porcentaje del progreso</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rutinas_simulacion.html" class="btn btn-neutral float-right" title="Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modificadorMF.html" class="btn btn-neutral float-left" title="Archivo para el cambio de definición entre funciones de membresía" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

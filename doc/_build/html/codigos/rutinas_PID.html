@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo de rutinas para la función de entonación de PID &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo de rutinas para la función de entonación de PID utilizando data de un CSV" href="rutinas_CSV.html" />
+    <link rel="prev" title="Archivo Handler para la función de entonación de controladores PID" href="TuningHandler.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo de rutinas para la función de entonación de PID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rutinas_CSV.html">Archivo de rutinas para la función de entonación de PID utilizando data de un CSV</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a> &raquo;</li>
+        
+      <li>Archivo de rutinas para la función de entonación de PID</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/rutinas_PID.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="archivo-de-rutinas-para-la-funcion-de-entonacion-de-pid">
+<h1>Archivo de rutinas para la función de entonación de PID<a class="headerlink" href="#archivo-de-rutinas-para-la-funcion-de-entonacion-de-pid" title="Enlazar permanentemente con este título">¶</a></h1>
+<span class="target" id="module-rutinas_PID"></span><p>Archivo que contiene todas las rutinas necesarias para la funcionalidad de tunning de PID</p>
+<dl class="function">
+<dt id="rutinas_PID.auto_tuning_method">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">auto_tuning_method</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">k_proceso</em>, <em class="sig-param">tau</em>, <em class="sig-param">alpha</em>, <em class="sig-param">metodo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#auto_tuning_method"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.auto_tuning_method" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalon, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalon en lazo abierto</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k_proceso</strong> (<em>float</em>) – Ganancia del proceso</p></li>
+<li><p><strong>tau</strong> (<em>float</em>) – Constante de tiempo del proceso</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Tiempo muerto o delay del proceso</p></li>
+<li><p><strong>metodo</strong> (<em>str</em>) – Metodo a utilizar</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.model_method">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">model_method</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">t</em>, <em class="sig-param">y</em>, <em class="sig-param">dc_gain</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#model_method"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.model_method" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para obtener los parametros del modelo de primer orden de un sistema a partir de su respuesta escalon</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>numpyArray</em>) – Vector de tiempo</p></li>
+<li><p><strong>y</strong> (<em>numpyArray</em>) – Vector de respuesta</p></li>
+<li><p><strong>dc_gain</strong> (<em>float</em>) – Ganancia DC del sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.rutina_step_plot">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">rutina_step_plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">system</em>, <em class="sig-param">T</em>, <em class="sig-param">kp</em>, <em class="sig-param">ki</em>, <em class="sig-param">kd</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#rutina_step_plot"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.rutina_step_plot" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para obtener la respuesta escalon del sistema en lazo cerrado en combinacion con un controlador PID y su respectiva graficacion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<em>LTI</em>) – Representacion del sistema</p></li>
+<li><p><strong>T</strong> (<em>numpyArray</em>) – Vector de tiempo</p></li>
+<li><p><strong>kp</strong> (<em>float</em>) – Ganancia proporcional</p></li>
+<li><p><strong>ki</strong> (<em>float</em>) – Ganancia integral</p></li>
+<li><p><strong>kd</strong> (<em>float</em>) – Ganancia derivativa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.rutina_system_info">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">rutina_system_info</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">system</em>, <em class="sig-param">T</em>, <em class="sig-param">y</em>, <em class="sig-param">kp=0</em>, <em class="sig-param">ki=0</em>, <em class="sig-param">kd=0</em>, <em class="sig-param">autotuning=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#rutina_system_info"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.rutina_system_info" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para mostrar los resultados obtenidos de los calculos en un TextEdit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<em>LTI</em>) – Representacion del sistema</p></li>
+<li><p><strong>T</strong> (<em>numpyArray</em>) – Vector de tiempo</p></li>
+<li><p><strong>y</strong> (<em>numpyArray</em>) – Vector de respuesta</p></li>
+<li><p><strong>kp</strong> (<em>float</em><em>, </em><em>optional</em>) – Ganancia proporcional, defaults to 0</p></li>
+<li><p><strong>ki</strong> (<em>float</em><em>, </em><em>optional</em>) – Ganancia integral, defaults to 0</p></li>
+<li><p><strong>kd</strong> (<em>float</em><em>, </em><em>optional</em>) – Ganancia derivativa, defaults to 0</p></li>
+<li><p><strong>autotuning</strong> (<em>bool</em><em>, </em><em>optional</em>) – Bandera para señar si es o no una operacion con auto tunning, defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.system_creator_ss">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">system_creator_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#system_creator_ss"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.system_creator_ss" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="simple">
+<dt>Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y</dt><dd><p>la matriz de transmision directa la ecuacion de espacio de estados</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>list</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>list</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>list</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>list</em>) – Matriz de transmision directa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.system_creator_ss_tuning">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">system_creator_ss_tuning</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#system_creator_ss_tuning"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.system_creator_ss_tuning" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmision directa la ecuacion de espacio de estados, adicionalmente se realiza el auto tuning utilizando el metodo escojido por le usuario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>list</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>list</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>list</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>list</em>) – Matriz de transmision directa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.system_creator_tf">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">system_creator_tf</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">numerador</em>, <em class="sig-param">denominador</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#system_creator_tf"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.system_creator_tf" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numerador</strong> (<em>list</em>) – Coeficientes del numerador</p></li>
+<li><p><strong>denominador</strong> (<em>list</em>) – Coeficientes del denominador</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_PID.system_creator_tf_tuning">
+<code class="sig-prename descclassname">rutinas_PID.</code><code class="sig-name descname">system_creator_tf_tuning</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">numerador</em>, <em class="sig-param">denominador</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_PID.html#system_creator_tf_tuning"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_PID.system_creator_tf_tuning" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia, adicionalmente se realiza el auto tuning utilizando el metodo escojido por le usuario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>list</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>list</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>list</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>list</em>) – Matriz de transmision directa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rutinas_CSV.html" class="btn btn-neutral float-right" title="Archivo de rutinas para la función de entonación de PID utilizando data de un CSV" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="TuningHandler.html" class="btn btn-neutral float-left" title="Archivo Handler para la función de entonación de controladores PID" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

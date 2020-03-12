@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo de rutinas que contiene las clases FuzzyController y FISParser &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo para el cambio de definición entre funciones de membresía" href="modificadorMF.html" />
+    <link rel="prev" title="Archivo Handler para la función de lógica difusa" href="FuzzyHandler.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo de rutinas que contiene las clases FuzzyController y FISParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modificadorMF.html">Archivo para el cambio de definición entre funciones de membresía</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a> &raquo;</li>
+        
+      <li>Archivo de rutinas que contiene las clases FuzzyController y FISParser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/rutinas_fuzzy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-rutinas_fuzzy">
+<span id="archivo-de-rutinas-que-contiene-las-clases-fuzzycontroller-y-fisparser"></span><h1>Archivo de rutinas que contiene las clases FuzzyController y FISParser<a class="headerlink" href="#module-rutinas_fuzzy" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Archivo que contiene las clases FuzzyController y FISParser, para administrar el controlador difuso y cargar y exportar archivos .fis respectivamente</p>
+<dl class="class">
+<dt id="rutinas_fuzzy.FISParser">
+<em class="property">class </em><code class="sig-prename descclassname">rutinas_fuzzy.</code><code class="sig-name descname">FISParser</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">InputList=None</em>, <em class="sig-param">OutputList=None</em>, <em class="sig-param">RuleEtiquetas=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase para cargar y exportar archivos .fis, para cargar los archivos FIS las funciones get_system, get_vars,get_var y get_rules fueron tomadas de yapflm:</p>
+<p>Yet Another Python Fuzzy Logic Module: <a class="reference external" href="https://github.com/sputnick1124/yapflm">https://github.com/sputnick1124/yapflm</a></p>
+<p>Para obtener los datos necesarias del .fis, de allí, se aplica la función fis_to_json para completar el parsin. En el caso de la exportación, se realiza utilizando la función json_to_fis</p>
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">InputList=None</em>, <em class="sig-param">OutputList=None</em>, <em class="sig-param">RuleEtiquetas=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.__init__"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.__init__" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Constructor de la clase, inicializa las variables a utilizar y selecciona entre cargar el fis o exportarlo dependiendo de las variables con las que se cree el objeto</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – Dirección del archivo a cargar o exportar</p></li>
+<li><p><strong>inputlist</strong> (<em>list</em><em>, </em><em>optional</em>) – Lista de variables de entrada, defaults to None</p></li>
+<li><p><strong>OutputList</strong> (<em>list</em><em>, </em><em>optional</em>) – Lista de variables de entrada, defaults to None</p></li>
+<li><p><strong>RuleEtiquetas</strong> (<em>list</em><em>, </em><em>optional</em>) – Lista con la información necesaria para crear las reglas, defaults to None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.fis_to_json">
+<code class="sig-name descname">fis_to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.fis_to_json"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.fis_to_json" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función para completar la creación del controlador a partir de un archivo .fis</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.get_rules">
+<code class="sig-name descname">get_rules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.get_rules"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.get_rules" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función tomada de yapflm (Yet Another Python Fuzzy Logic Module)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.get_system">
+<code class="sig-name descname">get_system</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.get_system"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.get_system" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion tomada de yapflm (Yet Another Python Fuzzy Logic Module)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.get_var">
+<code class="sig-name descname">get_var</code><span class="sig-paren">(</span><em class="sig-param">vartype</em>, <em class="sig-param">varnum</em>, <em class="sig-param">start_line</em>, <em class="sig-param">end_line</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.get_var"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.get_var" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion tomada de yapflm (Yet Another Python Fuzzy Logic Module)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.get_vars">
+<code class="sig-name descname">get_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.get_vars"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.get_vars" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función tomada de yapflm (Yet Another Python Fuzzy Logic Module)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FISParser.json_to_fis">
+<code class="sig-name descname">json_to_fis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FISParser.json_to_fis"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FISParser.json_to_fis" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función para exportar el controlador en formato .fis</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rutinas_fuzzy.FuzzyController">
+<em class="property">class </em><code class="sig-prename descclassname">rutinas_fuzzy.</code><code class="sig-name descname">FuzzyController</code><span class="sig-paren">(</span><em class="sig-param">inputlist</em>, <em class="sig-param">outputlist</em>, <em class="sig-param">rulelist=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase para administrar el controlador difuso, a partir de la misma se puede crear el controlador difuso e ir creandolo de forma programatica por medio de la interfaz grafica definida en Ui_VentanaPrincipal.py y manejada en FuzzyHandler.py</p>
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">inputlist</em>, <em class="sig-param">outputlist</em>, <em class="sig-param">rulelist=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.__init__"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.__init__" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Se utiliza para inicializar el controlador con las entradas y salidas del mismo, en caso de que se envie el parametro opcional, rulelist, se crea el controlador a partir de las reglas suministradas y queda listo para usar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p></li>
+<li><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p></li>
+<li><p><strong>rulelist</strong> (<em>list</em><em>, </em><em>optional</em>) – Lista de reglas, defaults to []</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.agregar_regla">
+<code class="sig-name descname">agregar_regla</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">Etiquetasin</em>, <em class="sig-param">Etiquetasout</em>, <em class="sig-param">logica</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.agregar_regla"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.agregar_regla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear una regla a partir de un set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>Etiquetasin</strong> (<em>list</em>) – set de entrada</p></li>
+<li><p><strong>Etiquetasout</strong> (<em>list</em>) – set de salida</p></li>
+<li><p><strong>logica</strong> (<em>bool</em>) – Logica a utilizar</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.calcular_valor">
+<code class="sig-name descname">calcular_valor</code><span class="sig-paren">(</span><em class="sig-param">inputs</em>, <em class="sig-param">outputs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.calcular_valor"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.calcular_valor" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para calcular las salidas del controlador dado sus entradas, esta funcion se utiliza en la funcionalidad de simulacion de sistemas de control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>list</em>) – Lista con los valores de entrada</p></li>
+<li><p><strong>outputs</strong> (<em>list</em>) – Lista vacia del tamaño del numero de salidas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambiar_metodo">
+<code class="sig-name descname">cambiar_metodo</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">o</em>, <em class="sig-param">metodo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambiar_metodo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambiar_metodo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar el metodo de defuzzificacion de una salida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>o</strong> (<em>str</em>) – Numero de salida</p></li>
+<li><p><strong>metodo</strong> – Nombre del nuevo metodo de defuzzificacion</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambiar_nombre_input">
+<code class="sig-name descname">cambiar_nombre_input</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">i</em>, <em class="sig-param">nombre</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambiar_nombre_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambiar_nombre_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcio para cambiar el nombre de una entrada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Numero de entrada</p></li>
+<li><p><strong>nombre</strong> (<em>str</em>) – Nuevo nombre de la entrada</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambiar_nombre_output">
+<code class="sig-name descname">cambiar_nombre_output</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">o</em>, <em class="sig-param">nombre</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambiar_nombre_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambiar_nombre_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div><p>Funcio para cambiar el nombre de una salida</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>o</strong> (<em>int</em>) – Numero de salida</p></li>
+<li><p><strong>nombre</strong> (<em>str</em>) – Nuevo nombre de la salida</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambiar_regla">
+<code class="sig-name descname">cambiar_regla</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">Etiquetasin</em>, <em class="sig-param">Etiquetasout</em>, <em class="sig-param">index_rule</em>, <em class="sig-param">logica</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambiar_regla"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambiar_regla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar una regla a partir de un nuevo set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>Etiquetasin</strong> (<em>list</em>) – set de entrada</p></li>
+<li><p><strong>Etiquetasout</strong> (<em>list</em>) – set de salida</p></li>
+<li><p><strong>index_rule</strong> (<em>int</em>) – Indice indicando la regla a cambiar</p></li>
+<li><p><strong>logica</strong> (<em>bool</em>) – Logica a utilizar</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambio_etinombre_input">
+<code class="sig-name descname">cambio_etinombre_input</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">inputlist</em>, <em class="sig-param">i</em>, <em class="sig-param">n</em>, <em class="sig-param">old_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambio_etinombre_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambio_etinombre_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcio para cambiar el nombre de una etiqueta en la entrada seleccionada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Numero de entrada</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Numero de etiqueta</p></li>
+<li><p><strong>old_name</strong> (<em>str</em>) – Nombre anterior</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambio_etinombre_output">
+<code class="sig-name descname">cambio_etinombre_output</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">outputlist</em>, <em class="sig-param">o</em>, <em class="sig-param">n</em>, <em class="sig-param">old_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambio_etinombre_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambio_etinombre_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcio para cambiar el nombre de una etiqueta en la salida seleccionada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p></li>
+<li><p><strong>o</strong> (<em>int</em>) – Numero de salida</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Numero de etiqueta</p></li>
+<li><p><strong>old_name</strong> (<em>str</em>) – Nombre anterior</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambio_etiquetas_input">
+<code class="sig-name descname">cambio_etiquetas_input</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">inputlist</em>, <em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambio_etiquetas_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambio_etiquetas_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar las etiquetas de entrada del controlador</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Numero de entrada</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.cambio_etiquetas_output">
+<code class="sig-name descname">cambio_etiquetas_output</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">outputlist</em>, <em class="sig-param">o</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.cambio_etiquetas_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.cambio_etiquetas_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar las etiquetas de salida del controlador</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p></li>
+<li><p><strong>o</strong> (<em>int</em>) – Numero de salida</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_controlador">
+<code class="sig-name descname">crear_controlador</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_controlador"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_controlador" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear el controlador difuso a partir de todas las reglas creadas</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_etiquetas_input">
+<code class="sig-name descname">crear_etiquetas_input</code><span class="sig-paren">(</span><em class="sig-param">inputlist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_etiquetas_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_etiquetas_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear las etiquetas de una entrada a partir de la lista de variables de entrada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_etiquetas_output">
+<code class="sig-name descname">crear_etiquetas_output</code><span class="sig-paren">(</span><em class="sig-param">outputlist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_etiquetas_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_etiquetas_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear las etiquetas de una salida a partir de la lista de variables de salida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_input">
+<code class="sig-name descname">crear_input</code><span class="sig-paren">(</span><em class="sig-param">inputlist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear las variables de entrada a partir de la lista de variables de entrada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_output">
+<code class="sig-name descname">crear_output</code><span class="sig-paren">(</span><em class="sig-param">outputlist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear las variables de salida a partir de la lista de variables de salida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_plots_in">
+<code class="sig-name descname">crear_plots_in</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">ni</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_plots_in"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_plots_in" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear los objetos de graficacion de PyQtGraph de la entrada, el codigo para la obtencion de los valores de salida y el graficado es una version altamente modificada de la funcion .view() de Scikit-Fuzzy. Las modificaciones realizadas fueron necesarias para cambiar matplotlib por PyQtGraph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>ni</strong> (<em>int</em>) – Numero de entradas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_plots_out">
+<code class="sig-name descname">crear_plots_out</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">no</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_plots_out"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_plots_out" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear los objetos de graficacion de PyQtGraph de la salida, el codigo para la obtencion de los valores de salida y el graficado es una version altamente modificada de la funcion .view() de Scikit-Fuzzy. Las modificaciones realizadas fueron necesarias para cambiar matplotlib por PyQtGraph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>no</strong> (<em>int</em>) – Numero de salidas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.crear_reglas">
+<code class="sig-name descname">crear_reglas</code><span class="sig-paren">(</span><em class="sig-param">rulelistC</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.crear_reglas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.crear_reglas" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para crear las reglas a partir de una lista que contiene toda la informacion necesaria, esta lista es creada en FuzzyHandler.py:</p>
+<p>Cada posicion en la lista contiene un set de entradas, salidas y la logica a utilizar (AND o OR), a su vez, cada set es una lista que posee en cada posicion otra lista con la etiqueta, el numero de entrada/salida y si esta o no negada para el caso de las entradas, en caso de ser salida contiene el peso asignado</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>rulelistC</strong> (<em>list</em>) – Lista con la informacion necesaria para crear las reglas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.eliminar_regla">
+<code class="sig-name descname">eliminar_regla</code><span class="sig-paren">(</span><em class="sig-param">index_rule</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.eliminar_regla"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.eliminar_regla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para eliminar una regla</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>index_rule</strong> (<em>int</em>) – Indice indicando la regla a eliminar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.graficar_mf_in">
+<code class="sig-name descname">graficar_mf_in</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.graficar_mf_in"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.graficar_mf_in" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para graficar las funciones de membresia de una entrada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Numero de entrada</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.graficar_mf_out">
+<code class="sig-name descname">graficar_mf_out</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">o</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.graficar_mf_out"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.graficar_mf_out" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para graficar las funciones de membresia de una salida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>o</strong> (<em>int</em>) – Numero de salida</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.graficar_prueba_pyqtgraph">
+<code class="sig-name descname">graficar_prueba_pyqtgraph</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">ni</em>, <em class="sig-param">no</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.graficar_prueba_pyqtgraph"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.graficar_prueba_pyqtgraph" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar la grafica en funcion de las nuevas entradas, codigo tomado y modificado de la funcion .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>ni</strong> (<em>int</em>) – Numero de entradas</p></li>
+<li><p><strong>no</strong> (<em>int</em>) – Numero de salidas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.graficar_respuesta_2d">
+<code class="sig-name descname">graficar_respuesta_2d</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">inrange</em>, <em class="sig-param">no</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.graficar_respuesta_2d"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.graficar_respuesta_2d" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para graficar la respuesta del controlador en caso de poseer una entrada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>inrange</strong> (<em>list</em>) – Rango de la variable de entrada</p></li>
+<li><p><strong>no</strong> (<em>int</em>) – Numero de salidas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.graficar_respuesta_3d">
+<code class="sig-name descname">graficar_respuesta_3d</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">inrange1</em>, <em class="sig-param">inrange2</em>, <em class="sig-param">no</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.graficar_respuesta_3d"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.graficar_respuesta_3d" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para graficar la superficie de respuesta del controlador en caso de poseer 2 entradas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>inrange1</strong> (<em>list</em>) – Rango de la variable de entrada uno</p></li>
+<li><p><strong>inrange2</strong> (<em>list</em>) – Rango de la variable de entrada dos</p></li>
+<li><p><strong>no</strong> (<em>int</em>) – Numero de salidas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.prueba_de_controlador">
+<code class="sig-name descname">prueba_de_controlador</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">values</em>, <em class="sig-param">ni</em>, <em class="sig-param">no</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.prueba_de_controlador"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.prueba_de_controlador" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar la prueba del controlador</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – Valores de entradas dados por el usuario con los sliders</p></li>
+<li><p><strong>ni</strong> (<em>int</em>) – Numero de entradas</p></li>
+<li><p><strong>no</strong> (<em>int</em>) – Numero de salidas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.update_definicion_input">
+<code class="sig-name descname">update_definicion_input</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">inputlist</em>, <em class="sig-param">i</em>, <em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.update_definicion_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.update_definicion_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar la definicion de una funcion de membresia en la entrada seleccionada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Numero de entrada</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Numero de etiqueta</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.update_definicion_output">
+<code class="sig-name descname">update_definicion_output</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">outputlist</em>, <em class="sig-param">o</em>, <em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.update_definicion_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.update_definicion_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar la definicion de una funcion de membresia en la salida seleccionada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p></li>
+<li><p><strong>o</strong> (<em>int</em>) – Numero de salida</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Numero de etiqueta</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.update_rango_input">
+<code class="sig-name descname">update_rango_input</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">inputlist</em>, <em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.update_rango_input"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.update_rango_input" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar el universo de discurso de una entrada</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>inputlist</strong> (<em>list</em>) – Lista de variables de entrada</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Numero de entrada</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_fuzzy.FuzzyController.update_rango_output">
+<code class="sig-name descname">update_rango_output</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">outputlist</em>, <em class="sig-param">o</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_fuzzy.html#FuzzyController.update_rango_output"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_fuzzy.FuzzyController.update_rango_output" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar el universo de discurso de una salida</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>outputlist</strong> (<em>list</em>) – Lista de variables de salida</p></li>
+<li><p><strong>o</strong> (<em>int</em>) – Numero de salida</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modificadorMF.html" class="btn btn-neutral float-right" title="Archivo para el cambio de definición entre funciones de membresía" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FuzzyHandler.html" class="btn btn-neutral float-left" title="Archivo Handler para la función de lógica difusa" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

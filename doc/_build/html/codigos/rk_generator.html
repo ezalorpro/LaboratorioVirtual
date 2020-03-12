@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba" href="discreto_generator.html" />
+    <link rel="prev" title="Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos" href="rutinas_rk.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rutinas_simulacion.html">Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rutinas_rk.html">Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</a></li>
+<li class="toctree-l3"><a class="reference internal" href="discreto_generator.html">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a> &raquo;</li>
+        
+      <li>Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/rk_generator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="archivo-para-compilar-los-runge-kutta-explicitos-y-embebidos-utilizando-numba">
+<h1>Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba<a class="headerlink" href="#archivo-para-compilar-los-runge-kutta-explicitos-y-embebidos-utilizando-numba" title="Enlazar permanentemente con este título">¶</a></h1>
+<span class="target" id="module-rk_generator"></span><p>Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba, los metodos quedan guardados en el archivo: metodos_RK.cp37-win32.pyd y pueden ser importados desde el archivo como una funcion de un modulo</p>
+<dl class="function">
+<dt id="rk_generator.SSPRK3">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">SSPRK3</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#SSPRK3"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.SSPRK3" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta con preservado de estabilidad fuerte de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.bogacki_shampine23">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">bogacki_shampine23</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#bogacki_shampine23"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.bogacki_shampine23" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta embebido de Bogacki-Shampine 3(2), la integracion se continua con la salida de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.cash_karp45">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">cash_karp45</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#cash_karp45"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.cash_karp45" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta embebido de Cash-Karp 4(5), la integracion se continua con la salida de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.dopri54">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">dopri54</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#dopri54"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.dopri54" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta embebido de Dormand-Prince 5(4), la integracion se continua con la salida de orden 5, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.fehlberg45">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">fehlberg45</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#fehlberg45"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.fehlberg45" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta embebido de Fehlberg 4(5), la integracion se continua con la salida de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.heun3">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">heun3</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#heun3"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.heun3" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta Heun de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.norm">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">norm</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#norm"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.norm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Función para calcular la norma RMS de un vector. Función tomada de SciPy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>numpyArray</em>) – Vector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.ralston3">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">ralston3</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#ralston3"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.ralston3" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta Ralston de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.ralston4">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">ralston4</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#ralston4"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.ralston4" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta Ralston con minimo error de truncamiento de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.runge_kutta2">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">runge_kutta2</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#runge_kutta2"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.runge_kutta2" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta de orden 2, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.runge_kutta3">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">runge_kutta3</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#runge_kutta3"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.runge_kutta3" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta de orden 3, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.runge_kutta4">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">runge_kutta4</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#runge_kutta4"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.runge_kutta4" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.runge_kutta5">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">runge_kutta5</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#runge_kutta5"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.runge_kutta5" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta de orden 5, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rk_generator.tres_octavos4">
+<code class="sig-prename descclassname">rk_generator.</code><code class="sig-name descname">tres_octavos4</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em>, <em class="sig-param">x</em>, <em class="sig-param">h</em>, <em class="sig-param">inputValue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rk_generator.html#tres_octavos4"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rk_generator.tres_octavos4" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Runge-Kutta 3/8 de orden 4, en el metodo se asumio entrada constante, por lo que se descarta t + h*cs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>F</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Matriz de transmision directa</p></li>
+<li><p><strong>x</strong> (<em>float64</em><em>, </em><em>2d</em><em>, </em><em>C</em>) – Vector de estado</p></li>
+<li><p><strong>h</strong> (<em>float64</em>) – Tamaño de paso</p></li>
+<li><p><strong>inputValue</strong> (<em>float64</em>) – Valor de entrada al sistema</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="discreto_generator.html" class="btn btn-neutral float-right" title="Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rutinas_rk.html" class="btn btn-neutral float-left" title="Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

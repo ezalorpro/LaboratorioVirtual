@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo de rutinas para la función de entonación de PID utilizando data de un CSV &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo Handler para la función de lógica difusa" href="FuzzyHandler.html" />
+    <link rel="prev" title="Archivo de rutinas para la función de entonación de PID" href="rutinas_PID.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rutinas_PID.html">Archivo de rutinas para la función de entonación de PID</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo de rutinas para la función de entonación de PID utilizando data de un CSV</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a> &raquo;</li>
+        
+      <li>Archivo de rutinas para la función de entonación de PID utilizando data de un CSV</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/rutinas_CSV.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-rutinas_CSV">
+<span id="archivo-de-rutinas-para-la-funcion-de-entonacion-de-pid-utilizando-data-de-un-csv"></span><h1>Archivo de rutinas para la función de entonación de PID utilizando data de un CSV<a class="headerlink" href="#module-rutinas_CSV" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Archivo que contiene todas las rutinas necesarias para la funcionalidad de identificacion de modelo y tunning con csv</p>
+<dl class="function">
+<dt id="rutinas_CSV.actualizar_Datos">
+<code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">actualizar_Datos</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">Kc</em>, <em class="sig-param">t0</em>, <em class="sig-param">t1</em>, <em class="sig-param">t2</em>, <em class="sig-param">kp</em>, <em class="sig-param">ki</em>, <em class="sig-param">kd</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#actualizar_Datos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.actualizar_Datos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para mostrar los resultados obtenidos del modelo en un TextEdit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Kc</strong> (<em>float</em>) – Ganancia del proceso</p></li>
+<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalon</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalon</p></li>
+<li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
+<li><p><strong>kp</strong> (<em>float</em>) – Ganancia proporcional</p></li>
+<li><p><strong>ki</strong> (<em>float</em>) – Ganancia integral</p></li>
+<li><p><strong>kd</strong> (<em>float</em>) – Ganancia derivativa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_CSV.auto_tuning_method_csv">
+<code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">auto_tuning_method_csv</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">k_proceso</em>, <em class="sig-param">tau</em>, <em class="sig-param">alpha</em>, <em class="sig-param">metodo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#auto_tuning_method_csv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.auto_tuning_method_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalon, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalon en lazo abierto</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k_proceso</strong> (<em>float</em>) – Ganancia del proceso</p></li>
+<li><p><strong>tau</strong> (<em>float</em>) – Constante de tiempo del proceso</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Tiempo muerto o delay del proceso</p></li>
+<li><p><strong>metodo</strong> (<em>str</em>) – Metodo a utilizar</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_CSV.calcular_modelo">
+<code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">calcular_modelo</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">dict_data</em>, <em class="sig-param">indexTime</em>, <em class="sig-param">indexVp</em>, <em class="sig-param">indexEFC</em>, <em class="sig-param">MinVP</em>, <em class="sig-param">MaxVP</em>, <em class="sig-param">MinEFC</em>, <em class="sig-param">MaxEFC</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#calcular_modelo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.calcular_modelo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Fucion para calcular los parametros del modelo de primer orden</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_data</strong> (<em>dict</em>) – Diccionario con la data procesada del csv</p></li>
+<li><p><strong>indexTime</strong> (<em>int</em>) – Indice que identifica al tiempo</p></li>
+<li><p><strong>indexVp</strong> (<em>int</em>) – Indice que identifica a Vp</p></li>
+<li><p><strong>indexEFC</strong> (<em>int</em>) – Indice que identifica al EFC</p></li>
+<li><p><strong>MinVP</strong> (<em>float</em>) – Limite inferior de Vp</p></li>
+<li><p><strong>MaxVP</strong> (<em>float</em>) – Limite superior de Vp</p></li>
+<li><p><strong>MinEFC</strong> (<em>float</em>) – Limite inferior de EFC</p></li>
+<li><p><strong>MaxEFC</strong> (<em>float</em>) – Limite superior de EFC</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_CSV.calculos_manual">
+<code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">calculos_manual</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">GraphObjets</em>, <em class="sig-param">Kc</em>, <em class="sig-param">t0</em>, <em class="sig-param">t1</em>, <em class="sig-param">t2</em>, <em class="sig-param">slop</em>, <em class="sig-param">y1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#calculos_manual"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.calculos_manual" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para recalcular el controlador PID a partir de los datos del modelo de primer orden con el nueto tiempo t1, ademas, se grafica la data del csv junto con algunos parametros de la identificacion del modelo y la nueva recta</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GraphObjets</strong> (<em>list</em>) – Lista de objetos de graficacion</p></li>
+<li><p><strong>Kc</strong> (<em>float</em>) – Ganancia del proceso</p></li>
+<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalon</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalon</p></li>
+<li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
+<li><p><strong>slop</strong> (<em>float</em>) – Pendiente de la recta de identificacion</p></li>
+<li><p><strong>y1</strong> (<em>float</em>) – Punto y1 de la recta de identifiacion, en este punto se encuentra el mayor cambio respecto al tiempo</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_CSV.entonar_y_graficar">
+<code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">entonar_y_graficar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">dict_data</em>, <em class="sig-param">Kc</em>, <em class="sig-param">tau</em>, <em class="sig-param">y1</em>, <em class="sig-param">y2</em>, <em class="sig-param">t0</em>, <em class="sig-param">t1</em>, <em class="sig-param">t2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#entonar_y_graficar"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.entonar_y_graficar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para calcular el controlador PID a partir de los datos del modelo de primer orden, ademas, se grafica la data del csv junto con algunos parametros de la identificacion del modelo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_data</strong> (<em>dict</em>) – Diccionario con la data procesada del csv</p></li>
+<li><p><strong>Kc</strong> (<em>float</em>) – Ganancia del proceso</p></li>
+<li><p><strong>tau</strong> (<em>float</em>) – Constante de tiempo del proceso</p></li>
+<li><p><strong>y1</strong> (<em>float</em>) – Punto y1 de la recta de identifiacion, en este punto se encuentra el mayor cambio respecto al tiempo</p></li>
+<li><p><strong>y2</strong> (<em>float</em>) – Punto y2 de la recta de identificacion</p></li>
+<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalon</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalon</p></li>
+<li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_CSV.procesar_csv">
+<code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">procesar_csv</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">csv_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#procesar_csv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.procesar_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para procesar la data del archivo csv, se crea una nueva data en un diccionario, se normalizan las escalas con el span y se transforma el tiempo a segundos. Para la transformacion de tiempo a segundos los formatos aceptados son</p>
+<p>hh:mm:ss</p>
+<p>mm:ss</p>
+<p>ss</p>
+<p>En cualquiera de los casos se llevara a segundos y se restara el tiempo inicial para que empiece en cero</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>csv_data</strong> (<em>numpyArray</em>) – Data del csv</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FuzzyHandler.html" class="btn btn-neutral float-right" title="Archivo Handler para la función de lógica difusa" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rutinas_PID.html" class="btn btn-neutral float-left" title="Archivo de rutinas para la función de entonación de PID" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
