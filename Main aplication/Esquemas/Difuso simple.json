@@ -1,0 +1,136 @@
+[
+    [
+        {
+            "nombre": "error",
+            "numeroE": 7,
+            "etiquetas": [
+                {
+                    "nombre": "negativo alto",
+                    "mf": "trimf",
+                    "definicion": [
+                        -2.0,
+                        -1.0,
+                        -0.5
+                    ]
+                },
+                {
+                    "nombre": "negativo medio",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1.0,
+                        -0.4,
+                        -0.25
+                    ]
+                },
+                {
+                    "nombre": "negativo bajo",
+                    "mf": "trimf",
+                    "definicion": [
+                        -0.75,
+                        -0.15,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -0.25,
+                        0,
+                        0.25
+                    ]
+                },
+                {
+                    "nombre": "positivo bajo",
+                    "mf": "trimf",
+                    "definicion": [
+                        0,
+                        0.15,
+                        0.75
+                    ]
+                },
+                {
+                    "nombre": "positivo medio",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.25,
+                        0.4,
+                        1.0
+                    ]
+                },
+                {
+                    "nombre": "positivo alto",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.5,
+                        1,
+                        1.1
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ]
+        }
+    ],
+    [
+        {
+            "nombre": "se\u00f1al de control",
+            "numeroE": 5,
+            "etiquetas": [
+                {
+                    "nombre": "cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1,
+                        0.0,
+                        0.1
+                    ]
+                },
+                {
+                    "nombre": "baja",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        0.2,
+                        0.3
+                    ]
+                },
+                {
+                    "nombre": "media",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.1,
+                        0.4,
+                        0.5
+                    ]
+                },
+                {
+                    "nombre": "alta",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.3,
+                        0.7,
+                        0.8
+                    ]
+                },
+                {
+                    "nombre": "muy alta",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.5,
+                        1,
+                        1.1
+                    ]
+                }
+            ],
+            "rango": [
+                0,
+                1
+            ],
+            "metodo": "centroid"
+        }
+    ],
+    []
+]

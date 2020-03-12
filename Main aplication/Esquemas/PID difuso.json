@@ -1,0 +1,152 @@
+[
+    [
+        {
+            "nombre": "error",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "negativo",
+                    "mf": "gauss2mf",
+                    "definicion": [
+                        0.325,
+                        -1.5,
+                        0.325,
+                        -0.9
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "gauss2mf",
+                    "definicion": [
+                        0.325,
+                        0,
+                        0.325,
+                        0
+                    ]
+                },
+                {
+                    "nombre": "positivo",
+                    "mf": "gauss2mf",
+                    "definicion": [
+                        0.325,
+                        0.9,
+                        0.325,
+                        1.5
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ]
+        },
+        {
+            "nombre": "derivada del error",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "negativa",
+                    "mf": "zmf",
+                    "definicion": [
+                        -10.0,
+                        2.5
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "gbellmf",
+                    "definicion": [
+                        1.0,
+                        1.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "positiva",
+                    "mf": "smf",
+                    "definicion": [
+                        -2.5,
+                        10.0
+                    ]
+                }
+            ],
+            "rango": [
+                -10,
+                10
+            ]
+        },
+        {
+            "nombre": "segunda derivada del error",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "negativa",
+                    "mf": "zmf",
+                    "definicion": [
+                        -100.0,
+                        25.0
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "gbellmf",
+                    "definicion": [
+                        10.0,
+                        1.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "positiva",
+                    "mf": "smf",
+                    "definicion": [
+                        -25.0,
+                        100.0
+                    ]
+                }
+            ],
+            "rango": [
+                -100,
+                100
+            ]
+        }
+    ],
+    [
+        {
+            "nombre": "se\u00f1al de control",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "negativa",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.5,
+                        -1.0
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.5,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "positiva",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.5,
+                        1.0
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ],
+            "metodo": "centroid"
+        }
+    ],
+    []
+]

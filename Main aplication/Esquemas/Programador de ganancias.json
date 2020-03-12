@@ -1,0 +1,195 @@
+[
+    [
+        {
+            "nombre": "Error",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "negativo",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1.1,
+                        -1.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1.0,
+                        0.0,
+                        1.0
+                    ]
+                },
+                {
+                    "nombre": "positivo",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        1.0,
+                        1.1
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ]
+        },
+        {
+            "nombre": "Derivada del Error",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "negativo",
+                    "mf": "trimf",
+                    "definicion": [
+                        -11.0,
+                        -10.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -10.0,
+                        0.0,
+                        10.0
+                    ]
+                },
+                {
+                    "nombre": "positivo",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        10.0,
+                        11.0
+                    ]
+                }
+            ],
+            "rango": [
+                -10,
+                10
+            ]
+        }
+    ],
+    [
+        {
+            "nombre": "Kp",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "Cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1,
+                        0,
+                        5
+                    ]
+                },
+                {
+                    "nombre": "Medio",
+                    "mf": "trimf",
+                    "definicion": [
+                        0,
+                        5,
+                        10
+                    ]
+                },
+                {
+                    "nombre": "Alto",
+                    "mf": "trimf",
+                    "definicion": [
+                        5.0,
+                        10.0,
+                        11.0
+                    ]
+                }
+            ],
+            "rango": [
+                0,
+                10
+            ],
+            "metodo": "centroid"
+        },
+        {
+            "nombre": "Ki",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "Cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1,
+                        0,
+                        5.0
+                    ]
+                },
+                {
+                    "nombre": "Medio",
+                    "mf": "trimf",
+                    "definicion": [
+                        0,
+                        5.0,
+                        10.0
+                    ]
+                },
+                {
+                    "nombre": "Alto",
+                    "mf": "trimf",
+                    "definicion": [
+                        5,
+                        10.0,
+                        11.0
+                    ]
+                }
+            ],
+            "rango": [
+                0,
+                10
+            ],
+            "metodo": "centroid"
+        },
+        {
+            "nombre": "Kd",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "Cero",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1.0,
+                        0,
+                        0.5
+                    ]
+                },
+                {
+                    "nombre": "Medio",
+                    "mf": "trimf",
+                    "definicion": [
+                        0,
+                        0.5,
+                        1
+                    ]
+                },
+                {
+                    "nombre": "Alto",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.5,
+                        1.0,
+                        1.1
+                    ]
+                }
+            ],
+            "rango": [
+                0,
+                1
+            ],
+            "metodo": "centroid"
+        }
+    ],
+    []
+]
