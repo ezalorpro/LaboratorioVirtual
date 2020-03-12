@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>discreto_generator &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Principal.html">Archivo principal (main)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+        
+      <li>discreto_generator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Código fuente para discreto_generator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Archivo para compilar las funciones encargadas de la simulacion en tiempo discreto utilizando numba, las funciones quedan guardadas en el archivo: discreto_sim.cp37-win32.pyd y pueden ser importadas desde el archivo como una funcion de un modulo</span>
+<span class="sd">&quot;&quot;&quot;</span>
+ 
+
+<span class="kn">from</span> <span class="nn">numba.pycc</span> <span class="kn">import</span> <span class="n">CC</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">cc</span> <span class="o">=</span> <span class="n">CC</span><span class="p">(</span><span class="s1">&#39;discreto_sim&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ss_discreta"><a class="viewcode-back" href="../codigos/discreto_generator.html#discreto_generator.ss_discreta">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;ss_discreta&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ss_discreta</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para calcular la respuesta del sistema por medio de la representacion discreta de las ecuaciones de espacio de estados</span>
+<span class="sd">    </span>
+<span class="sd">    :param ss: Representacion del sistema</span>
+<span class="sd">    :type ss: LTI</span>
+<span class="sd">    :param x: Vector de estado</span>
+<span class="sd">    :type x: numpyArray</span>
+<span class="sd">    :param _: No importa</span>
+<span class="sd">    :type _: float</span>
+<span class="sd">    :param inputValue: Valor de entrada al sistema</span>
+<span class="sd">    :type inputValue: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="PID_discreto"><a class="viewcode-back" href="../codigos/discreto_generator.html#discreto_generator.PID_discreto">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;PID_discreto&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8, f8, f8, f8[::1], f8, f8, f8)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">PID_discreto</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">s_integral</span><span class="p">,</span> <span class="n">error_anterior</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para calcular el PID en forma discreta</span>
+<span class="sd">    </span>
+<span class="sd">    :param error: Señal de error</span>
+<span class="sd">    :type error: float</span>
+<span class="sd">    :param ts: Periodo de muestreo</span>
+<span class="sd">    :type ts: float</span>
+<span class="sd">    :param s_integral: Acumulador de la señal integral</span>
+<span class="sd">    :type s_integral: float</span>
+<span class="sd">    :param error_anterior: deque con el error anterior</span>
+<span class="sd">    :type error_anterior: deque Object</span>
+<span class="sd">    :param kp: Ganancia proporcional</span>
+<span class="sd">    :type kp: float</span>
+<span class="sd">    :param ki: Ganancia integral</span>
+<span class="sd">    :type ki: float</span>
+<span class="sd">    :param kd: Ganancia derivativa</span>
+<span class="sd">    :type kd: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s_proporcional</span> <span class="o">=</span> <span class="n">error</span>
+    <span class="n">s_integral</span> <span class="o">=</span> <span class="n">s_integral</span> <span class="o">+</span> <span class="p">(</span><span class="n">error</span> <span class="o">+</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">ts</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">s_derivativa</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">-</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">ts</span>
+    <span class="n">s_control</span> <span class="o">=</span> <span class="n">s_proporcional</span><span class="o">*</span><span class="n">kp</span> <span class="o">+</span> <span class="n">s_integral</span><span class="o">*</span><span class="n">ki</span> <span class="o">+</span> <span class="n">s_derivativa</span><span class="o">*</span><span class="n">kd</span>
+    <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">error</span>
+    
+    <span class="k">return</span> <span class="n">s_control</span><span class="p">,</span> <span class="n">s_integral</span><span class="p">,</span> <span class="n">error_anterior</span></div>
+
+
+<div class="viewcode-block" id="derivadas_discretas"><a class="viewcode-back" href="../codigos/discreto_generator.html#discreto_generator.derivadas_discretas">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;derivadas_discretas&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8, f8, f8[::1])&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">derivadas_discretas</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">error_anterior</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para calcular la derivada del error y la segunda derivada del error</span>
+<span class="sd">    </span>
+<span class="sd">    :param error: Señal de error</span>
+<span class="sd">    :type error: float</span>
+<span class="sd">    :param ts: Periodo de muestreo</span>
+<span class="sd">    :type ts: float</span>
+<span class="sd">    :param error_anterior: deque con el error anterior</span>
+<span class="sd">    :type error_anterior: deque Object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s_derivativa</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span><span class="o">-</span><span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">ts</span>
+    <span class="n">s_derivativa2</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">ts</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">error_anterior</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">error</span>
+    
+    <span class="k">return</span> <span class="n">s_derivativa</span><span class="p">,</span> <span class="n">s_derivativa2</span><span class="p">,</span> <span class="n">error_anterior</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">cc</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

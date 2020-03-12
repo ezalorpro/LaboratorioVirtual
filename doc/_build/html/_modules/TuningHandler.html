@@ -1,0 +1,854 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TuningHandler &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Principal.html">Archivo principal (main)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+        
+      <li>TuningHandler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Código fuente para TuningHandler</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Archivo para el manejo de la funcion de Tunning, sirve de intermediario entre la interfaz grafica y las rutinas de entonacion de controladores PID y la identificacion de modelos a partir de un archivo CSV y entonacion de PID para el mismo</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">rutinas.rutinas_PID</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rutinas.rutinas_CSV</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PySide2</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<div class="viewcode-block" id="TuningHandler"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.TuningHandler">[documentos]</a><span class="k">def</span> <span class="nf">TuningHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion principal para el manejo de la funcionalida de Tunning, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">GraphObjets</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tfSliderValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfreolutionSpin2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ssSliderValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssreolutionSpin2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfcalcButton2</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">sscalcButton2</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">csvcalcButton2</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BtnFile</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">csv_path</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tiempo_slider_cambio</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidNSlider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox2</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">PID_bool_discreto</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfradioButton2</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">PID_stacked_to_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssradioButton2</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">PID_stacked_to_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">csvradioButton2</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">PID_stacked_to_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfAutoTuningcheckBox2</span><span class="o">.</span><span class="n">clicked</span><span class="p">[</span><span class="s1">&#39;bool&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="k">lambda</span><span class="p">:</span> <span class="n">tf_habilitar_sliders_checkbox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAutoTuningcheckBox2</span><span class="o">.</span><span class="n">clicked</span><span class="p">[</span><span class="s1">&#39;bool&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="k">lambda</span><span class="p">:</span> <span class="n">ss_habilitar_sliders_checkbox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfreolutionSpin2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">actualizar_sliders_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssreolutionSpin2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">actualizar_sliders_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="c1"># Validaciones de entradas</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfnum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfdem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssA_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssB_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssD_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit2</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLVP</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">LVP_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUVP</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">UVP_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLEFC</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">LEFC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUEFC</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">UEFC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="tfnum_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.tfnum_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfnum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del numerador de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfdem_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.tfdem_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfdem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del denominador de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfdelay_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.tfdelay_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del delay de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Delay no valido, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfperiodo_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.tfperiodo_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del periodo de muestreo de la funcion de transferencia &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Periodo de muestreo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssA_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ssA_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssA_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de estados de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssB_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ssB_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssB_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de entrada de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssC_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ssC_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de salida de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssD_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ssD_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssD_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de transmision directa de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssdelay_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ssdelay_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del delay de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Delay no valido, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssperiodo_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ssperiodo_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del periodo de muestreo de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Periodo de muestreo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit2</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tiempo_slider_cambio"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.tiempo_slider_cambio">[documentos]</a><span class="k">def</span> <span class="nf">tiempo_slider_cambio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Para discriminar entre entonacion e identificacion de modelo con archivo csv &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ajustar_atraso_manual</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="chequeo_de_accion"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.chequeo_de_accion">[documentos]</a><span class="k">def</span> <span class="nf">chequeo_de_accion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Para discriminar entre entonacion con funcion de transferencia, ecuacion de espacio de estados o identificacion de modelo con archivo csv </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfAutoTuningcheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
+    <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">calcular_PID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAutoTuningcheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
+    <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">calcular_PID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfAutoTuningcheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
+    <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">calcular_autotuning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAutoTuningcheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
+    <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">calcular_autotuning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">calcular_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calcular_PID"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.calcular_PID">[documentos]</a><span class="k">def</span> <span class="nf">calcular_PID</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para realizar el los calculos necesarios para la funcionalidad de entonacion de controaldores PID, el llamado a esta funcion se realizar por medio del boton calcular o cada vez que se modifique alguno de los sliders</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">system_ss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># caso: Funcion de transferencia</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">dem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+        <span class="c1"># Validacion de funcion propia</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dem</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Funcion de transferencia impropia, el numerador debe ser de un grado menor o igual al denominador&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">system_creator_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">dem</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Ecuacion de espacio de estados</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">system_ss</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">system_creator_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">system_delay</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># caso: Sistema sin delay</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Sistema con delay</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">system_ss</span><span class="p">:</span>
+        <span class="n">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="n">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tfSliderValue</span><span class="p">)</span>
+        <span class="n">update_time_and_N_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_ss</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="n">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ssSliderValue</span><span class="p">)</span>
+        <span class="n">update_time_and_N_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calcular_autotuning"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.calcular_autotuning">[documentos]</a><span class="k">def</span> <span class="nf">calcular_autotuning</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para realizar el los calculos necesarios para la funcionalidad de entonacion de controaldores PID con auto tunning, el llamado a esta funcion se realizar por medio del boton calcular si previamente se habilito la funcionalidad de auto tunning</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">system_ss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># caso: Funcion de transferencia</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">dem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+        <span class="c1"># Validacion de funcion propia</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dem</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Funcion de transferencia impropia, el numerador debe ser de un grado menor o igual al denominador&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">system_creator_tf_tuning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">dem</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;El alfa calculado es igual o menor a 0.05, lo cual es invalido para auto-tuning, se recomienda agregar un Delay mayor a 0.3&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">return</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Ecuacion de espacio de estados</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit2</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">system_ss</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">system_creator_ss_tuning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;El alfa calculado es igual o menor a 0.05, lo cual es invalido para auto-tuning, se recomienda agregar un Delay mayor a 0.3&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">system_delay</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># caso: Sistema sin delay</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Sistema con delay</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">system_ss</span><span class="p">:</span>
+        <span class="n">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_pid</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">autotuning</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">update_gain_labels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">autotuning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tfSliderValue</span>
+        <span class="p">)</span>
+        <span class="n">update_time_and_N_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_ss</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">autotuning</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">update_gain_labels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">autotuning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ssSliderValue</span>
+        <span class="p">)</span>
+        <span class="n">update_time_and_N_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calcular_csv"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.calcular_csv">[documentos]</a><span class="k">def</span> <span class="nf">calcular_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para realizar el los calculos necesarios para la funcionalidad de identificacion de modelos y entonacion de controlador PID, el llamado a esta funcion se realizar por medio del boton calcular</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">csv_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathCSVedit</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                <span class="n">delimiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditSeparador</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">autostrip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Archivo no valido&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">csv_data</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">procesar_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_data</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnboundLocalError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Error en el formato del CSV, verifique los nombres de los encabezados y/o el separador asignado&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="n">Kc</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">anclaT</span><span class="p">,</span> <span class="n">anclaY</span> <span class="o">=</span> <span class="n">calcular_modelo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_data</span><span class="p">,</span> <span class="o">*</span><span class="n">info</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">GraphObjets</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_info</span> <span class="o">=</span> <span class="n">entonar_y_graficar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_data</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">model_info</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">anclaT</span><span class="p">,</span> <span class="n">anclaY</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LVP_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.LVP_validator">[documentos]</a><span class="k">def</span> <span class="nf">LVP_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del limite inferior del span de VP &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLVP</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Valor no valido, deber se un numero real&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLVP</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="UVP_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.UVP_validator">[documentos]</a><span class="k">def</span> <span class="nf">UVP_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del limite superior del span de VP &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUVP</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Valor no valido, deber se un numero real&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUVP</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LEFC_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.LEFC_validator">[documentos]</a><span class="k">def</span> <span class="nf">LEFC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del limite inferior del span de EFC &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLEFC</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Valor no valido, deber se un numero real&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLEFC</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="UEFC_validator"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.UEFC_validator">[documentos]</a><span class="k">def</span> <span class="nf">UEFC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del limite superior del span de EFC &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUEFC</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Valor no valido, deber se un numero real&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUEFC</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ajustar_atraso_manual"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ajustar_atraso_manual">[documentos]</a><span class="k">def</span> <span class="nf">ajustar_atraso_manual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para ajutar el tiempo t1, despues de realizar el calculo para un archivo csv, se utiliza en caso de que la estimacion automatica no sea lo suficientemente buena</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Kc</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span> <span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">anclaT</span><span class="p">,</span> <span class="n">anclaY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_info</span>
+    <span class="n">t1_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="n">t1_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">t0</span> <span class="o">+</span> <span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span> <span class="o">*</span> <span class="n">t1_new</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoLabelValue</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t1_new</span><span class="p">))</span>
+    <span class="n">slop</span> <span class="o">=</span> <span class="p">(</span><span class="n">anclaY</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">anclaT</span><span class="o">-</span><span class="n">t1_new</span><span class="p">)</span>
+    <span class="n">calculos_manual</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">GraphObjets</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1_new</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">slop</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="csv_path"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.csv_path">[documentos]</a><span class="k">def</span> <span class="nf">csv_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cargar el archivo csv &quot;&quot;&quot;</span>
+    <span class="n">path_csv</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;CSV (*.csv)&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathCSVedit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">path_csv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="PID_bool_discreto"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.PID_bool_discreto">[documentos]</a><span class="k">def</span> <span class="nf">PID_bool_discreto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para habilitar y deshabilitar el periodo de muestreo &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PID_stacked_to_tf"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.PID_stacked_to_tf">[documentos]</a><span class="k">def</span> <span class="nf">PID_stacked_to_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar a funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">GraphStakedTuning</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoLabel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidLabelController</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+        <span class="s2">&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;PID = K&lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt; vertical-align:sub;</span><span class="se">\&quot;</span><span class="s2">&gt;p &lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;* e(s) + K&lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt; vertical-align:sub;</span><span class="se">\&quot;</span><span class="s2">&gt;i  &lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;/ s + K&lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt; vertical-align:sub;</span><span class="se">\&quot;</span><span class="s2">&gt;d * &lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;N/(1 + s/N) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">tf_habilitar_sliders_checkbox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tfSliderValue</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="tf_habilitar_sliders_checkbox"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.tf_habilitar_sliders_checkbox">[documentos]</a><span class="k">def</span> <span class="nf">tf_habilitar_sliders_checkbox</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para habilitar ganancias antes y despues del auto tuning con funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidNSlider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfAutoTuningcheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PID_stacked_to_ss"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.PID_stacked_to_ss">[documentos]</a><span class="k">def</span> <span class="nf">PID_stacked_to_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar a ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">GraphStakedTuning</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoLabel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidLabelController</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+        <span class="s2">&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;PID = K&lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt; vertical-align:sub;</span><span class="se">\&quot;</span><span class="s2">&gt;p &lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;* e(s) + K&lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt; vertical-align:sub;</span><span class="se">\&quot;</span><span class="s2">&gt;i  &lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;/ s + K&lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt; vertical-align:sub;</span><span class="se">\&quot;</span><span class="s2">&gt;d * &lt;/span&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2"> font-size:12pt;</span><span class="se">\&quot;</span><span class="s2">&gt;N/(1 + s/N) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>
+    <span class="p">)</span>
+    <span class="n">ss_habilitar_sliders_checkbox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ssSliderValue</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ss_habilitar_sliders_checkbox"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.ss_habilitar_sliders_checkbox">[documentos]</a><span class="k">def</span> <span class="nf">ss_habilitar_sliders_checkbox</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para habilitar ganancias antes y despues del auto tuning con ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidNSlider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAutoTuningcheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="actualizar_sliders_tf"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.actualizar_sliders_tf">[documentos]</a><span class="k">def</span> <span class="nf">actualizar_sliders_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para ajustar la resolucion de los sliders con funcion de transferencia &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tfSliderValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfreolutionSpin2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="n">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tfSliderValue</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="actualizar_sliders_ss"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.actualizar_sliders_ss">[documentos]</a><span class="k">def</span> <span class="nf">actualizar_sliders_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para ajustar la resolucion de los sliders con ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ssSliderValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssreolutionSpin2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="n">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ssSliderValue</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="update_gain_labels"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.update_gain_labels">[documentos]</a><span class="k">def</span> <span class="nf">update_gain_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">autotuning</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para actualizar los labels que representan las ganancias, se ejecuta cada vez que un slider de ganancias cambia</span>
+<span class="sd">    </span>
+<span class="sd">    :param kp: Ganancia proporcional, defaults to 0</span>
+<span class="sd">    :type kp: float, optional</span>
+<span class="sd">    :param ki: Ganancia integral, defaults to 0</span>
+<span class="sd">    :type ki: float, optional</span>
+<span class="sd">    :param kd: Ganancia derivativa, defaults to 0</span>
+<span class="sd">    :type kd: float, optional</span>
+<span class="sd">    :param autotuning: Bandera para señar si es o no una operacion con auto tunning, defaults to False</span>
+<span class="sd">    :type autotuning: bool, optional</span>
+<span class="sd">    :param resolution: Resolucion de los sliders, defaults to 50</span>
+<span class="sd">    :type resolution: int, optional</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">autotuning</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">kp</span> <span class="o">*</span> <span class="n">resolution</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">ki</span> <span class="o">*</span> <span class="n">resolution</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">kd</span> <span class="o">*</span> <span class="n">resolution</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpValueLabel2</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiValueLabel2</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdValueLabel2</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="update_time_and_N_labels"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.update_time_and_N_labels">[documentos]</a><span class="k">def</span> <span class="nf">update_time_and_N_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para actualizar los labels que representan al tiempo y al valor N &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoLabelValue</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidNLabelValue</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidNSlider</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="mi">3</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="PID_stacked_to_csv"><a class="viewcode-back" href="../codigos/TuningHandler.html#TuningHandler.PID_stacked_to_csv">[documentos]</a><span class="k">def</span> <span class="nf">PID_stacked_to_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar a csv &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoLabel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;t1&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidLabelController</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">PIDstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">GraphStakedTuning</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheckBox2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdHSlider2</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidNSlider</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">GraphObjets</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pidTiempoSlider</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

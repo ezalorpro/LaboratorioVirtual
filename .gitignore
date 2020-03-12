@@ -4,6 +4,8 @@ virtualenv
 virtualenvqt
 dist
 vtkmodules
+.vscode
+__pycache__
 !main.spec
 !*.gitignore
 !*.py
@@ -14,7 +16,6 @@ vtkmodules
 !*.synctex.gz
 !*.ui
 !*.png
-!*.vscode
 !*.json
 !*.fls
 !imagenes
@@ -28,7 +29,6 @@ vtkmodules
 !*.pyd
 !*.ico
 !*.zcos
-!Main aplication/doc/**
-!Main aplication/Documentacion/**
+!doc/**
 readMeta.m
 esquemas tikz/*.fls

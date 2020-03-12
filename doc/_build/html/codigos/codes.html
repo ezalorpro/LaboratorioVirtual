@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documentación automática &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Bienvenido a la documentacion del Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentación automática</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-main">Principal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#promociones-de-widgets">Promociones de Widgets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-focusLineEdit">focusLineEdit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mlpwidget">mlpwidget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyqtgraphWidget">pyqtgraphWidget</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#handlers">Handlers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-analisisHandler">analisisHandler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-TuningHandler">TuningHandler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Documentación automática</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/codes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="documentacion-automatica">
+<h1>Documentación automática<a class="headerlink" href="#documentacion-automatica" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="module-main">
+<span id="principal"></span><h2>Principal<a class="headerlink" href="#module-main" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>[Archivo principal, en orden de ejecutar la aplicacion, este es el archivo a ejecutar]</p>
+<dl class="class">
+<dt id="main.MainWindow">
+<em class="property">class </em><code class="sig-prename descclassname">main.</code><code class="sig-name descname">MainWindow</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#main.MainWindow" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definicion de toda la interfaz grafica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz grafica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les envia self y se recibe self y se sigue tratando como si fuera parte de la clase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>QtWidgets</strong> (<em>ObjectType</em>) – Clase base de ventana ofrecida por Qt</p></li>
+<li><p><strong>Ui_MainWindow</strong> (<em>ObjectType</em>) – Clase con la interfaz grafica autogenerada con qtdesigner</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="main.MainWindow.closeEvent">
+<code class="sig-name descname">closeEvent</code><span class="sig-paren">(</span><em class="sig-param">event</em><span class="sig-paren">)</span><a class="headerlink" href="#main.MainWindow.closeEvent" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Evento pera el cerrado de la ventana</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="main.MainWindow.resource_path">
+<code class="sig-name descname">resource_path</code><span class="sig-paren">(</span><em class="sig-param">relative_path</em><span class="sig-paren">)</span><a class="headerlink" href="#main.MainWindow.resource_path" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para generar direcciones absolutas a partir de direcciones relativas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>relative_path</strong> (<em>str</em>) – direccion relativa</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="promociones-de-widgets">
+<h2>Promociones de Widgets<a class="headerlink" href="#promociones-de-widgets" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="module-focusLineEdit">
+<span id="focuslineedit"></span><h3>focusLineEdit<a class="headerlink" href="#module-focusLineEdit" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="class">
+<dt id="focusLineEdit.FocusLineEdit">
+<em class="property">class </em><code class="sig-prename descclassname">focusLineEdit.</code><code class="sig-name descname">FocusLineEdit</code><a class="headerlink" href="#focusLineEdit.FocusLineEdit" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="method">
+<dt id="focusLineEdit.FocusLineEdit.focusInEvent">
+<code class="sig-name descname">focusInEvent</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">arg__1: PySide2.QtGui.QFocusEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#focusLineEdit.FocusLineEdit.focusInEvent" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mlpwidget">
+<span id="mlpwidget"></span><h3>mlpwidget<a class="headerlink" href="#module-mlpwidget" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Archivo para definir las clases MlpWidget, MlpWidgetNoToolbar, MlpWidgetSubplot y MlpWidget3D, estas clases son utilizadas por qtdesigner para promocionar un QGraphicsView a las clases aca definidas en orden de mostrar las graficas en un QGraphicsView</p>
+<dl class="class">
+<dt id="mlpwidget.MlpWidget">
+<em class="property">class </em><code class="sig-prename descclassname">mlpwidget.</code><code class="sig-name descname">MlpWidget</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlpwidget.MlpWidget" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>[Clase basica para mostrar graficas utilizando Matplotlib]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QGraphicsView</strong> (<em>[</em><em>objectType</em><em>]</em>) – [Clase base del QGraphicsView]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="mlpwidget.MlpWidget3D">
+<em class="property">class </em><code class="sig-prename descclassname">mlpwidget.</code><code class="sig-name descname">MlpWidget3D</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlpwidget.MlpWidget3D" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>[Clase basica para mostrar graficas en 3D utilizando Matplotlib]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QGraphicsView</strong> (<em>[</em><em>objectType</em><em>]</em>) – [Clase base del QGraphicsView]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="mlpwidget.MlpWidgetNoToolbar">
+<em class="property">class </em><code class="sig-prename descclassname">mlpwidget.</code><code class="sig-name descname">MlpWidgetNoToolbar</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlpwidget.MlpWidgetNoToolbar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>[Clase para mostrar graficas utilizando Matplotlib sin el toolbar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QGraphicsView</strong> (<em>[</em><em>objectType</em><em>]</em>) – [Clase base del QGraphicsView]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="mlpwidget.MlpWidgetSubplot">
+<em class="property">class </em><code class="sig-prename descclassname">mlpwidget.</code><code class="sig-name descname">MlpWidgetSubplot</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlpwidget.MlpWidgetSubplot" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>[Clase para mostrar graficas en subplots utilizando Matplotlib]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QGraphicsView</strong> (<em>[</em><em>objectType</em><em>]</em>) – [Clase base del QGraphicsView]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyqtgraphWidget">
+<span id="pyqtgraphwidget"></span><h3>pyqtgraphWidget<a class="headerlink" href="#module-pyqtgraphWidget" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="simple">
+<dt>[Archivo para definir las clases PgraphWidget y PgraphWidgetpid, estas clases son utilizadas por qtdesigner para</dt><dd><p>promocionar un QGraphicsView a las clases aca definidas en orden de mostrar las graficas en un QGraphicsView]</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="pyqtgraphWidget.PgraphWidget">
+<em class="property">class </em><code class="sig-prename descclassname">pyqtgraphWidget.</code><code class="sig-name descname">PgraphWidget</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyqtgraphWidget.PgraphWidget" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="simple">
+<dt>[Clase para las graficas utilizadas en la prueba de los controladores difusos, PyQtGraph es acto para</dt><dd><p>realizar graficas en tiempo real]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QGraphicsView</strong> (<em>[</em><em>objectType</em><em>]</em>) – [Clase base del QGraphicsView]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyqtgraphWidget.PgraphWidgetpid">
+<em class="property">class </em><code class="sig-prename descclassname">pyqtgraphWidget.</code><code class="sig-name descname">PgraphWidgetpid</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyqtgraphWidget.PgraphWidgetpid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><dl class="simple">
+<dt>[Clase para las graficas utilizadas en el tunning de controladores PID, PyQtGraph es acto para realizar</dt><dd><p>graficas en tiempo real]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QGraphicsView</strong> (<em>[</em><em>objectType</em><em>]</em>) – [Clase base del QGraphicsView]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="handlers">
+<h2>Handlers<a class="headerlink" href="#handlers" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="module-analisisHandler">
+<span id="analisishandler"></span><h3>analisisHandler<a class="headerlink" href="#module-analisisHandler" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Archivo para el manejo de la funcion de analisis de sistemas de control, sirve de intermediario entre la interfaz grafica y las rutinas de analisis</p>
+<dl class="function">
+<dt id="analisisHandler.AnalisisHandler">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">AnalisisHandler</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.AnalisisHandler" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion principal para el manejo de la funcionalida de analisis de sistemas de control, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.analisis_bool_discreto">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">analisis_bool_discreto</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.analisis_bool_discreto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para habilitar y deshabilitar el periodo de muestreo</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.analisis_stacked_to_ss">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">analisis_stacked_to_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.analisis_stacked_to_ss" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar de funcion de transferencia a ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.analisis_stacked_to_tf">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">analisis_stacked_to_tf</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.analisis_stacked_to_tf" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar de ecuacion de espacio de estados a funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.calcular_analisis">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">calcular_analisis</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.calcular_analisis" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar el los calculos necesarios para la funcionalidad de analisis de sistemas de control, el llamado a esta funcion se realiza por medio del boton calcular</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.ssA_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">ssA_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.ssA_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de estados de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.ssB_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">ssB_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.ssB_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de entrada de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.ssC_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">ssC_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.ssC_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de salida de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.ssD_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">ssD_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.ssD_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de transmision directa de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.ssdelay_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">ssdelay_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.ssdelay_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del delay de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.ssperiodo_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">ssperiodo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.ssperiodo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del periodo de muestreo de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.tfdelay_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">tfdelay_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.tfdelay_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del delay de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.tfdem_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">tfdem_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.tfdem_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del denominador de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.tfnum_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">tfnum_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.tfnum_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del numerador de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="analisisHandler.tfperiodo_validator">
+<code class="sig-prename descclassname">analisisHandler.</code><code class="sig-name descname">tfperiodo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#analisisHandler.tfperiodo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del periodo de muestreo de la funcion de transferencia</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-TuningHandler">
+<span id="tuninghandler"></span><h3>TuningHandler<a class="headerlink" href="#module-TuningHandler" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Archivo para el manejo de la funcion de Tunning, sirve de intermediario entre la interfaz grafica y las rutinas de entonacion de controladores PID y la identificacion de modelos a partir de un archivo CSV y entonacion de PID para el mismo</p>
+<dl class="function">
+<dt id="TuningHandler.LEFC_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">LEFC_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.LEFC_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del limite inferior del span de EFC</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.LVP_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">LVP_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.LVP_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del limite inferior del span de VP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.PID_bool_discreto">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">PID_bool_discreto</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.PID_bool_discreto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para habilitar y deshabilitar el periodo de muestreo</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.PID_stacked_to_csv">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">PID_stacked_to_csv</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.PID_stacked_to_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar a csv</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.PID_stacked_to_ss">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">PID_stacked_to_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.PID_stacked_to_ss" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar a ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.PID_stacked_to_tf">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">PID_stacked_to_tf</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.PID_stacked_to_tf" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cambiar a funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.TuningHandler">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">TuningHandler</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.TuningHandler" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion principal para el manejo de la funcionalida de Tunning, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.UEFC_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">UEFC_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.UEFC_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del limite superior del span de EFC</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.UVP_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">UVP_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.UVP_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del limite superior del span de VP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.actualizar_sliders_ss">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">actualizar_sliders_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.actualizar_sliders_ss" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para ajustar la resolucion de los sliders con ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.actualizar_sliders_tf">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">actualizar_sliders_tf</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.actualizar_sliders_tf" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para ajustar la resolucion de los sliders con funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ajustar_atraso_manual">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ajustar_atraso_manual</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ajustar_atraso_manual" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para ajutar el tiempo t1, despues de realizar el calculo para un archivo csv, se utiliza en caso de que la estimacion automatica no sea lo suficientemente buena</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.calcular_PID">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">calcular_PID</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.calcular_PID" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar el los calculos necesarios para la funcionalidad de entonacion de controaldores PID, el llamado a esta funcion se realizar por medio del boton calcular o cada vez que se modifique alguno de los sliders</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.calcular_autotuning">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">calcular_autotuning</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.calcular_autotuning" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar el los calculos necesarios para la funcionalidad de entonacion de controaldores PID con auto tunning, el llamado a esta funcion se realizar por medio del boton calcular si previamente se habilito la funcionalidad de auto tunning</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.calcular_csv">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">calcular_csv</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.calcular_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar el los calculos necesarios para la funcionalidad de identificacion de modelos y entonacion de controlador PID, el llamado a esta funcion se realizar por medio del boton calcular</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.chequeo_de_accion">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">chequeo_de_accion</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.chequeo_de_accion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Para discriminar entre entonacion con funcion de transferencia, ecuacion de espacio de estados o identificacion de modelo con archivo csv</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.csv_path">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">csv_path</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.csv_path" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para cargar el archivo csv</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ssA_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ssA_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ssA_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de estados de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ssB_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ssB_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ssB_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de entrada de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ssC_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ssC_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ssC_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de salida de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ssD_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ssD_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ssD_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion de la matriz de transmision directa de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ss_habilitar_sliders_checkbox">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ss_habilitar_sliders_checkbox</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ss_habilitar_sliders_checkbox" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para habilitar ganancias antes y despues del auto tuning con ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ssdelay_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ssdelay_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ssdelay_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del delay de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.ssperiodo_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">ssperiodo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.ssperiodo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del periodo de muestreo de la ecuacion de espacio de estados</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.tf_habilitar_sliders_checkbox">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">tf_habilitar_sliders_checkbox</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.tf_habilitar_sliders_checkbox" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para habilitar ganancias antes y despues del auto tuning con funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.tfdelay_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">tfdelay_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.tfdelay_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del delay de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.tfdem_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">tfdem_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.tfdem_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del denominador de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.tfnum_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">tfnum_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.tfnum_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del numerador de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.tfperiodo_validator">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">tfperiodo_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.tfperiodo_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Validacion del periodo de muestreo de la funcion de transferencia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.tiempo_slider_cambio">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">tiempo_slider_cambio</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.tiempo_slider_cambio" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Para discriminar entre entonacion e identificacion de modelo con archivo csv</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.update_gain_labels">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">update_gain_labels</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">kp=0</em>, <em class="sig-param">ki=0</em>, <em class="sig-param">kd=0</em>, <em class="sig-param">autotuning=False</em>, <em class="sig-param">resolution=50</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.update_gain_labels" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar los labels que representan las ganancias, se ejecuta cada vez que un slider de ganancias cambia</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kp</strong> (<em>float</em><em>, </em><em>optional</em>) – Ganancia proporcional, defaults to 0</p></li>
+<li><p><strong>ki</strong> (<em>float</em><em>, </em><em>optional</em>) – Ganancia integral, defaults to 0</p></li>
+<li><p><strong>kd</strong> (<em>float</em><em>, </em><em>optional</em>) – Ganancia derivativa, defaults to 0</p></li>
+<li><p><strong>autotuning</strong> (<em>bool</em><em>, </em><em>optional</em>) – Bandera para señar si es o no una operacion con auto tunning, defaults to False</p></li>
+<li><p><strong>resolution</strong> (<em>int</em><em>, </em><em>optional</em>) – Resolucion de los sliders, defaults to 50</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="TuningHandler.update_time_and_N_labels">
+<code class="sig-prename descclassname">TuningHandler.</code><code class="sig-name descname">update_time_and_N_labels</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#TuningHandler.update_time_and_N_labels" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para actualizar los labels que representan al tiempo y al valor N</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Bienvenido a la documentacion del Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

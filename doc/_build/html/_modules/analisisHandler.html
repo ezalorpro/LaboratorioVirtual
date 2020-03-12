@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>analisisHandler &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Principal.html">Archivo principal (main)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+        
+      <li>analisisHandler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Código fuente para analisisHandler</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Archivo para el manejo de la funcion de analisis de sistemas de control, sirve de intermediario entre la interfaz grafica y las rutinas de analisis </span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">rutinas.rutinas_analisis</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<div class="viewcode-block" id="AnalisisHandler"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.AnalisisHandler">[documentos]</a><span class="k">def</span> <span class="nf">AnalisisHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion principal para el manejo de la funcionalida de analisis de sistemas de control, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfcalcButton1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">calcular_analisis</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">sscalcButton1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">calcular_analisis</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfradioButton1</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">analisis_stacked_to_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssradioButton1</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">analisis_stacked_to_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="c1"># Validaciones de entradas</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfnum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfdem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssA_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssB_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssD_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit1</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="tfnum_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.tfnum_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfnum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del numerador de la funcion de transferencia &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfdem_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.tfdem_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfdem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del denominador de la funcion de transferencia &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfdelay_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.tfdelay_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del delay de la funcion de transferencia &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;Delay no valido, debe ser un número real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfperiodo_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.tfperiodo_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del periodo de muestreo de la funcion de transferencia &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Periodo de muestreo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssA_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.ssA_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssA_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de estados de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssB_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.ssB_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssB_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de entrada de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssC_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.ssC_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de salida de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssD_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.ssD_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssD_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de transmision directa de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssdelay_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.ssdelay_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del delay de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;Delay no valido, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssperiodo_validator"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.ssperiodo_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del periodo de muestreo de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Periodo de muestreo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="calcular_analisis"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.calcular_analisis">[documentos]</a><span class="k">def</span> <span class="nf">calcular_analisis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para realizar el los calculos necesarios para la funcionalidad de analisis de sistemas de control, el llamado a esta funcion se realiza por medio del boton calcular</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">system_ss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox1</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">AnalisisstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox1</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">AnalisisstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">AnalisisstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># caso: Funcion de transferencia</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">dem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+        <span class="c1"># Validacion de funcion propia</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dem</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Funcion de transferencia impropia, el numerador debe ser de un grado menor o igual al denominador&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">system_delay</span> <span class="o">=</span> <span class="n">system_creator_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">dem</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Ecuacion de espacio de estados</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit1</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">system_ss</span> <span class="o">=</span> <span class="n">system_creator_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">system_delay</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># caso: Sistema sin delay</span>
+        <span class="n">t1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">rutina_impulse_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">rutina_bode_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>
+        <span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">rutina_nyquist_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>
+        <span class="n">rutina_root_locus_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>
+        <span class="n">rutina_nichols_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Sistema con delay</span>
+        <span class="n">t1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">rutina_impulse_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        <span class="n">t2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">rutina_bode_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">)</span>
+        <span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">rutina_nyquist_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">)</span>
+        <span class="n">rutina_root_locus_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">)</span>
+        <span class="n">rutina_nichols_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_delay</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">system_ss</span><span class="p">:</span>
+        <span class="n">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_ss</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="analisis_bool_discreto"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.analisis_bool_discreto">[documentos]</a><span class="k">def</span> <span class="nf">analisis_bool_discreto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para habilitar y deshabilitar el periodo de muestreo &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox1</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit1</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit1</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="analisis_stacked_to_tf"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.analisis_stacked_to_tf">[documentos]</a><span class="k">def</span> <span class="nf">analisis_stacked_to_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar de ecuacion de espacio de estados a funcion de transferencia &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">AnalisisstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="analisis_stacked_to_ss"><a class="viewcode-back" href="../codigos/analisisHandler.html#analisisHandler.analisis_stacked_to_ss">[documentos]</a><span class="k">def</span> <span class="nf">analisis_stacked_to_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar de funcion de transferencia a ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">AnalisisstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1155 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>simulacionHandler &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../codigos/Principal.html">Archivo principal (main)</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Código de módulo</a> &raquo;</li>
+        
+      <li>simulacionHandler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Código fuente para simulacionHandler</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Archivo para el manejo de la funcion de simulacion de sistemas de control, sirve de intermediario entre la interfaz grafica y la clase creada para manejar la simulacion en una hilo distinto, esto es debido al tiempo que puede llegar a tomar cada simulacion</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">rutinas.metodos_RK</span> <span class="kn">import</span> <span class="p">(</span><span class="n">runge_kutta2</span><span class="p">,</span> <span class="n">runge_kutta3</span><span class="p">,</span> <span class="n">runge_kutta4</span><span class="p">,</span> <span class="n">runge_kutta5</span><span class="p">,</span>
+                                <span class="n">heun3</span><span class="p">,</span> <span class="n">ralston3</span><span class="p">,</span> <span class="n">SSPRK3</span><span class="p">,</span> <span class="n">ralston4</span><span class="p">,</span> <span class="n">tres_octavos4</span><span class="p">,</span>
+                                <span class="n">bogacki_shampine23</span><span class="p">,</span> <span class="n">fehlberg45</span><span class="p">,</span> <span class="n">cash_karp45</span><span class="p">,</span> <span class="n">dopri54</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">rutinas.rutinas_fuzzy</span> <span class="kn">import</span> <span class="n">FuzzyController</span>
+<span class="kn">from</span> <span class="nn">rutinas.rutinas_simulacion</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rutinas.rutinas_rk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PySide2</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtWidgets</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<div class="viewcode-block" id="SimulacionHandler"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.SimulacionHandler">[documentos]</a><span class="k">def</span> <span class="nf">SimulacionHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion principal para el manejo de la funcionalida de simulacion de sistemas de control, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simularButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">calcular_simulacion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfradioButton4</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">simulacion_stacked_to_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssradioButton4</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">simulacion_stacked_to_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">loadController1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">get_pathcontroller1</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">loadController2</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">get_pathcontroller2</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacion</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">accion_esquema_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">defaultConfiguration</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">restablecer_configuracion</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="c1"># Validaciones de entradas</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfnum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfdem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tfperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssA_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssB_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssD_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit4</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ssperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tiempoSimulacion</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">tiempo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonSimulacion</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">escalon_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonAvanzado</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">escalonAvanzado_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">padeOrder</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">pade_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rtolLineEdit</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">rtol_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">atolLineEdit</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">atol_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">maxStepIncr</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">maxstep_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">minStepDecr</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">minstep_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">safetyFactor</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">safetyFactor_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numSensor</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">sensornum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demSensor</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">sensordem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numAccionador</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">accionadornum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demAccionador</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">accionadordem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inferiorSaturador</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">inferiorSaturador_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">superiorSaturador</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">superiorSaturador_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpSimulacion</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">kp_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiSimulacion</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">ki_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdSimulacion</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">kd_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">N_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    
+    <span class="n">restablecer_configuracion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="tfnum_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.tfnum_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfnum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del numerador de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfdem_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.tfdem_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfdem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del denominador de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfdelay_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.tfdelay_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del delay de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Delay no valido, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelayEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tfperiodo_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.tfperiodo_validator">[documentos]</a><span class="k">def</span> <span class="nf">tfperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del periodo de muestreo de la funcion de transferencia &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Periodo de muestreo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssA_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ssA_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssA_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de estados de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssB_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ssB_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssB_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de entrada de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssC_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ssC_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssC_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de salida de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssD_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ssD_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssD_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la matriz de transmision directa de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.</span><span class="se">\n</span><span class="s2"> i.g., [[1, 1], [1, -1]]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssdelay_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ssdelay_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssdelay_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del delay de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Delay no valido, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ssperiodo_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ssperiodo_validator">[documentos]</a><span class="k">def</span> <span class="nf">ssperiodo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del periodo de muestreo de la ecuacion de espacio de estados &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Periodo de muestreo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit4</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="tiempo_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.tiempo_validator">[documentos]</a><span class="k">def</span> <span class="nf">tiempo_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del tiempo de simulacion &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tiempoSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Tiempo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tiempoSimulacion</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="escalon_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.escalon_validator">[documentos]</a><span class="k">def</span> <span class="nf">escalon_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del escalon simple &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Tiempo no valido, debe ser un numero real mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonSimulacion</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="escalonAvanzado_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.escalonAvanzado_validator">[documentos]</a><span class="k">def</span> <span class="nf">escalonAvanzado_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del escalon avanzado &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonAvanzado</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Escalon avanzado no valido, debe contener una cantidad par de valores con formato: </span><span class="se">\n</span><span class="s2"> [valor1, tiempo1, valor2, tiempo2, ..., valor_n, tiempo_n]&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonAvanzado</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">_</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                        <span class="s2">&quot;Escalon avanzado no valido, los valores de tiempo deben cumplir la siguiente condicion: </span><span class="se">\n</span><span class="s2"> tiempo1 &lt;= tiempo2 &lt;= tiempo3 &lt;= ... &lt;= tiempo_n&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonAvanzado</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+                    <span class="k">return</span>
+
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los valores y tiempos deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 0.5, 4, 0.25, 8]&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonAvanzado</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="pade_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.pade_validator">[documentos]</a><span class="k">def</span> <span class="nf">pade_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del orden del pade &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">padeOrder</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Orden del pade no valido, debe ser un numero entero mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">padeOrder</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="rtol_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.rtol_validator">[documentos]</a><span class="k">def</span> <span class="nf">rtol_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la tolerancia relativa &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rtolLineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Tolerancia relativa no valida, debe ser un numero real mayor que cero, se puede expresar en notacion cientifica</span><span class="se">\n</span><span class="s2"> i.g., 1e-3&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rtolLineEdit</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="atol_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.atol_validator">[documentos]</a><span class="k">def</span> <span class="nf">atol_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la tolerancia absoluta &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">atolLineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Tolerancia absoluta no valida, debe ser un numero real mayor que cero, se puede expresar en notacion cientifica</span><span class="se">\n</span><span class="s2"> i.g., 3e-6&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">atolLineEdit</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="maxstep_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.maxstep_validator">[documentos]</a><span class="k">def</span> <span class="nf">maxstep_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del incremento maximo de paso &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">maxStepIncr</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Incremento maximo de paso no valido, debe ser un numero real mayor que 1&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">maxStepIncr</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="minstep_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.minstep_validator">[documentos]</a><span class="k">def</span> <span class="nf">minstep_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del decremento minimo de paso &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">minStepDecr</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">_</span> <span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Decremento minimo de paso no valido, debe ser un numero real menor que 1 y mayor que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">minStepDecr</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="safetyFactor_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.safetyFactor_validator">[documentos]</a><span class="k">def</span> <span class="nf">safetyFactor_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del factor de seguridad &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">safetyFactor</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">_</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Factor de seguridad no valido, debe ser un numero real menor que 1 y mayor que cero&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">safetyFactor</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="sensornum_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.sensornum_validator">[documentos]</a><span class="k">def</span> <span class="nf">sensornum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del numerador de la funcion de transferencia correspondiente al sensor &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numSensor</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numSensor</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="sensordem_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.sensordem_validator">[documentos]</a><span class="k">def</span> <span class="nf">sensordem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del denominador de la funcion de transferencia correspondiente al sensor &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demSensor</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demSensor</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="accionadornum_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.accionadornum_validator">[documentos]</a><span class="k">def</span> <span class="nf">accionadornum_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del numerador de la funcion de transferencia correspondiente al accionador &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numAccionador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numAccionador</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="accionadordem_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.accionadordem_validator">[documentos]</a><span class="k">def</span> <span class="nf">accionadordem_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del denominador de la funcion de transferencia correspondiente al accionador &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demAccionador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Formato no valido, los coeficientes deben estar entre corchetes y separados por comas.</span><span class="se">\n</span><span class="s2"> i.g., [1, 2, 3]&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demAccionador</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="inferiorSaturador_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.inferiorSaturador_validator">[documentos]</a><span class="k">def</span> <span class="nf">inferiorSaturador_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del limite inferior del saturador &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inferiorSaturador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Limite inferior no valido, debe ser un numero real&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inferiorSaturador</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="superiorSaturador_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.superiorSaturador_validator">[documentos]</a><span class="k">def</span> <span class="nf">superiorSaturador_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del limite superior del saturador &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">superiorSaturador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Limite superior no valido, debe ser un numero real&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">superiorSaturador</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="kp_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.kp_validator">[documentos]</a><span class="k">def</span> <span class="nf">kp_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la ganancia proporcional &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Ganancia kp no valida, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpSimulacion</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ki_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.ki_validator">[documentos]</a><span class="k">def</span> <span class="nf">ki_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la ganancia integral &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Ganancia ki no valida, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiSimulacion</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="kd_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.kd_validator">[documentos]</a><span class="k">def</span> <span class="nf">kd_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion de la ganancia derivativa &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Ganancia kd no valida, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdSimulacion</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="N_validator"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.N_validator">[documentos]</a><span class="k">def</span> <span class="nf">N_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Validacion del valor N &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Valor de N no valido, debe ser un numero real mayor o igual que cero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="calcular_simulacion"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.calcular_simulacion">[documentos]</a><span class="k">def</span> <span class="nf">calcular_simulacion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para inicializar el QThread y realizar los calculos de la simulacion &quot;&quot;&quot;</span>
+    
+    <span class="n">num</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numSensor</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">dem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demSensor</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+    <span class="c1"># Validacion de funcion propia para el sensor</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">sensorCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Funcion de transferencia del sensor impropia, el numerador debe ser de un grado menor o igual al del denominador&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">toolBox</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">num</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">numAccionador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">dem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">demAccionador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+    <span class="c1"># Validacion de funcion propia para el accionador</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">accionadorCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Funcion de transferencia del accionador impropia, el numerador debe ser de un grado menor o igual al del denominador&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">toolBox</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">lim_inf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inferiorSaturador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">lim_sup</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">superiorSaturador</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+    <span class="c1"># Validacion de limites validos para el saturador</span>
+    <span class="k">if</span> <span class="n">lim_inf</span> <span class="o">&gt;=</span> <span class="n">lim_sup</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">saturadorCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Limites del saturador del accionador invalidos, el limite inferior debe ser menor que el limite superior&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">toolBox</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Validacion de seleccion de archivo para el controlador difuso</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathController1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="p">))</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacion</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Debe seleccionar un archivo valido para cargar el controaldor difuso&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">toolBox</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Validacion de seleccion de archivo para el controlador difuso 2 (PD)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathController2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="p">))</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacion</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Debe seleccionar un archivo valido para cargar el controaldor difuso 2&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">toolBox</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">system_ss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox4</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">SimulacionstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfperiodoEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox4</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="ow">and</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">SimulacionstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssperiodoEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">SimulacionstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># caso: Funcion de transferencia</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfnumEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">dem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdemEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+        <span class="c1"># Validacion de funcion propia</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dem</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+                <span class="s2">&quot;Funcion de transferencia impropia, el numerador debe ser de un grado menor o igual al del denominador&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelayEdit1</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="n">system</span> <span class="o">=</span> <span class="n">system_creator_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">dem</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># caso: Ecuacion de espacio de estados</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssAEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssBEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssCEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssDEdit4</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="n">system_creator_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="n">escalon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">escalon</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">escalonAvanzado</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+    <span class="c1"># Configuracion del solver</span>
+    <span class="n">rk_base</span><span class="p">,</span> <span class="n">metodo_adaptativo</span><span class="p">,</span> <span class="n">solver_config</span> <span class="o">=</span> <span class="n">configuration_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c1"># Lista a enviar al QThread con toda la informacion necesaria</span>
+    <span class="n">list_info</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacion</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">(),</span>
+        <span class="n">system</span><span class="p">,</span>
+        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tiempoSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">()),</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span>
+        <span class="n">escalon</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">sensorCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">accionadorCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">saturadorCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+        <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathController1</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathController2</span><span class="o">.</span><span class="n">text</span><span class="p">()],</span>
+        <span class="n">rk_base</span><span class="p">,</span>
+        <span class="n">metodo_adaptativo</span><span class="p">,</span>
+        <span class="n">solver_config</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">filtroCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Instanciacion del objeto QThread</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">thread</span> <span class="o">=</span> <span class="n">SimpleThread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">plot_final_results</span><span class="p">,</span>
+                               <span class="n">update_progresBar_function</span><span class="p">,</span>
+                               <span class="n">error_gui</span><span class="p">,</span>
+                               <span class="n">list_info</span><span class="p">)</span>
+
+    <span class="c1"># Inicio del proceso de simulacion</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="simulacion_stacked_to_tf"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.simulacion_stacked_to_tf">[documentos]</a><span class="k">def</span> <span class="nf">simulacion_stacked_to_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar de ecuacion de espacio de estados a funcion de transferencia &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">SimulacionstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="simulacion_stacked_to_ss"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.simulacion_stacked_to_ss">[documentos]</a><span class="k">def</span> <span class="nf">simulacion_stacked_to_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar de funcion de transferencia a ecuacion de espacio de estados &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">SimulacionstackedWidget</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_pathcontroller1"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.get_pathcontroller1">[documentos]</a><span class="k">def</span> <span class="nf">get_pathcontroller1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para obtener la direccion al archivo del controlador difuso &quot;&quot;&quot;</span>
+
+    <span class="n">path_cargar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;JSON/FIS (*.json *.fis)&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathController1</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">path_cargar</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="get_pathcontroller2"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.get_pathcontroller2">[documentos]</a><span class="k">def</span> <span class="nf">get_pathcontroller2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para obtener la direccion al archivo del controlador difuso 2 (PD) &quot;&quot;&quot;</span>
+
+    <span class="n">path_cargar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;JSON/FIS (*.json *.fis)&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">pathController2</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">path_cargar</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="configuration_data"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.configuration_data">[documentos]</a><span class="k">def</span> <span class="nf">configuration_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para cambiar la configuracion del solver a utilizar &quot;&quot;&quot;</span>
+
+    <span class="n">rtol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rtolLineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">atol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">atolLineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">max_step_inc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">maxStepIncr</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">min_step_dec</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">minStepDecr</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+    <span class="n">safety_factor</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">safetyFactor</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+    <span class="c1"># Seleccion entre metodo explicito y embebido</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">metodo_adaptativo</span> <span class="o">=</span> <span class="n">rk_doble_paso_adaptativo</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">metodo_adaptativo</span> <span class="o">=</span> <span class="n">rk_embebido_adaptativo</span>
+
+    <span class="c1"># Metodos y orden</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">runge_kutta2</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">runge_kutta3</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">heun3</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">ralston3</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">SSPRK3</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">runge_kutta4</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">tres_octavos4</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">ralston4</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">runge_kutta5</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">rk_metodo</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">bogacki_shampine23</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">ralston3</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">fehlberg45</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">runge_kutta4</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">cash_karp45</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">runge_kutta4</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+        <span class="n">rk_metodo</span> <span class="o">=</span> <span class="n">dopri54</span>
+        <span class="n">rk_base</span> <span class="o">=</span> <span class="n">runge_kutta5</span>
+        <span class="n">ordenq</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="k">return</span> <span class="n">rk_base</span><span class="p">,</span> <span class="n">metodo_adaptativo</span><span class="p">,</span> <span class="p">[</span><span class="n">rk_metodo</span><span class="p">,</span> <span class="n">ordenq</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">max_step_inc</span><span class="p">,</span> <span class="n">min_step_dec</span><span class="p">,</span> <span class="n">safety_factor</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="restablecer_configuracion"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.restablecer_configuracion">[documentos]</a><span class="k">def</span> <span class="nf">restablecer_configuracion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para restablecer la configuracion avanzada por defecto &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">padeOrder</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">filtroCheck</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">solverMethod</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rtolLineEdit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;1e-4&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">atolLineEdit</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;1e-6&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">maxStepIncr</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">minStepDecr</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;0.2&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">safetyFactor</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;0.9&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="accion_esquema_selector"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.accion_esquema_selector">[documentos]</a><span class="k">def</span> <span class="nf">accion_esquema_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Funcion para mostrar los widgets indicados en funcion del esquema seleccionado &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacion</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tabSimulation</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># PID Clasico</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheck</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheck</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSpacer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+            <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/pidClasico.png&quot;</span><span class="p">))</span>
+
+
+    <span class="k">if</span> <span class="n">index</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]:</span>  <span class="c1"># PID difuso, PI difuso, PD difuso, Programador de ganancias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSpacer</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># PID difuso</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+                <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/pidDifuso.png&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># PI difuso</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+                <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/piDifuso.png&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># PD difuso</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+                <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/pdDifuso.png&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>  <span class="c1"># Programador de ganancias</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+                <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/GainScheduler.png&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># PI difuso + PD difuso</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSpacer</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+            <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/pipdDifuso.png&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># PI difuso + D Clasico</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheck</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheck</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSpacer</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+            <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/piplusDDifuso.png&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># PD difuso + I Clasico</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheck</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheck</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSpacer</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+            <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/pdplusIDifuso.png&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>  <span class="c1"># PID Clasico + Difuso simple</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller1Frame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">controller2Frame</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kdCheck</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kiCheck</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NFrame</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSpacer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NSimulacion</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">esquemaSimulacionGraph</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
+            <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/pidplusDifuso.png&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="update_progresBar_function"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.update_progresBar_function">[documentos]</a><span class="k">def</span> <span class="nf">update_progresBar_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para actualizar la barra de progreso de la simulacion, esta funcion es utilizada por el QThread</span>
+<span class="sd">    </span>
+<span class="sd">    :param value: Valor en porcentaje del progreso</span>
+<span class="sd">    :type value: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="error_gui"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.error_gui">[documentos]</a><span class="k">def</span> <span class="nf">error_gui</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para mostrar los errores que pudiesen ocurrir durante la simulacion, esta funcion es utilizada por el QThread</span>
+<span class="sd">    </span>
+<span class="sd">    :param error: Indicador del error</span>
+<span class="sd">    :type error: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">principalTab</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;Error inesperado&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">error</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span><span class="s2">&quot;No se permiten salidas negadas en los controladores&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">error</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
+            <span class="s2">&quot;Controlador no valido para el esquema seleccionado&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_final_results"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.plot_final_results">[documentos]</a><span class="k">def</span> <span class="nf">plot_final_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funcion para graficar los resultados finales de la simulacion</span>
+<span class="sd">    </span>
+<span class="sd">    :param result: Lista con los resultados obtenidos</span>
+<span class="sd">    :type result: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="c1"># Limitando los resultados para evitar problemas con matplotlib</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mf">1e300</span><span class="p">,</span> <span class="mf">1e300</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="mf">1e300</span><span class="p">,</span> <span class="mf">1e300</span><span class="p">)</span>
+
+    <span class="c1"># Distincion entre continuo y discreto para y(t)</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="n">where</span><span class="o">=</span><span class="s2">&quot;mid&quot;</span><span class="p">,</span>
+                                                    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Vp&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Vp&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Setpoint</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                                <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+                                                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;setpoint&#39;</span><span class="p">,</span>
+                                                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="c1"># Distincion entre continuo y discreto para la señal de control</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                    <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span>
+                                                    <span class="n">where</span><span class="o">=</span><span class="s2">&quot;mid&quot;</span><span class="p">,</span>
+                                                    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;señal de control&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                    <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span>
+                                                    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;señal de control&#39;</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">simulacionGraph</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">principalTab</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tabSimulation</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread) &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos" href="rutinas_rk.html" />
+    <link rel="prev" title="Archivo Handler para la función de simulación de sistemas de control" href="simulacionHandler.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FuzzyHandler.html">Archivo Handler para la función de lógica difusa</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rutinas_rk.html">Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rk_generator.html">Archivo para compilar los Runge-kutta explicitos y embebidos utilizando numba</a></li>
+<li class="toctree-l3"><a class="reference internal" href="discreto_generator.html">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupyterConsoleHandler.html">Archivo Handler para la función de consola Qt</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+        
+          <li><a href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a> &raquo;</li>
+        
+      <li>Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/rutinas_simulacion.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="archivo-que-contiene-las-rutinas-de-simulacion-y-la-clase-simplethread-qtthread">
+<h1>Archivo que contiene las rutinas de simulación y la clase SimpleThread (QtThread)<a class="headerlink" href="#archivo-que-contiene-las-rutinas-de-simulacion-y-la-clase-simplethread-qtthread" title="Enlazar permanentemente con este título">¶</a></h1>
+<span class="target" id="module-rutinas_simulacion"></span><p>Archivo que contiene la clase SimpleThread la cual ejecuta la simulacion de sistemas de control en hilo diferente al principal, esto se realiza de esta forma debido a que la simulacion puede tardar en algunos casos varios segundos, de ejecutarse en el hilo principal presentaria un comportamiento de bloqueo en la ventana principal</p>
+<dl class="class">
+<dt id="rutinas_simulacion.SimpleThread">
+<em class="property">class </em><code class="sig-prename descclassname">rutinas_simulacion.</code><code class="sig-name descname">SimpleThread</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">regresar</em>, <em class="sig-param">update_bar</em>, <em class="sig-param">error_gui</em>, <em class="sig-param">list_info</em>, <em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase para realizar la simulacion de sistemas de control en un hilo diferente al principal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>QThread</strong> (<em>ObjectType</em>) – Clase para crear un hilo paralelo al principal</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="rutinas_simulacion.SimpleThread.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">window</em>, <em class="sig-param">regresar</em>, <em class="sig-param">update_bar</em>, <em class="sig-param">error_gui</em>, <em class="sig-param">list_info</em>, <em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.__init__"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.__init__" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Constructor para recibir las variables y funciones del hilo principal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>object</em>) – Objeto que contiene a la ventana principal</p></li>
+<li><p><strong>regresar</strong> (<em>function</em>) – Funcion a la que regresa una vez terminada la simulacion, plot_final_results de simulacionHandler.py</p></li>
+<li><p><strong>update_bar</strong> (<em>function</em>) – Funcion para actualizar la barra de progreso, update_progresBar_function de simulacionHandler.py</p></li>
+<li><p><strong>error_gui</strong> (<em>function</em>) – Funcion para mostrar los errores ocurridos durante la simulacion, error_gui de simulacionHandler.py</p></li>
+<li><p><strong>list_info</strong> (<em>list</em>) – Lista con toda la informacion necesaria</p></li>
+<li><p><strong>parent</strong> (<em>NoneType</em><em>, </em><em>optional</em>) – Sin efecto, defaults to None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_simulacion.SimpleThread.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.run"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.run" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion a ejecutar cuando se hace el llamado a self.start()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_simulacion.SimpleThread.run_fuzzy">
+<code class="sig-name descname">run_fuzzy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.run_fuzzy"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.run_fuzzy" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar la simulacion de sistemas de control de esquemas difusos</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_simulacion.SimpleThread.run_pid">
+<code class="sig-name descname">run_pid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.run_pid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.run_pid" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para realizar la simulacion de sistemas de control con controlador PID clasico</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rutinas_simulacion.SimpleThread.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.stop"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.stop" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para detener el hilo</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_simulacion.controlador_validator">
+<code class="sig-prename descclassname">rutinas_simulacion.</code><code class="sig-name descname">controlador_validator</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">esquema</em>, <em class="sig-param">InputList</em>, <em class="sig-param">OutputList</em>, <em class="sig-param">RuleEtiquetas</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#controlador_validator"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.controlador_validator" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para validar los controladores difusos con respecto al esquema de control seleccionado</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>esquema</strong> (<em>int</em>) – Esquema de control seleccionado representado por un valor</p></li>
+<li><p><strong>InputList</strong> (<em>list</em>) – Lista de entradas</p></li>
+<li><p><strong>OutputList</strong> (<em>list</em>) – Lista de salidas</p></li>
+<li><p><strong>RuleEtiquetas</strong> (<em>list</em>) – Lista con set de reglas</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_simulacion.system_creator_ss">
+<code class="sig-prename descclassname">rutinas_simulacion.</code><code class="sig-name descname">system_creator_ss</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#system_creator_ss"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.system_creator_ss" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmision directa la ecuacion de espacio de estados</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>list</em>) – Matriz de estados</p></li>
+<li><p><strong>B</strong> (<em>list</em>) – Matriz de entrada</p></li>
+<li><p><strong>C</strong> (<em>list</em>) – Matriz de salida</p></li>
+<li><p><strong>D</strong> (<em>list</em>) – Matriz de transmision directa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="rutinas_simulacion.system_creator_tf">
+<code class="sig-prename descclassname">rutinas_simulacion.</code><code class="sig-name descname">system_creator_tf</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">numerador</em>, <em class="sig-param">denominador</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#system_creator_tf"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.system_creator_tf" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numerador</strong> (<em>list</em>) – Coeficientes del numerador</p></li>
+<li><p><strong>denominador</strong> (<em>list</em>) – Coeficientes del denominador</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rutinas_rk.html" class="btn btn-neutral float-right" title="Archivo para definir los algoritmos de ajuste del tamaño de paso para los Runge-kutta explícitos y embebidos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="simulacionHandler.html" class="btn btn-neutral float-left" title="Archivo Handler para la función de simulación de sistemas de control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
