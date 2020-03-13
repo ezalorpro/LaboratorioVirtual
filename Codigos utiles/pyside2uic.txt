@@ -1,0 +1,1 @@
+& "C:\Program Files (x86)\Python37-32\Scripts\pyside2-uic.exe" -x .\VentanaPrincipal.ui -o .\Ui_VentanaPrincipal.py

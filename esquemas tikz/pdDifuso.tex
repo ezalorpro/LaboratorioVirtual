@@ -1,0 +1,148 @@
+\documentclass[tikz, border=0mm, convert={density=1000,size=1080x800, outext=.png}]{standalone}
+
+\usetikzlibrary{shapes,arrows,positioning, calc}
+
+\makeatletter
+
+\pgfdeclareshape{record}{
+\inheritsavedanchors[from={rectangle}]
+\inheritbackgroundpath[from={rectangle}]
+\inheritanchorborder[from={rectangle}]
+\foreach \x in {center,north east,north west,north,south,south east,south west, west, east}{
+\inheritanchor[from={rectangle}]{\x}
+}
+\foregroundpath{
+\pgfpointdiff{\northeast}{\southwest}
+\pgf@xa=\pgf@x \pgf@ya=\pgf@y
+\northeast
+\pgfpathmoveto{\pgfpoint{0}{0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{0}{-0.33\pgf@ya}}
+\pgfpathmoveto{\pgfpoint{0.33\pgf@xa}{0}}
+\pgfpathlineto{\pgfpoint{-0.33\pgf@xa}{0}}
+\pgfpathmoveto{\pgfpointadd{\southwest}{\pgfpoint{-0.33\pgf@xa}{-0.6\pgf@ya}}}
+\pgfpathlineto{\pgfpointadd{\southwest}{\pgfpoint{-0.5\pgf@xa}{-0.6\pgf@ya}}}
+\pgfpathlineto{\pgfpointadd{\northeast}{\pgfpoint{-0.5\pgf@xa}{-0.6\pgf@ya}}}
+\pgfpathlineto{\pgfpointadd{\northeast}{\pgfpoint{-0.33\pgf@xa}{-0.6\pgf@ya}}}
+}
+}
+\makeatother
+
+\makeatletter
+
+\pgfdeclareshape{fuzzyBlock}{
+\inheritsavedanchors[from={rectangle}]
+\inheritbackgroundpath[from={rectangle}]
+\inheritanchorborder[from={rectangle}]
+\foreach \x in {center,north east,north west,north,south,south east,south west, west, east}{
+\inheritanchor[from={rectangle}]{\x}
+}
+\foregroundpath{
+\pgfpointdiff{\northeast}{\southwest}
+\pgf@xa=\pgf@x \pgf@ya=\pgf@y
+\northeast
+
+\pgfpathmoveto{\pgfpoint{0.45\pgf@xa}{0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{-0.45\pgf@xa}{0.33\pgf@ya}}
+
+\pgfpathmoveto{\pgfpoint{0.4\pgf@xa}{0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{0.2\pgf@xa}{-0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{0\pgf@xa}{0.33\pgf@ya}}
+
+\pgfpathmoveto{\pgfpoint{0.2\pgf@xa}{0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{0\pgf@xa}{-0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{-0.2\pgf@xa}{0.33\pgf@ya}}
+
+\pgfpathmoveto{\pgfpoint{0\pgf@xa}{0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{-0.2\pgf@xa}{-0.33\pgf@ya}}
+\pgfpathlineto{\pgfpoint{-0.4\pgf@xa}{0.33\pgf@ya}}
+}
+}
+\makeatother
+
+\begin{document}
+
+\tikzset{%
+    block1/.style={
+        draw,
+        fill=white, 
+        rectangle, 
+        minimum height=2em, 
+        minimum width=3em,
+        node distance=0.6cm
+    },
+    input/.style={
+        inner sep=0pt
+    },      
+    output/.style={
+        inner sep=0pt, 
+        node distance=0.6cm
+    },      
+    sum/.style = {
+        draw, 
+        fill=white, 
+        circle, 
+        minimum size=2mm, 
+        inner sep=0pt,
+        node distance=0.6cm
+    },
+    pinstyle/.style = {
+        pin edge={to-,thin,black}
+    },
+    branch/.style={
+        fill,
+        circle,
+        minimum size=3pt,
+        outer sep=-1pt,
+        inner sep=0pt, 
+        node distance=0.6cm
+    },
+    EmptyBlock/.style={
+        circle,
+        minimum size=0pt,
+        outer sep=-1pt,
+        inner sep=-1pt, 
+        node distance=2cm
+    }
+}
+
+\begin{tikzpicture}[auto, >=latex']
+
+    \node[input] (input) {};
+    \node [sum, right = of input] (sum) {};
+    \node [branch, node distance=0.4cm, right = of sum] (errorjoint) {};
+    \node [block1, right = of errorjoint] (filtro) {$\frac{N}{10s + N}$};
+    \node [block1, node distance=0.45cm, right = of filtro] (derivada) {$\frac{N}{1+\frac{N}{s}}$};
+    
+    \coordinate[node distance=0.8cm, above = of errorjoint] (empty1) {};
+    \coordinate[node distance=3.5cm, right = of empty1] (empty2) {};
+    
+    \node [fuzzyBlock, minimum height=2em, minimum width=3em, node distance=0.6cm, draw, right = of derivada] (controller) {};
+
+    \node [block1, right = of controller] (actuador) {$A(s)$};
+    \node [record, minimum size=2em, node distance=0.6cm, draw, right = of actuador] (saturador) {};
+    \node [block1, right = of saturador] (system) {$G(s)$};
+    \node [branch, node distance=0.4cm, right = of system] (yjoint) {};
+    \node [output, right = of yjoint] (output) {};
+    \node [block1, below = of controller] (sensor){$H(s)$};
+    
+
+    \draw [draw,->] (input) node[above right] {$sp$} -- (sum);
+    \draw [-] (sum) -- (errorjoint);
+    \draw [-] (errorjoint) -- (empty1);
+    \draw [->] (errorjoint) -- (filtro);
+    \draw [->] (filtro) -- (derivada);
+    \draw [-] (empty1) -- (empty2);
+    \draw [->] (empty2) |- ([yshift=1em]controller);
+    \draw [->] ([xshift=1em]derivada) |- (controller);
+    \draw [->] (controller) -- (actuador);
+    \draw [->] (actuador) -- (saturador);
+    \draw [->] (saturador) -- (system);
+    \draw [-] (system) -- (yjoint);
+    \draw [->] (yjoint) -- (output) node [name=y, above left] {$Vp$};
+    \draw [->] (yjoint.south) |- (sensor);
+    \draw [->] (sensor) -| node[pos=0.97, right] {\tiny{$-$}} (sum);
+    \draw[thick,dashed] ($(actuador.north west)+(-0.2,0.1)$)  rectangle ($(saturador.south east)+(0.2,-0.1)$);
+    \draw[thick,dashed] ($(sensor.north west)+(-0.2,0.1)$)  rectangle ($(sensor.south east)+(0.2,-0.1)$);
+
+\end{tikzpicture}
+\end{document}

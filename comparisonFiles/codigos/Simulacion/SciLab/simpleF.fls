@@ -1,0 +1,63 @@
+# sciFLT scilab Fuzzy Logic Toolbox
+<REVISION>
+ <revision>@REV@
+
+<DESCRIPTION>
+ <name>simpleF
+ <comment>Imported from Matlab fis - check it please!
+ <type>m
+ <SNorm>max
+ <SNormPar>0.0
+ <TNorm>min
+ <TNormPar>0.0
+ <Comp>one
+ <CompPar>0.0
+ <ImpMethod>min
+ <AggMethod>max
+ <defuzzMethod>centroide
+
+<INPUT>
+ <name>error
+ <range>-1.0 1.0
+  <mf_name>negativo grande
+   <mf_type>trimf
+   <mf_par>-2.0 -1.0 -0.5
+  <mf_name>negativo
+   <mf_type>trimf
+   <mf_par>-1.0 -0.5 0.0
+  <mf_name>cero
+   <mf_type>trimf
+   <mf_par>-0.5 0.0 0.5
+  <mf_name>positivo
+   <mf_type>trimf
+   <mf_par>0.0 0.5 1.0
+  <mf_name>positivo grande
+   <mf_type>trimf
+   <mf_par>0.5 1.0 2.0
+
+<OUTPUT>
+ <name>s_fuzzy
+ <range>-1.0 1.0
+  <mf_name>negativa grande
+   <mf_type>trimf
+   <mf_par>-2.0 -1.0 -0.5
+  <mf_name>negativa
+   <mf_type>trimf
+   <mf_par>-1.0 -0.5 0.0
+  <mf_name>cero
+   <mf_type>trimf
+   <mf_par>-0.5 0.0 0.5
+  <mf_name>positiva
+   <mf_type>trimf
+   <mf_par>0.0 0.5 1.0
+  <mf_name>positiva grande
+   <mf_type>trimf
+   <mf_par>0.5 1.0 1.667
+
+<RULE>
+5 5 1 1.0
+4 4 1 0.5
+3 3 1 0.1
+2 2 1 0.5
+1 1 1 1.0
+

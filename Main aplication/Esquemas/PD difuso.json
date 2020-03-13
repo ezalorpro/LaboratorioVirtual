@@ -1,0 +1,158 @@
+[
+    [
+        {
+            "nombre": "error",
+            "numeroE": 5,
+            "etiquetas": [
+                {
+                    "nombre": "negativo alto",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.2,
+                        -1
+                    ]
+                },
+                {
+                    "nombre": "negativo bajo",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.2,
+                        -0.5
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.2,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "positivo bajo",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.2,
+                        0.5
+                    ]
+                },
+                {
+                    "nombre": "positivo alto",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.2,
+                        1.0
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ]
+        },
+        {
+            "nombre": "derivada del error",
+            "numeroE": 5,
+            "etiquetas": [
+                {
+                    "nombre": "negativo alto",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        2,
+                        -10
+                    ]
+                },
+                {
+                    "nombre": "negativo bajo",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        2,
+                        -5
+                    ]
+                },
+                {
+                    "nombre": "cero",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        2,
+                        0
+                    ]
+                },
+                {
+                    "nombre": "positivo bajo",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        2,
+                        5
+                    ]
+                },
+                {
+                    "nombre": "positivo alto",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        2,
+                        10
+                    ]
+                }
+            ],
+            "rango": [
+                -10,
+                10
+            ]
+        }
+    ],
+    [
+        {
+            "nombre": "se\u00f1al de control",
+            "numeroE": 5,
+            "etiquetas": [
+                {
+                    "nombre": "cero",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.1,
+                        0
+                    ]
+                },
+                {
+                    "nombre": "bajo",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.1,
+                        0.25
+                    ]
+                },
+                {
+                    "nombre": "medio",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.1,
+                        0.5
+                    ]
+                },
+                {
+                    "nombre": "alto",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.1,
+                        0.75
+                    ]
+                },
+                {
+                    "nombre": "muy alto",
+                    "mf": "gaussmf",
+                    "definicion": [
+                        0.1,
+                        1.0
+                    ]
+                }
+            ],
+            "rango": [
+                0,
+                1
+            ],
+            "metodo": "centroid"
+        }
+    ],
+    []
+]

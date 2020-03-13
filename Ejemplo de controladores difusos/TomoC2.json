@@ -1,0 +1,401 @@
+[
+    [
+        {
+            "nombre": "entrada1",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "etiqueta1",
+                    "mf": "trimf",
+                    "definicion": [
+                        -2.0,
+                        -1.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta2",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1.0,
+                        -0.0,
+                        1.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta3",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        1.0,
+                        2.0
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ]
+        },
+        {
+            "nombre": "entrada2",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "etiqueta1",
+                    "mf": "trimf",
+                    "definicion": [
+                        -20.0,
+                        -10.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta2",
+                    "mf": "trimf",
+                    "definicion": [
+                        -10.0,
+                        0.0,
+                        10.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta3",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        10.0,
+                        20.0
+                    ]
+                }
+            ],
+            "rango": [
+                -10,
+                10
+            ]
+        }
+    ],
+    [
+        {
+            "nombre": "salida1",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "etiqueta1",
+                    "mf": "trimf",
+                    "definicion": [
+                        -2.0,
+                        -1.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta2",
+                    "mf": "trimf",
+                    "definicion": [
+                        -1.0,
+                        -0.0,
+                        1.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta3",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        1.0,
+                        2.0
+                    ]
+                }
+            ],
+            "rango": [
+                -1,
+                1
+            ],
+            "metodo": "som"
+        },
+        {
+            "nombre": "salida2",
+            "numeroE": 3,
+            "etiquetas": [
+                {
+                    "nombre": "etiqueta1",
+                    "mf": "trimf",
+                    "definicion": [
+                        -200.0,
+                        -100.0,
+                        0.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta2",
+                    "mf": "trimf",
+                    "definicion": [
+                        -100.0,
+                        0.0,
+                        100.0
+                    ]
+                },
+                {
+                    "nombre": "etiqueta3",
+                    "mf": "trimf",
+                    "definicion": [
+                        0.0,
+                        100.0,
+                        200.0
+                    ]
+                }
+            ],
+            "rango": [
+                -100,
+                100
+            ],
+            "metodo": "som"
+        }
+    ],
+    [
+        [
+            [
+                [
+                    "etiqueta1",
+                    0,
+                    false
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    false
+                ]
+            ],
+            [
+                [
+                    "etiqueta1",
+                    0,
+                    1.0
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    1.0
+                ]
+            ],
+            true
+        ],
+        [
+            [
+                [
+                    "etiqueta1",
+                    0,
+                    false
+                ],
+                [
+                    "etiqueta2",
+                    1,
+                    false
+                ]
+            ],
+            [
+                [
+                    "etiqueta2",
+                    0,
+                    1.0
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    1.0
+                ]
+            ],
+            false
+        ],
+        [
+            [
+                [
+                    "etiqueta1",
+                    0,
+                    false
+                ],
+                [
+                    "etiqueta3",
+                    1,
+                    true
+                ]
+            ],
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    1.0
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    1.0
+                ]
+            ],
+            false
+        ],
+        [
+            [
+                [
+                    "etiqueta2",
+                    0,
+                    true
+                ],
+                [
+                    "etiqueta2",
+                    1,
+                    false
+                ]
+            ],
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    1.0
+                ],
+                [
+                    "etiqueta2",
+                    1,
+                    1.0
+                ]
+            ],
+            false
+        ],
+        [
+            [
+                [
+                    "etiqueta2",
+                    0,
+                    true
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    false
+                ]
+            ],
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    1.0
+                ],
+                [
+                    "etiqueta3",
+                    1,
+                    1.0
+                ]
+            ],
+            true
+        ],
+        [
+            [
+                [
+                    "etiqueta2",
+                    0,
+                    false
+                ],
+                [
+                    "etiqueta3",
+                    1,
+                    true
+                ]
+            ],
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    1.0
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    1.0
+                ]
+            ],
+            true
+        ],
+        [
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    false
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    false
+                ]
+            ],
+            [
+                [
+                    "etiqueta1",
+                    0,
+                    0.8999999999999999
+                ],
+                [
+                    "etiqueta3",
+                    1,
+                    0.8999999999999999
+                ]
+            ],
+            true
+        ],
+        [
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    false
+                ],
+                [
+                    "etiqueta2",
+                    1,
+                    false
+                ]
+            ],
+            [
+                [
+                    "etiqueta2",
+                    0,
+                    0.7499999999999998
+                ],
+                [
+                    "etiqueta2",
+                    1,
+                    0.7499999999999998
+                ]
+            ],
+            true
+        ],
+        [
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    true
+                ],
+                [
+                    "etiqueta3",
+                    1,
+                    true
+                ]
+            ],
+            [
+                [
+                    "etiqueta3",
+                    0,
+                    0.7499999999999998
+                ],
+                [
+                    "etiqueta1",
+                    1,
+                    0.7499999999999998
+                ]
+            ],
+            true
+        ]
+    ]
+]

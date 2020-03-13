@@ -1,0 +1,47 @@
+[System]
+Name='PI'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='error'
+Range=[-1 1]
+NumMFs=3
+MF1='negativo':'sigmf',[-12.0 -0.5]
+MF2='cero':'dsigmf',[12.0 -0.5 12.0 0.5]
+MF3='positivo':'sigmf',[12.0 0.5]
+
+[Input2]
+Name='d_error'
+Range=[-2 2]
+NumMFs=3
+MF1='negativo':'sigmf',[-6.0 -1]
+MF2='cero':'dsigmf',[6.0 -1 6.0 1]
+MF3='positivo':'sigmf',[6.0 1]
+
+[Output1]
+Name='s_control'
+Range=[-1 1]
+NumMFs=3
+MF1='negativa':'zmf',[-1 0]
+MF2='cero':'pimf',[-1 0 0 1]
+MF3='positiva':'smf',[0 1]
+
+[Rules]
+3 1, 3 (1.0) : 1
+1 3, 1 (1.0) : 1
+3 2, 3 (0.49999999999999956) : 1
+1 2, 1 (0.5) : 1
+2 1, 2 (0.2) : 1
+2 2, 2 (0.2) : 1
+2 3, 2 (0.2) : 1
+3 3, 1 (1.0) : 1
+1 1, 3 (1.0) : 1

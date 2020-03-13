@@ -1,0 +1,75 @@
+[System]
+Name='PIDdifuso'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=29
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='error'
+Range=[-1 1]
+NumMFs=3
+MF1='negativo':'trimf',[-2.0 -1.0 0.0]
+MF2='cero':'trimf',[-1.0 0.0 1.0]
+MF3='positivo':'trimf',[0.0 1.0 2.0]
+
+[Input2]
+Name='d_error'
+Range=[-1 1]
+NumMFs=3
+MF1='negativo':'trimf',[-2.0 -1.0 0.0]
+MF2='cero':'trimf',[-1.0 0.0 1.0]
+MF3='positivo':'trimf',[0.0 1.0 2.0]
+
+[Input3]
+Name='d2_error'
+Range=[-1 1]
+NumMFs=3
+MF1='negativo':'trimf',[-2.0 -1.0 0.0]
+MF2='cero':'trimf',[-1.0 0.0 1.0]
+MF3='positivo':'trimf',[0.0 1.0 2.0]
+
+[Output1]
+Name='scontrol'
+Range=[-2 2]
+NumMFs=3
+MF1='negativa':'trimf',[-3.0 -2.0 0]
+MF2='cero':'trimf',[-2.0 0 2.0]
+MF3='positiva':'trimf',[0 2.0 3.0]
+
+[Rules]
+2 2 3, 2 (1.0) : 1
+2 2 2, 2 (1.0) : 1
+2 2 1, 2 (1.0) : 1
+2 3 1, 3 (1.0) : 1
+2 3 2, 2 (1.0) : 1
+2 3 3, 2 (1.0) : 1
+2 1 3, 1 (1.0) : 1
+2 1 2, 2 (1.0) : 1
+2 1 1, 2 (1.0) : 1
+3 1 1, 3 (1.0) : 1
+3 1 2, 3 (1.0) : 1
+3 1 3, 1 (1.0) : 1
+3 3 1, 2 (1.0) : 1
+3 3 2, 1 (1.0) : 1
+3 3 3, 2 (1.0) : 1
+3 2 1, 3 (1.0) : 1
+3 2 2, 3 (1.0) : 1
+3 2 3, 3 (1.0) : 1
+1 1 1, 1 (1.0) : 1
+1 1 2, 1 (1.0) : 1
+1 1 3, 2 (1.0) : 1
+1 3 1, 3 (1.0) : 1
+1 3 2, 3 (1.0) : 1
+1 3 3, 2 (1.0) : 1
+1 2 1, 1 (1.0) : 1
+1 2 2, 1 (1.0) : 1
+1 2 3, 1 (1.0) : 1
+-2 1 0, 3 (1.0) : 1
+-2 3 0, 1 (1.0) : 1

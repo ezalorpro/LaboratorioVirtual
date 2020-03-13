@@ -1,0 +1,1 @@
+gprof2dot -f pstats -n 1 myProfilingFile.pstats | C:\GraphViz\bin\dot -Tpdf -o output.pdf

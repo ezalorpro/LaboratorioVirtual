@@ -1,0 +1,37 @@
+[System]
+Name='TomoC1'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=5
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='entrada1'
+Range=[-10 10]
+NumMFs=5
+MF1='etiqueta1':'trimf',[-20.0 -10.0 0.0]
+MF2='etiqueta2':'trapmf',[-10.0 -7.5 -2.5 0.0]
+MF3='etiqueta3':'gaussmf',[2.5 0]
+MF4='etiqueta4':'dsigmf',[3 2.5 3 7.5]
+MF5='etiqueta5':'smf',[2.5 10]
+
+[Output1]
+Name='salida1'
+Range=[-10 10]
+NumMFs=3
+MF1='etiqueta1':'trimf',[-20.0 -10.0 0.0]
+MF2='etiqueta2':'trimf',[-10.0 0.0 10.0]
+MF3='etiqueta3':'trimf',[0.0 10.0 20.0]
+
+[Rules]
+1, 1 (1.0) : 1
+2, 2 (1.0) : 2
+-3, 3 (1.0) : 2
+4, 2 (1.0) : 1
+5, 1 (0.7999999999999998) : 1

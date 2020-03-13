@@ -1,0 +1,70 @@
+\documentclass[tikz, border=0mm]{standalone}
+
+\usetikzlibrary{shapes,arrows,positioning, calc}
+
+\begin{document}
+
+\tikzset{%
+    block1/.style={
+        draw,
+        fill=white, 
+        rectangle, 
+        minimum height=2em, 
+        minimum width=3em,
+        node distance=0.9cm
+    },
+    input/.style={
+        inner sep=0pt, 
+        node distance=0.6cm
+    },      
+    output/.style={
+        inner sep=0pt, 
+        node distance=0.6cm
+    },      
+    sum/.style = {
+        draw, 
+        fill=white, 
+        circle, 
+        minimum size=2mm, 
+        inner sep=0pt,
+        node distance=0.6cm
+    },
+    pinstyle/.style = {
+        pin edge={to-,thin,black}
+    },
+    branch/.style={
+        fill,
+        circle,
+        minimum size=3pt,
+        outer sep=-1pt,
+        inner sep=0pt, 
+        node distance=0.6cm
+    },
+    EmptyBlock/.style={
+        circle,
+        minimum size=0pt,
+        outer sep=-1pt,
+        inner sep=-1pt, 
+        node distance=2cm
+    }
+}
+
+\begin{tikzpicture}[auto, >=latex']
+
+    \node[input] (input) {};
+    \node [sum, right = of input] (sum) {};
+    \node [block1, right = of sum] (controlador) {$PID$};
+    \node [block1, right = of controlador] (proceso) {$Proceso$};
+    \node [branch, right = of proceso] (yjoint) {};
+    \node [output, right = of yjoint] (output) {};
+    \coordinate[node distance=0.6cm, below = of proceso] (empty1) {};    
+
+    \draw [->] (input) node[above right] {$sp$} -- (sum);
+    \draw [->] (sum) -- (controlador) node[pos=0.9, above left] {$e(t)$};
+    \draw [->] (controlador) -- (proceso) node[pos=1, above left] {$sc(t)$};
+    \draw [->] (proceso) -- (output) node [name=y, above left] {$Vp$};
+    \draw [-] (yjoint.south) |- (empty1);
+    \draw [->] (empty1) -| node[pos=0.97, right] {\tiny{$-$}} (sum);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,2 @@
+..\virtualenv\Scripts\pyi-makespec --onefile --icon="icono.ico" --add-data="icono.ico;." --add-data="Esquemas;Esquemas" .\main.py
+..\virtualenv\Scripts\pyinstaller main.spec --clean
