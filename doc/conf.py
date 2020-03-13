@@ -88,3 +88,5 @@ texinfo_documents = [
      author, 'LaboratorioVirtual', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+autodoc_mock_imports = ["discreto_sim", "metodos_RK"]
