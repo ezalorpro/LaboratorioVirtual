@@ -29,6 +29,7 @@ __pycache__
 !*.pyd
 !*.ico
 !*.zcos
+!*.svg
 !doc/**
 !*.*.yml
 !*.qrc
