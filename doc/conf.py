@@ -89,4 +89,4 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-autodoc_mock_imports = ["discreto_sim", "metodos_RK"]
+autodoc_mock_imports = ["discreto_sim", "metodos_RK", "rutinas_rk"]
