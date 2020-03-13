@@ -29,7 +29,7 @@ def setup(app):
     
 # -- Project information -----------------------------------------------------
 
-project = 'Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre'
+project = 'Laboratorio Virtual de sistemas de control clásicos y difusos utilizando software libre'
 copyright = '2020, Kleiver J. Carrasco M.'
 author = 'Kleiver J. Carrasco M.'
 
@@ -74,17 +74,17 @@ html_theme_path = sphinx_rtd_theme.get_html_theme_path()
 html_static_path = ['_static']
 
 latex_documents = [
-    (master_doc, 'LaboratorioVirtual.tex', 'Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre',
+    (master_doc, 'LaboratorioVirtual.tex', 'Laboratorio Virtual de sistemas de control clásicos y difusos utilizando software libre',
      'Kleiver J. Carrasco M.', 'manual'),
 ]
 
 man_pages = [
-    (master_doc, 'LaboratorioVirtual', 'Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre',
+    (master_doc, 'LaboratorioVirtual', 'Laboratorio Virtual de sistemas de control clásicos y difusos utilizando software libre',
      [author], 1)
 ]
 
 texinfo_documents = [
-    (master_doc, 'LaboratorioVirtual', 'Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre',
+    (master_doc, 'LaboratorioVirtual', 'Laboratorio Virtual de sistemas de control clásicos y difusos utilizando software libre',
      author, 'LaboratorioVirtual', 'One line description of project.',
      'Miscellaneous'),
 ]
