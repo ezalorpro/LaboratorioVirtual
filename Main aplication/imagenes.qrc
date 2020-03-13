@@ -1,0 +1,39 @@
+<RCC>
+  <qresource prefix="imagenes">
+    <file>imagenes/GainScheduler.png</file>
+    <file>imagenes/pdDifuso.png</file>
+    <file>imagenes/pdplusIDifuso.png</file>
+    <file>imagenes/pidClasico.png</file>
+    <file>imagenes/pidDifuso.png</file>
+    <file>imagenes/piDifuso.png</file>
+    <file>imagenes/pidplusDifuso.png</file>
+    <file>imagenes/pipdDifuso.png</file>
+    <file>imagenes/piplusDDifuso.png</file>
+    <file>imagenes/sinEsquema.png</file>
+    <file>imagenes/entrada1.png</file>
+    <file>imagenes/entrada2.png</file>
+    <file>imagenes/entrada3.png</file>
+    <file>imagenes/entrada4.png</file>
+    <file>imagenes/entrada5.png</file>
+    <file>imagenes/entrada6.png</file>
+    <file>imagenes/entrada7.png</file>
+    <file>imagenes/entrada8.png</file>
+    <file>imagenes/entrada9.png</file>
+    <file>imagenes/entrada10.png</file>
+    <file>imagenes/salida1.png</file>
+    <file>imagenes/salida2.png</file>
+    <file>imagenes/salida3.png</file>
+    <file>imagenes/salida4.png</file>
+    <file>imagenes/salida5.png</file>
+    <file>imagenes/salida6.png</file>
+    <file>imagenes/salida7.png</file>
+    <file>imagenes/salida8.png</file>
+    <file>imagenes/salida9.png</file>
+    <file>imagenes/salida10.png</file>
+  </qresource>
+  <qresource prefix="iconos">
+    <file>arrow.ico</file>
+    <file>icono.ico</file>
+    <file>ui_button_default.ico</file>
+  </qresource>
+</RCC>

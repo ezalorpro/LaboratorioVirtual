@@ -31,5 +31,6 @@ __pycache__
 !*.zcos
 !doc/**
 !*.*.yml
+!*.qrc
 readMeta.m
 esquemas tikz/*.fls
