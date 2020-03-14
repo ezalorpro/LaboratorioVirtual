@@ -5,7 +5,7 @@ El Laboratorio Virtual de sistemas de control clásicos y difusos es una tesis r
 
 **email**: kleiver615@gmail.com
 
-**Tutor academico**: MSC. Ing. Juan R. Vizcaya R. 
+**Tutor académico**: MSC. Ing. Juan R. Vizcaya R. 
 
 ## Como usar
 
@@ -32,6 +32,6 @@ La aplicación puede ser ejecutada al hacer un llamado de python sobre el archiv
 
     python main.py
 
-## Documentacion
+## Documentación
 
-La documentacion completa de la aplicacion se puede leer en: https://laboratoriovirtual.readthedocs.io/
+La documentación completa de la aplicación se puede leer en: https://laboratoriovirtual.readthedocs.io/
