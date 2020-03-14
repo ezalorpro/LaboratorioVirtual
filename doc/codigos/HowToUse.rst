@@ -7,7 +7,7 @@ Como primer paso se debe descargar o clonar el repositorio de la aplicación alo
 
 https://github.com/ezalorpro/LaboratorioVirtual
 
-La aplicación fue programada en python, por tanto, es necesario tener instalado una versión de python >= 3.7, adicionalmente, se necesitan los módulos listados a continuación::
+La aplicación fue programada en python y es necesario tener instalado una versión de python >= 3.7, adicionalmente, se necesitan los módulos listados a continuación::
 
     matplotlib>=3.1.1
     networkx==2.3
