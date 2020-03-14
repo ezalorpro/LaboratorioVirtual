@@ -5,7 +5,7 @@ El Laboratorio Virtual de sistemas de control clásicos y difusos es una tesis r
 
 **email**: kleiver615@gmail.com
 
-**Tutor académico**: MSC. Ing. Juan R. Vizcaya R. 
+**Tutor académico**: MSc. Ing. Juan R. Vizcaya R. 
 
 ## Como usar
 
