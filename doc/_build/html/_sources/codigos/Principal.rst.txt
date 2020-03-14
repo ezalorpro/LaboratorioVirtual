@@ -1,4 +1,3 @@
-
 Archivo principal (main)
 -------------------------
 

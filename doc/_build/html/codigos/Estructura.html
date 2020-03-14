@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. La aplicación &mdash; documentación de Laboratorio Virtual - 1.0</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="3. Documentación automática" href="Documentacion.html" />
+    <link rel="prev" title="1. Como usar" href="HowToUse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="HowToUse.html">1. Como usar</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. La aplicación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#estructura-del-codigo">2.1. Estructura del código</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interfaz-grafica">2.2. Interfaz gráfica</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Documentacion.html">3. Documentación automática</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Laboratorio Virtual</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>La aplicación</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/codigos/Estructura.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="la-aplicacion">
+<h1><span class="section-number">2. </span>La aplicación<a class="headerlink" href="#la-aplicacion" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="estructura-del-codigo">
+<h2><span class="section-number">2.1. </span>Estructura del código<a class="headerlink" href="#estructura-del-codigo" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El código fue realizado utilizando una combinación de programación estructurada y programación orientada a objetos. En la siguiente imagen se observa un esquema que representa la jerarquía del programa:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/estructuraMain.png"><img alt="Estructura" src="../_images/estructuraMain.png" style="width: 566.6px; height: 438.20000000000005px;" /></a>
+</div>
+<p>En la primera columna se encuentra el archivo main o principal, el cual se encarga de la creación de la ventana gráfica y del llamado de los archivos «handlers», los cuales se observan en la columna dos (Análisis, Entonación, Lógica difusa y Simulación), los archivos «handler» tienen la tarea de manejar la interfaz gráfica y hacer de enlace entre el usuario y las rutinas.</p>
+<p>Los archivos de rutinas se observan en la tercera columna, su función es la de realizar los cálculos necesarios que solicite el usuario por medio de la interfaz gráfica.</p>
+</div>
+<div class="section" id="interfaz-grafica">
+<h2><span class="section-number">2.2. </span>Interfaz gráfica<a class="headerlink" href="#interfaz-grafica" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La interfaz gráfica fue realizada utilizando PySide2, las funciones de Laboratorio Virtual fueron separadas en pestañas. En las siguientes imágenes se señalan cada uno de los componentes que integran cada función.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/analisis.png"><img alt="analisis" src="../_images/analisis.png" style="width: 699.5px; height: 364.0px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/analisisSS.png"><img alt="analisisSS" src="../_images/analisisSS.png" style="width: 239.0px; height: 168.0px;" /></a>
+</div>
+<table class="hlist"><tr><td><ul class="simple">
+<li><p>hola</p></li>
+<li><p>andate</p></li>
+</ul>
+</td><td><ul class="simple">
+<li><p>pelotas</p></li>
+</ul>
+</td></tr></table>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/entonacionPID.png"><img alt="Estructura" src="../_images/entonacionPID.png" style="width: 691.5px; height: 371.5px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/entonacionCSV.png"><img alt="Estructura" src="../_images/entonacionCSV.png" style="width: 700.5px; height: 364.0px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/fuzzyFront.png"><img alt="Estructura" src="../_images/fuzzyFront.png" style="width: 701.5px; height: 364.0px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/fuzzyIO.png"><img alt="Estructura" src="../_images/fuzzyIO.png" style="width: 680.0px; height: 364.0px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/fuzzyRules.png"><img alt="Estructura" src="../_images/fuzzyRules.png" style="width: 685.5px; height: 364.0px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/fuzzyPrueba.png"><img alt="Estructura" src="../_images/fuzzyPrueba.png" style="width: 785.4px; height: 445.9px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/fuzzyRespuesta.png"><img alt="Estructura" src="../_images/fuzzyRespuesta.png" style="width: 763.6999999999999px; height: 445.9px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/simulacionGeneral.png"><img alt="Estructura" src="../_images/simulacionGeneral.png" style="width: 761.6px; height: 412.16px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/simulacionPlot.png"><img alt="Estructura" src="../_images/simulacionPlot.png" style="width: 718.1999999999999px; height: 446.59999999999997px;" /></a>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Documentacion.html" class="btn btn-neutral float-right" title="3. Documentación automática" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="HowToUse.html" class="btn btn-neutral float-left" title="1. Como usar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Kleiver J. Carrasco M.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,12 +1,14 @@
-Bienvenido a la documentación del Laboratorio Virtual de sistemas de control clásicos y difusos utilizando software libre
+Bienvenido a la documentación del Laboratorio Virtual
 ===================================================================================================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contenido:
+   :numbered:
    
-   codigos/Promociones
-   codigos/Principal
+   codigos/HowToUse
+   codigos/Estructura
+   codigos/Documentacion
 
 
 Indices y tablas

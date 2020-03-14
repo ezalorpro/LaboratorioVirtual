@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Archivo Handler para la función de lógica difusa &mdash; documentación de Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre - 1.0</title>
+  <title>3.2.3. Archivo Handler para la función de lógica difusa &mdash; documentación de Laboratorio Virtual - 1.0</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Archivo de rutinas que contiene las clases FuzzyController y FISParser" href="rutinas_fuzzy.html" />
-    <link rel="prev" title="Archivo de rutinas para la función de entonación de PID utilizando data de un CSV" href="rutinas_CSV.html" /> 
+    <link rel="next" title="3.2.3.1. Archivo de rutinas que contiene las clases FuzzyController y FISParser" href="rutinas_fuzzy.html" />
+    <link rel="prev" title="3.2.2.2. Archivo de rutinas para la función de entonación de PID utilizando data de un CSV" href="rutinas_CSV.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -51,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre
+            <a href="../index.html" class="icon icon-home"> Laboratorio Virtual
           
 
           
@@ -83,16 +83,21 @@
             
               <p class="caption"><span class="caption-text">Contenido:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Promociones.html">Promociones de Widgets</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="Principal.html">Archivo principal (main)</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="analisisHandler.html">Archivo Handler para la función de análisis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TuningHandler.html">Archivo Handler para la función de entonación de controladores PID</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Archivo Handler para la función de lógica difusa</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rutinas_fuzzy.html">Archivo de rutinas que contiene las clases FuzzyController y FISParser</a></li>
-<li class="toctree-l3"><a class="reference internal" href="modificadorMF.html">Archivo para el cambio de definición entre funciones de membresía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HowToUse.html">1. Como usar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Estructura.html">2. La aplicación</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Documentacion.html">3. Documentación automática</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Promociones.html">3.1. Promociones de Widgets</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="Principal.html">3.2. Archivo principal (main)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="analisisHandler.html">3.2.1. Archivo Handler para la función de análisis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TuningHandler.html">3.2.2. Archivo Handler para la función de entonación de controladores PID</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3.2.3. Archivo Handler para la función de lógica difusa</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rutinas_fuzzy.html">3.2.3.1. Archivo de rutinas que contiene las clases FuzzyController y FISParser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modificadorMF.html">3.2.3.2. Archivo para el cambio de definición entre funciones de membresía</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="simulacionHandler.html">Archivo Handler para la función de simulación de sistemas de control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulacionHandler.html">3.2.4. Archivo Handler para la función de simulación de sistemas de control</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -109,7 +114,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Laboratorio Virtual de sistemas de control clasicos y difusos utilizando software libre</a>
+          <a href="../index.html">Laboratorio Virtual</a>
         
       </nav>
 
@@ -140,9 +145,11 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="Principal.html">Archivo principal (main)</a> &raquo;</li>
+          <li><a href="Documentacion.html"><span class="section-number">3. </span>Documentación automática</a> &raquo;</li>
         
-      <li>Archivo Handler para la función de lógica difusa</li>
+          <li><a href="Principal.html"><span class="section-number">3.2. </span>Archivo principal (main)</a> &raquo;</li>
+        
+      <li><span class="section-number">3.2.3. </span>Archivo Handler para la función de lógica difusa</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,12 +169,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="archivo-handler-para-la-funcion-de-logica-difusa">
-<h1>Archivo Handler para la función de lógica difusa<a class="headerlink" href="#archivo-handler-para-la-funcion-de-logica-difusa" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1><span class="section-number">3.2.3. </span>Archivo Handler para la función de lógica difusa<a class="headerlink" href="#archivo-handler-para-la-funcion-de-logica-difusa" title="Enlazar permanentemente con este título">¶</a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Rutinas asociadas:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="rutinas_fuzzy.html">Archivo de rutinas que contiene las clases FuzzyController y FISParser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modificadorMF.html">Archivo para el cambio de definición entre funciones de membresía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rutinas_fuzzy.html">3.2.3.1. Archivo de rutinas que contiene las clases FuzzyController y FISParser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modificadorMF.html">3.2.3.2. Archivo para el cambio de definición entre funciones de membresía</a></li>
 </ul>
 </div>
 <span class="target" id="module-FuzzyHandler"></span><p>Archivo para el manejo de la funcion de diseño de controladores difusos, sirve de intermediario entre la interfaz grafica y la clase creada para manejar el controlador difuso definida en rutinas_fuzzy.py</p>
@@ -487,10 +494,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="rutinas_fuzzy.html" class="btn btn-neutral float-right" title="Archivo de rutinas que contiene las clases FuzzyController y FISParser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="rutinas_fuzzy.html" class="btn btn-neutral float-right" title="3.2.3.1. Archivo de rutinas que contiene las clases FuzzyController y FISParser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="rutinas_CSV.html" class="btn btn-neutral float-left" title="Archivo de rutinas para la función de entonación de PID utilizando data de un CSV" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="rutinas_CSV.html" class="btn btn-neutral float-left" title="3.2.2.2. Archivo de rutinas para la función de entonación de PID utilizando data de un CSV" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
