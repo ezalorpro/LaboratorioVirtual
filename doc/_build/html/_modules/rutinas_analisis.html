@@ -163,7 +163,7 @@
 
 <div class="viewcode-block" id="system_creator_tf"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.system_creator_tf">[documentos]</a><span class="k">def</span> <span class="nf">system_creator_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numerador</span><span class="p">,</span> <span class="n">denominador</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia</span>
+<span class="sd">    Función para la creación del sistema a partir de los coeficientes del numerador y del denominador de la función de transferencia.</span>
 <span class="sd">    </span>
 <span class="sd">    :param numerador: Coeficientes del numerador</span>
 <span class="sd">    :type numerador: list</span>
@@ -208,7 +208,7 @@
 
 <div class="viewcode-block" id="system_creator_ss"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.system_creator_ss">[documentos]</a><span class="k">def</span> <span class="nf">system_creator_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmision directa la ecuacion de espacio de estados</span>
+<span class="sd">    Función para la creación del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmisión directa la ecuación de espacio de estados.</span>
 <span class="sd">    </span>
 <span class="sd">    :param A: Matriz de estados</span>
 <span class="sd">    :type A: list</span>
@@ -216,7 +216,7 @@
 <span class="sd">    :type B: list</span>
 <span class="sd">    :param C: Matriz de salida</span>
 <span class="sd">    :type C: list</span>
-<span class="sd">    :param D: Matriz de transmision directa</span>
+<span class="sd">    :param D: Matriz de transmisión directa</span>
 <span class="sd">    :type D: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -262,7 +262,7 @@
 
 <div class="viewcode-block" id="rutina_step_plot"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_step_plot">[documentos]</a><span class="k">def</span> <span class="nf">rutina_step_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener la respuesta escalon del sistema y su respectiva graficacion</span>
+<span class="sd">    Función para obtener la respuesta escalón del sistema y su respectiva graficacion.</span>
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
@@ -304,7 +304,7 @@
 
 <div class="viewcode-block" id="rutina_impulse_plot"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_impulse_plot">[documentos]</a><span class="k">def</span> <span class="nf">rutina_impulse_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener la respuesta impulso del sistema y su respectiva graficacion</span>
+<span class="sd">    Función para obtener la respuesta impulso del sistema y su respectiva graficacion.</span>
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
@@ -360,7 +360,7 @@
 
 <div class="viewcode-block" id="rutina_bode_plot"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_bode_plot">[documentos]</a><span class="k">def</span> <span class="nf">rutina_bode_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de bode</span>
+<span class="sd">    Función para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de bode.</span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
@@ -371,7 +371,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">bode</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
 
-    <span class="c1"># Grafica de amplitud en dB</span>
+    <span class="c1"># Gráfica de amplitud en dB</span>
     <span class="n">bodeDb</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BodeGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BodeGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">bodeDb</span><span class="p">,</span> <span class="s2">&quot;tab:blue&quot;</span><span class="p">)</span>
@@ -381,11 +381,11 @@
         <span class="n">mticker</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2"> dB&quot;</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="c1"># Transformacion de grados mayores a 180</span>
+    <span class="c1"># Transformación de grados mayores a 180</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">((</span><span class="n">phase</span> <span class="o">*</span> <span class="mf">180.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">180</span><span class="p">):</span>
         <span class="n">phase</span> <span class="o">=</span> <span class="n">phase</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
-    <span class="c1"># Grafica de fase en grados</span>
+    <span class="c1"># Gráfica de fase en grados</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BodeGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BodeGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span>
                                                       <span class="n">phase</span> <span class="o">*</span> <span class="mf">180.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span>
@@ -397,7 +397,7 @@
     <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BodeGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;rad/s&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Calculo y graficacion del margen de ganancia y de fase</span>
+    <span class="c1"># Cálculo y graficacion del margen de ganancia y de fase</span>
     <span class="n">gm</span><span class="p">,</span> <span class="n">pm</span><span class="p">,</span> <span class="n">wg</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">margenes_ganancias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BodeGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
@@ -436,7 +436,7 @@
 
 <div class="viewcode-block" id="rutina_nyquist_plot"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_nyquist_plot">[documentos]</a><span class="k">def</span> <span class="nf">rutina_nyquist_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de Nyquist</span>
+<span class="sd">    Función para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de Nyquist.</span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
@@ -450,7 +450,7 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NyquistGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NyquistGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Flechas para la direccion</span>
+    <span class="c1"># Flechas para la dirección</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">NyquistGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span>
         <span class="n">real</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="n">imag</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -498,7 +498,7 @@
 
 <div class="viewcode-block" id="rutina_root_locus_plot"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_root_locus_plot">[documentos]</a><span class="k">def</span> <span class="nf">rutina_root_locus_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener el lugar de la raices del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se moodifico la funcion root_locus para poder enviar el axis y la figura</span>
+<span class="sd">    Función para obtener el lugar de la raíces del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se modificó la función root_locus para poder enviar el axis y la figura.</span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
@@ -506,7 +506,7 @@
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rlocusGraphicsView1</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
 
-    <span class="c1"># Distincion entre discreto y continuo, con delay y sin delay.</span>
+    <span class="c1"># Distinción entre discreto y continuo, con delay y sin delay.</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">isdtime</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelaycheckBox1</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
         <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">AnalisisstackedWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -541,7 +541,7 @@
 
 <div class="viewcode-block" id="rutina_nichols_plot"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_nichols_plot">[documentos]</a><span class="k">def</span> <span class="nf">rutina_nichols_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener el diagram de nichols del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se moodifico la funcion nichols_plot para poder enviar el axis y la figura, adicionalmente se realizaron algunas modificaciones para una mejor presentacion de la grafica</span>
+<span class="sd">    Función para obtener el diagrama de nichols del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se modificó la función nichols_plot para poder enviar el axis y la figura, adicionalmente se realizaron algunas modificaciones para una mejor presentación de la gráfica.</span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
@@ -600,7 +600,7 @@
 
 <div class="viewcode-block" id="rutina_system_info"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.rutina_system_info">[documentos]</a><span class="k">def</span> <span class="nf">rutina_system_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para mostrar los resultados obtenidos de los calculos en un TextEdit</span>
+<span class="sd">    Función para mostrar los resultados obtenidos de los calculos en un TextEdit.</span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
@@ -614,7 +614,7 @@
 <span class="sd">    :type omega: numpyArray</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># Informacion del step</span>
+    <span class="c1"># Información del step</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">info</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">step_info</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
@@ -657,7 +657,7 @@
     <span class="n">dcgain</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">dcgain</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
     <span class="n">Datos</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Ganancia DC: {real(dcgain):5.3f}</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-    <span class="c1"># Calculo del margen de ganancia y de fase</span>
+    <span class="c1"># Cálculo del margen de ganancia y de fase</span>
     <span class="n">gm</span><span class="p">,</span> <span class="n">pm</span><span class="p">,</span> <span class="n">wg</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">margenes_ganancias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">gm</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">infty</span><span class="p">:</span>
@@ -695,7 +695,7 @@
 
 <div class="viewcode-block" id="margenes_ganancias"><a class="viewcode-back" href="../codigos/rutinas_analisis.html#rutinas_analisis.margenes_ganancias">[documentos]</a><span class="k">def</span> <span class="nf">margenes_ganancias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Función para obtener el margen de ganancia y el margen de fase</span>
+<span class="sd">    Función para obtener el margen de ganancia y el margen de fase.</span>
 <span class="sd">    </span>
 <span class="sd">    :param system: Representación del sistema</span>
 <span class="sd">    :type system: LTI</span>
@@ -724,7 +724,7 @@
     <span class="n">indGain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">degPhase</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">180</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">indGain</span> <span class="o">=</span> <span class="n">indGain</span> <span class="o">*</span> <span class="n">crossHack</span>
 
-    <span class="c1"># Calculo de la respuesta en frecuencia para omega = 0 rad/s y pi en caso de ser discreto</span>
+    <span class="c1"># Cálculo de la respuesta en frecuencia para omega = 0 rad/s y pi en caso de ser discreto</span>
     <span class="k">if</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">isdtime</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">zero_freq_response</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">evalfr</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         

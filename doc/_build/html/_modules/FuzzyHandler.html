@@ -148,7 +148,7 @@
             
   <h1>Código fuente para FuzzyHandler</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">Archivo para el manejo de la funcion de diseño de controladores difusos, sirve de intermediario entre la interfaz grafica y la clase creada para manejar el controlador difuso definida en rutinas_fuzzy.py </span>
+<span class="sd">Archivo para el manejo de la función de diseño de controladores difusos, sirve de intermediario entre la interfaz grafica y la clase creada para manejar el controlador difuso definida en rutinas_fuzzy.py </span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -165,7 +165,7 @@
 
 <div class="viewcode-block" id="FuzzyHandler"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.FuzzyHandler">[documentos]</a><span class="k">def</span> <span class="nf">FuzzyHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion principal para el manejo de diseño de controladores difusos, se crean las señales a ejecutar cuando se interactua con los widgets</span>
+<span class="sd">    Función principal para el manejo de diseño de controladores difusos, se crean las señales a ejecutar cuando se interactuá con los widgets</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">EntradasTab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">widget</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -191,7 +191,7 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">RuleList</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="c1"># Lista para para contorlar un desplazamiento de ventana</span>
+    <span class="c1"># Lista para para controlar un desplazamiento de ventana</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">vector_rotacion</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">rotacion_windowIn</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">rotacion_windowOut</span> <span class="o">=</span> <span class="mi">2</span>
@@ -291,13 +291,13 @@
 
 
 <div class="viewcode-block" id="cerrar_prueba"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.cerrar_prueba">[documentos]</a><span class="k">def</span> <span class="nf">cerrar_prueba</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para cerrar las pestañas de pruebas ante cambios en el controlador difuso &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para cerrar las pestañas de pruebas ante cambios en el controlador difuso &quot;&quot;&quot;</span>
     
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="imagen_entradas"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.imagen_entradas">[documentos]</a><span class="k">def</span> <span class="nf">imagen_entradas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para establecer la imagen del numero de entradas &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para establecer la imagen del numero de entradas &quot;&quot;&quot;</span>
 
     <span class="n">ni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">estrucNumberInputs</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">imagenInputs</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
@@ -306,7 +306,7 @@
 
 
 <div class="viewcode-block" id="imagen_salidas"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.imagen_salidas">[documentos]</a><span class="k">def</span> <span class="nf">imagen_salidas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para establecer la imagen del numero de salidas &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para establecer la imagen del numero de salidas &quot;&quot;&quot;</span>
     <span class="n">no</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">estrucNumberOutputs</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">imagenOutputs</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
         <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/imagenes/imagenes/salida&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">no</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span><span class="p">)</span>
@@ -314,7 +314,7 @@
 
 
 <div class="viewcode-block" id="check_esquema_show"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.check_esquema_show">[documentos]</a><span class="k">def</span> <span class="nf">check_esquema_show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para mediar entre entradas y salidas genericas y esquemas de control &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para mediar entre entradas y salidas genéricas y esquemas de control &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyEsquemasCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">imagenEsquemas</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
@@ -327,7 +327,7 @@
 
 
 <div class="viewcode-block" id="show_esquema"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.show_esquema">[documentos]</a><span class="k">def</span> <span class="nf">show_esquema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para establecer la imagen del esquema de control seleccionado &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para establecer la imagen del esquema de control seleccionado &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyEsquemas</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">imagenEsquemas</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span>
@@ -378,7 +378,7 @@
 
 
 <div class="viewcode-block" id="crear_tabs"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.crear_tabs">[documentos]</a><span class="k">def</span> <span class="nf">crear_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para iniciar el entorno de diseño para entradas y salidas genericas &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para iniciar el entorno de diseño para entradas y salidas genéricas &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyEsquemasCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span>
@@ -390,7 +390,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNombre</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNombre</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="c1"># Vaciado de informacion previa</span>
+        <span class="c1"># Vaciado de información previa</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span> <span class="o">=</span> <span class="p">[]</span>
@@ -419,7 +419,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
-        <span class="c1"># Creacion de funciones de membresia genericas</span>
+        <span class="c1"># Creación de funciones de membresía genéricas</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumeroEntradas</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">insertItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
             <span class="n">temp_dic</span> <span class="o">=</span> <span class="n">inputDic_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
@@ -447,7 +447,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="c1"># Se inicializa el controlador con la informacion actual</span>
+        <span class="c1"># Se inicializa el controlador con la información actual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzzController</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzzInitController</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">)</span>
 
         <span class="n">seleccion_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -456,13 +456,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzzController</span><span class="o">.</span><span class="n">graficar_mf_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzzController</span><span class="o">.</span><span class="n">graficar_mf_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># En caso de que se seleccione un esquema y no entradas y salidas genericas</span>
+        <span class="c1"># En caso de que se seleccione un esquema y no entradas y salidas genéricas</span>
         <span class="n">cargar_esquema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="inputDic_creator"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.inputDic_creator">[documentos]</a><span class="k">def</span> <span class="nf">inputDic_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para crear entradas genericas</span>
+<span class="sd">    Función para crear entradas genéricas</span>
 <span class="sd">    </span>
 <span class="sd">    :param i: Numero de entrada</span>
 <span class="sd">    :type i: int</span>
@@ -479,7 +479,7 @@
 
 <div class="viewcode-block" id="outputDic_creator"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.outputDic_creator">[documentos]</a><span class="k">def</span> <span class="nf">outputDic_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para crear salidas genericas</span>
+<span class="sd">    Función para crear salidas genéricas</span>
 <span class="sd">    </span>
 <span class="sd">    :param i: Numero de salida</span>
 <span class="sd">    :type i: int</span>
@@ -497,11 +497,11 @@
 
 <div class="viewcode-block" id="EtiquetasDic_creator"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.EtiquetasDic_creator">[documentos]</a><span class="k">def</span> <span class="nf">EtiquetasDic_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">erange</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para crear etiquetas genericas</span>
+<span class="sd">    Función para crear etiquetas genéricas</span>
 <span class="sd">    </span>
 <span class="sd">    :param j: Numero de etiqueta</span>
 <span class="sd">    :type j: int</span>
-<span class="sd">    :param erange: Definicio de la funcion de membresia</span>
+<span class="sd">    :param erange: Definición de la función de membresía</span>
 <span class="sd">    :type erange: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -514,7 +514,7 @@
 
 
 <div class="viewcode-block" id="cargar_esquema"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.cargar_esquema">[documentos]</a><span class="k">def</span> <span class="nf">cargar_esquema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para iniciar el entorno de diseño a partir de un esquema de control seleccionado &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para iniciar el entorno de diseño a partir de un esquema de control seleccionado &quot;&quot;&quot;</span>
 
     <span class="c1"># Carga del archivo correspondiente al esquema seleccionado</span>
     <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_path</span><span class="p">(</span>
@@ -558,7 +558,7 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="c1"># Se inicializa el controlador con la informacion actual</span>
+    <span class="c1"># Se inicializa el controlador con la información actual</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">fuzzController</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzzInitController</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">,</span>
                                                   <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">,</span>
                                                   <span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span><span class="p">)</span>
@@ -577,7 +577,7 @@
 
 
 <div class="viewcode-block" id="guardar_controlador"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.guardar_controlador">[documentos]</a><span class="k">def</span> <span class="nf">guardar_controlador</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion manejar el guardado del controlador diseñado &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función manejar el guardado del controlador diseñado &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_file</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;.fis&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -587,7 +587,7 @@
 
 
 <div class="viewcode-block" id="guardarcomo_controlador"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.guardarcomo_controlador">[documentos]</a><span class="k">def</span> <span class="nf">guardarcomo_controlador</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion manejar el guardado en un nuevo archivo del controlador diseñado &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función manejar el guardado en un nuevo archivo del controlador diseñado &quot;&quot;&quot;</span>
 
     <span class="n">path_guardar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;JSON (*.json)&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path_guardar</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -600,7 +600,7 @@
 
 
 <div class="viewcode-block" id="exportar_fis"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.exportar_fis">[documentos]</a><span class="k">def</span> <span class="nf">exportar_fis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion manejar el exportado del controlador diseñado a formato .FIS &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función manejar el exportado del controlador diseñado a formato .FIS &quot;&quot;&quot;</span>
 
     <span class="n">path_guardar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;FIS (*.fis)&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path_guardar</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -612,7 +612,7 @@
 
 
 <div class="viewcode-block" id="cargar_controlador"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.cargar_controlador">[documentos]</a><span class="k">def</span> <span class="nf">cargar_controlador</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion manejar el cargado de controaldores previamente diseñados, se aceptan formatos .JSON y .FIS &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función manejar el cargado de controladores previamente diseñados, se aceptan formatos .JSON y .FIS &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">path_cargar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;JSON/FIS (*.json *.fis)&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_cargar</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -663,7 +663,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="c1"># Se inicializa el controlador con la informacion actual</span>
+        <span class="c1"># Se inicializa el controlador con la información actual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzzController</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzzInitController</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">,</span>
                                                       <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">,</span>
                                                       <span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span><span class="p">)</span>
@@ -682,7 +682,7 @@
 
 
 <div class="viewcode-block" id="seleccion_entrada"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccion_entrada">[documentos]</a><span class="k">def</span> <span class="nf">seleccion_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para desplegar la informacion de la entrada seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para desplegar la información de la entrada seleccionada &quot;&quot;&quot;</span>
 
     <span class="n">ni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNombre</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;nombre&quot;</span><span class="p">])</span>
@@ -703,7 +703,7 @@
 
 
 <div class="viewcode-block" id="seleccion_salida"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccion_salida">[documentos]</a><span class="k">def</span> <span class="nf">seleccion_salida</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para desplegar la informacion de la salida seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para desplegar la información de la salida seleccionada &quot;&quot;&quot;</span>
 
     <span class="n">no</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNombre</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;nombre&quot;</span><span class="p">])</span>
@@ -725,11 +725,11 @@
 
 
 <div class="viewcode-block" id="nombre_entrada"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.nombre_entrada">[documentos]</a><span class="k">def</span> <span class="nf">nombre_entrada</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el cambio de nombre de la entrada seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el cambio de nombre de la entrada seleccionada &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNombre</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-            <span class="s2">&quot;El nombre no puede estar vacio&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;El nombre no puede estar vació&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNombre</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
         <span class="k">return</span>
@@ -763,11 +763,11 @@
 
 
 <div class="viewcode-block" id="nombre_salida"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.nombre_salida">[documentos]</a><span class="k">def</span> <span class="nf">nombre_salida</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el cambio de nombre de la salida seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el cambio de nombre de la salida seleccionada &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNombre</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-            <span class="s2">&quot;El nombre no puede estar vacio&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;El nombre no puede estar vació&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNombre</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
         <span class="k">return</span>
@@ -801,7 +801,7 @@
 
 
 <div class="viewcode-block" id="numero_de_etiquetas_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.numero_de_etiquetas_in">[documentos]</a><span class="k">def</span> <span class="nf">numero_de_etiquetas_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el numero de etiquetas para la entrada seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el numero de etiquetas para la entrada seleccionada &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputEtiquetasNum</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
@@ -825,7 +825,7 @@
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ne</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumIn</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># Eliminacion de las reglas que dependian de las etiquetas a eliminar</span>
+        <span class="c1"># Eliminación de las reglas que dependían de las etiquetas a eliminar</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ne</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sets</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span><span class="p">)):</span>
@@ -842,7 +842,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumIn</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-        <span class="c1"># Eliminacion de las etiquetas</span>
+        <span class="c1"># Eliminación de las etiquetas</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ne</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">]):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
@@ -865,7 +865,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumIn</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">rmin</span><span class="p">,</span> <span class="n">rmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;rango&quot;</span><span class="p">]</span>
 
-        <span class="c1"># Creacion de funciones de membresia trimf genericas</span>
+        <span class="c1"># Creación de funciones de membresía trimf genéricas</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">ne</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">ini_range_etiquetas</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">vector_rotacion</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rotacion_windowIn</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">rmax</span><span class="o">-</span><span class="n">rmin</span><span class="p">)</span> <span class="o">+</span> <span class="n">rmin</span><span class="p">,</span>
@@ -902,7 +902,7 @@
 
 
 <div class="viewcode-block" id="numero_de_etiquetas_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.numero_de_etiquetas_out">[documentos]</a><span class="k">def</span> <span class="nf">numero_de_etiquetas_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el numero de etiquetas para la salida seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el numero de etiquetas para la salida seleccionada &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputEtiquetasNum</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
@@ -926,7 +926,7 @@
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ne</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumOut</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># Eliminacion de las reglas que dependian de las etiquetas a eliminar</span>
+        <span class="c1"># Eliminación de las reglas que dependían de las etiquetas a eliminar</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ne</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">sets</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span><span class="p">)):</span>
@@ -943,7 +943,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumOut</span><span class="o">.</span><span class="n">removeItem</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-        <span class="c1"># Eliminacion de las etiquetas</span>
+        <span class="c1"># Eliminación de las etiquetas</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ne</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">]):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
@@ -966,7 +966,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumOut</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">rmin</span><span class="p">,</span> <span class="n">rmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;rango&quot;</span><span class="p">]</span>
 
-        <span class="c1"># Creacion de funciones de membresia trimf genericas</span>
+        <span class="c1"># Creación de funciones de membresía trimf genéricas</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">ne</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;numeroE&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">ini_range_etiquetas</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">vector_rotacion</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rotacion_windowOut</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">rmax</span><span class="o">-</span><span class="n">rmin</span><span class="p">)</span> <span class="o">+</span> <span class="n">rmin</span><span class="p">,</span>
@@ -1003,7 +1003,7 @@
 
 
 <div class="viewcode-block" id="rango_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.rango_in">[documentos]</a><span class="k">def</span> <span class="nf">rango_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el rango para la entrada seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el rango para la entrada seleccionada &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputRange</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
@@ -1029,7 +1029,7 @@
 
 
 <div class="viewcode-block" id="rango_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.rango_out">[documentos]</a><span class="k">def</span> <span class="nf">rango_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el rango para la salida seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el rango para la salida seleccionada &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputRange</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
@@ -1055,7 +1055,7 @@
 
 
 <div class="viewcode-block" id="defuzz_metodo"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.defuzz_metodo">[documentos]</a><span class="k">def</span> <span class="nf">defuzz_metodo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el metodo de defuzzificacion para la salida seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el metodo de defuzzificacion para la salida seleccionada &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -1068,7 +1068,7 @@
 
 
 <div class="viewcode-block" id="seleccion_etiqueta_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccion_etiqueta_in">[documentos]</a><span class="k">def</span> <span class="nf">seleccion_etiqueta_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para desplegar la informacion de la etiqueta seleccionada de la entrada actual &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para desplegar la información de la etiqueta seleccionada de la entrada actual &quot;&quot;&quot;</span>
 
     <span class="n">ni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
     <span class="n">ne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumIn</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
@@ -1083,7 +1083,7 @@
 
 
 <div class="viewcode-block" id="seleccion_etiqueta_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccion_etiqueta_out">[documentos]</a><span class="k">def</span> <span class="nf">seleccion_etiqueta_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para desplegar la informacion de la etiqueta seleccionada de la salida actual &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para desplegar la información de la etiqueta seleccionada de la salida actual &quot;&quot;&quot;</span>
 
     <span class="n">no</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
     <span class="n">ne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumOut</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
@@ -1097,11 +1097,11 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfOut</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="nombre_etiqueta_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.nombre_etiqueta_in">[documentos]</a><span class="k">def</span> <span class="nf">nombre_etiqueta_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el cambio de nombre de la etiqueta seleccionada de la entrada actual &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el cambio de nombre de la etiqueta seleccionada de la entrada actual &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNombreIn</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-            <span class="s2">&quot;El nombre no puede estar vacio&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;El nombre no puede estar vació&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNombreIn</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
         <span class="k">return</span>
@@ -1144,7 +1144,7 @@
 
 <div class="viewcode-block" id="actualizar_RulesEtiquetas_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.actualizar_RulesEtiquetas_in">[documentos]</a><span class="k">def</span> <span class="nf">actualizar_RulesEtiquetas_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="n">old_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta</span>
+<span class="sd">    Función para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta</span>
 <span class="sd">    </span>
 <span class="sd">    :param ni: Numero de entrada</span>
 <span class="sd">    :type ni: int</span>
@@ -1164,11 +1164,11 @@
 
 
 <div class="viewcode-block" id="nombre_etiqueta_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.nombre_etiqueta_out">[documentos]</a><span class="k">def</span> <span class="nf">nombre_etiqueta_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el cambio de nombre de la etiqueta seleccionada de la salida actual &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el cambio de nombre de la etiqueta seleccionada de la salida actual &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNombreOut</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-            <span class="s2">&quot;El nombre no puede estar vacio&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;El nombre no puede estar vació&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNombreOut</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
         <span class="k">return</span>
@@ -1213,7 +1213,7 @@
 
 <div class="viewcode-block" id="actualizar_RulesEtiquetas_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.actualizar_RulesEtiquetas_out">[documentos]</a><span class="k">def</span> <span class="nf">actualizar_RulesEtiquetas_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">no</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="n">old_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta</span>
+<span class="sd">    Función para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta</span>
 <span class="sd">    </span>
 <span class="sd">    :param no: Numero de salida</span>
 <span class="sd">    :type no: int</span>
@@ -1233,23 +1233,23 @@
 
 
 <div class="viewcode-block" id="seleccion_mf_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccion_mf_in">[documentos]</a><span class="k">def</span> <span class="nf">seleccion_mf_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el cambio de funcion de membresia para la etiqueta seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el cambio de función de membresía para la etiqueta seleccionada &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">ni</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inputNumber</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
     <span class="n">ne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumIn</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
 
-    <span class="c1"># Se guarda el nombre de la funcion de membresia anterior</span>
+    <span class="c1"># Se guarda el nombre de la función de membresía anterior</span>
     <span class="n">old_mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;mf&quot;</span><span class="p">]</span>
 
     <span class="n">definicion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;definicion&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;mf&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfIn</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
 
-    <span class="c1"># Se guarda el nombre de la funcion de membresia seleccionada</span>
+    <span class="c1"># Se guarda el nombre de la función de membresía seleccionada</span>
     <span class="n">new_mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;mf&quot;</span><span class="p">]</span>
 
-    <span class="c1"># Se obtiene una definicion aproximada entre la antigua funcion de membresia y la seleccionada</span>
+    <span class="c1"># Se obtiene una definicion aproximada entre la antigua función de membresía y la seleccionada</span>
     <span class="n">new_definicion</span><span class="p">,</span> <span class="n">tooltip</span> <span class="o">=</span> <span class="n">update_definicionmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_mf</span><span class="p">,</span> <span class="n">definicion</span><span class="p">,</span> <span class="s1">&#39;trimf&#39;</span><span class="p">)</span>
     <span class="n">new_definicion</span><span class="p">,</span> <span class="n">tooltip</span> <span class="o">=</span> <span class="n">update_definicionmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;trimf&#39;</span><span class="p">,</span> <span class="n">new_definicion</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfIn</span><span class="o">.</span><span class="n">currentText</span><span class="p">())</span>
     <span class="n">new_definicion</span> <span class="o">=</span> <span class="n">round_list</span><span class="p">(</span><span class="n">new_definicion</span><span class="p">)</span>
@@ -1263,7 +1263,7 @@
 
 <div class="viewcode-block" id="definicion_in"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.definicion_in">[documentos]</a><span class="k">def</span> <span class="nf">definicion_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Funcion para manejar el cambio de definicion de la funcion de membresia correspondiente a la etiqueta actual</span>
+<span class="sd">    Función para manejar el cambio de definicion de la función de membresía correspondiente a la etiqueta actual</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -1284,20 +1284,20 @@
 
 
 <div class="viewcode-block" id="deinificion_in_validator"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.deinificion_in_validator">[documentos]</a><span class="k">def</span> <span class="nf">deinificion_in_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para validar las definiciones de las funciones de membresia &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para validar las definiciones de las funciones de membresía &quot;&quot;&quot;</span>
 
     <span class="n">mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfIn</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaDefinicionIn</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Funcion externa para la validacion</span>
+            <span class="c1"># Función externa para la validacion</span>
             <span class="n">validacion_mf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">mf</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaDefinicionIn</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-            <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+            <span class="s2">&quot;Formato de definicion invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
             <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe estar entre corchetes con valores separados por comas&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaDefinicionIn</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
@@ -1305,22 +1305,22 @@
 
 
 <div class="viewcode-block" id="seleccion_mf_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccion_mf_out">[documentos]</a><span class="k">def</span> <span class="nf">seleccion_mf_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para manejar el cambio de funcion de membresia para la etiqueta seleccionada &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para manejar el cambio de función de membresía para la etiqueta seleccionada &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">no</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">outputNumber</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
     <span class="n">ne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaNumOut</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
-    <span class="c1"># Se guarda el nombre de la funcion de membresia anterior</span>
+    <span class="c1"># Se guarda el nombre de la función de membresía anterior</span>
     <span class="n">old_mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;mf&quot;</span><span class="p">]</span>
 
     <span class="n">definicion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;definicion&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;mf&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfOut</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
 
-    <span class="c1"># Se guarda el nombre de la funcion de membresia seleccionada</span>
+    <span class="c1"># Se guarda el nombre de la función de membresía seleccionada</span>
     <span class="n">new_mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">[</span><span class="n">no</span><span class="p">][</span><span class="s2">&quot;etiquetas&quot;</span><span class="p">][</span><span class="n">ne</span><span class="p">][</span><span class="s2">&quot;mf&quot;</span><span class="p">]</span>
 
-    <span class="c1"># Se obtiene una definicion aproximada entre la antigua funcion de membresia y la seleccionada</span>
+    <span class="c1"># Se obtiene una definicion aproximada entre la antigua función de membresía y la seleccionada</span>
     <span class="n">new_definicion</span><span class="p">,</span> <span class="n">tooltip</span> <span class="o">=</span> <span class="n">update_definicionmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_mf</span><span class="p">,</span> <span class="n">definicion</span><span class="p">,</span> <span class="s1">&#39;trimf&#39;</span><span class="p">)</span>
     <span class="n">new_definicion</span><span class="p">,</span> <span class="n">tooltip</span> <span class="o">=</span> <span class="n">update_definicionmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;trimf&#39;</span><span class="p">,</span> <span class="n">new_definicion</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfOut</span><span class="o">.</span><span class="n">currentText</span><span class="p">())</span>
 
@@ -1334,7 +1334,7 @@
 
 <div class="viewcode-block" id="definicion_out"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.definicion_out">[documentos]</a><span class="k">def</span> <span class="nf">definicion_out</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Funcion para manejar el cambio de definicion de la funcion de membresia correspondiente a la etiqueta actual</span>
+<span class="sd">    Función para manejar el cambio de definicion de la función de membresía correspondiente a la etiqueta actual</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -1355,20 +1355,20 @@
 
 
 <div class="viewcode-block" id="deinificion_out_validator"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.deinificion_out_validator">[documentos]</a><span class="k">def</span> <span class="nf">deinificion_out_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para validar las definiciones de las funciones de membresia &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para validar las definiciones de las funciones de membresía &quot;&quot;&quot;</span>
 
     <span class="n">mf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaMfOut</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaDefinicionOut</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Funcion externa para la validacion</span>
+            <span class="c1"># Función externa para la validacion</span>
             <span class="n">validacion_mf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">mf</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaDefinicionOut</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-            <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+            <span class="s2">&quot;Formato de definicion invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
             <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe estar entre corchetes con valores separados por comas&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">etiquetaDefinicionOut</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
@@ -1376,12 +1376,12 @@
 
 
 <div class="viewcode-block" id="round_list"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.round_list">[documentos]</a><span class="k">def</span> <span class="nf">round_list</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para redondear los digitos de una lista &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para redondear los dígitos de una lista &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lista</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="rule_list_visualizacion"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.rule_list_visualizacion">[documentos]</a><span class="k">def</span> <span class="nf">rule_list_visualizacion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para mostrar las reglas creadas para el controlador actual en un listWidget &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para mostrar las reglas creadas para el controlador actual en un listWidget &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
 
@@ -1392,7 +1392,7 @@
         <span class="k">for</span> <span class="n">regla</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">RuleList</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rulelistWidget</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">regla</span><span class="p">))</span>
 
-        <span class="c1"># Se ocultan los widgets necesarios en funcion del numero de entradas y salidas</span>
+        <span class="c1"># Se ocultan los widgets necesarios en función del numero de entradas y salidas</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inframes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">outframes</span><span class="p">):</span>
             <span class="n">i</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
             <span class="n">o</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
@@ -1403,7 +1403,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rulelistWidget</span><span class="o">.</span><span class="n">setCurrentRow</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="c1"># Se muestran los widgets necesarios en funcion del numero de entradas</span>
+        <span class="c1"># Se muestran los widgets necesarios en función del numero de entradas</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">entrada</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inframes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inlabels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">entrada</span><span class="p">[</span><span class="s2">&quot;nombre&quot;</span><span class="p">])</span>
@@ -1412,7 +1412,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">inlists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inlists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">setCurrentRow</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="c1"># Se muestran los widgets necesarios en funcion del numero de salidas</span>
+        <span class="c1"># Se muestran los widgets necesarios en función del numero de salidas</span>
         <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">salida</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outframes</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outlabels</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">salida</span><span class="p">[</span><span class="s2">&quot;nombre&quot;</span><span class="p">])</span>
@@ -1427,7 +1427,7 @@
 
 <div class="viewcode-block" id="seleccionar_etiquetas"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.seleccionar_etiquetas">[documentos]</a><span class="k">def</span> <span class="nf">seleccionar_etiquetas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Funcion para seleccionar las etiquetas correspodientes a cada entrada/salida de la regla seleccionada</span>
+<span class="sd">    Función para seleccionar las etiquetas correspondientes a cada entrada/salida de la regla seleccionada</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RuleEtiquetas</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -1478,7 +1478,7 @@
 
 <div class="viewcode-block" id="rule_list_agregar"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.rule_list_agregar">[documentos]</a><span class="k">def</span> <span class="nf">rule_list_agregar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Funcion para crear una nueva regla a partir de las etiquetas seleccionadas para cada entrada y salida</span>
+<span class="sd">    Función para crear una nueva regla a partir de las etiquetas seleccionadas para cada entrada y salida</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -1489,14 +1489,14 @@
     <span class="n">Etiquetasin</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">Etiquetasout</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="c1"># Informacion de la entrada para la regla</span>
+    <span class="c1"># Información de la entrada para la regla</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">entrada</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
             <span class="n">Etiquetasin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inlists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">innots</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()]</span>
             <span class="p">)</span>
 
-    <span class="c1"># Informacion de la salida para la regla</span>
+    <span class="c1"># Información de la salida para la regla</span>
     <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">salida</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">outlists</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
             <span class="n">Etiquetasout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -1525,7 +1525,7 @@
 
 
 <div class="viewcode-block" id="rule_list_eliminar"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.rule_list_eliminar">[documentos]</a><span class="k">def</span> <span class="nf">rule_list_eliminar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para eliminar una regla &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para eliminar una regla &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -1539,7 +1539,7 @@
 
 
 <div class="viewcode-block" id="rule_list_cambiar"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.rule_list_cambiar">[documentos]</a><span class="k">def</span> <span class="nf">rule_list_cambiar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para modificar una regla &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para modificar una regla &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">fuzzyTabWidget</span><span class="o">.</span><span class="n">removeTab</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -1551,14 +1551,14 @@
     <span class="n">Etiquetasin</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">Etiquetasout</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="c1"># Informacion de la entrada para la nueva regla</span>
+    <span class="c1"># Información de la entrada para la nueva regla</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">entrada</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inlists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
             <span class="n">Etiquetasin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inlists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">innots</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()]</span>
             <span class="p">)</span>
 
-    <span class="c1"># Informacion de la salida para la nueva regla</span>
+    <span class="c1"># Información de la salida para la nueva regla</span>
     <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">salida</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">outlists</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
             <span class="n">Etiquetasout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -1594,7 +1594,7 @@
 
 <div class="viewcode-block" id="crear_controlador"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.crear_controlador">[documentos]</a><span class="k">def</span> <span class="nf">crear_controlador</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Funcion para crear el controlador a partir de toda la informacion recolectada, esta creacion se realiza con el fin de realizar la prueba del controlador y observar la superficie de respuesta del controlador en caso de poseer una o dos entradas</span>
+<span class="sd">    Función para crear el controlador a partir de toda la información recolectada, esta creación se realiza con el fin de realizar la prueba del controlador y observar la superficie de respuesta del controlador en caso de poseer una o dos entradas</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rulelistWidget</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
@@ -1607,7 +1607,7 @@
         <span class="n">ni</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">)</span>
         <span class="n">no</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">)</span>
 
-        <span class="c1"># Se ocultan los widgets necesarios en funcion del numero de entradas y salidas</span>
+        <span class="c1"># Se ocultan los widgets necesarios en función del numero de entradas y salidas</span>
         <span class="k">for</span> <span class="n">it_f</span><span class="p">,</span> <span class="n">ot_f</span><span class="p">,</span> <span class="n">f2d</span><span class="p">,</span> <span class="n">f3d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">intestframes</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outtestframes</span><span class="p">,</span>
@@ -1619,15 +1619,15 @@
             <span class="n">f2d</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
             <span class="n">f3d</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
-        <span class="c1"># Se muestran los widgets necesarios en funcion del numero de entradas</span>
+        <span class="c1"># Se muestran los widgets necesarios en función del numero de entradas</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">salida</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">intestframes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-        <span class="c1"># Se muestran los widgets necesarios en funcion del numero de salidas</span>
+        <span class="c1"># Se muestran los widgets necesarios en función del numero de salidas</span>
         <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">salida</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outtestframes</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-        <span class="c1"># Ejecucion del codigo correspondiente a la prueba del controlador</span>
+        <span class="c1"># Ejecucion del código correspondiente a la prueba del controlador</span>
         <span class="n">prueba_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="c1"># Chequeo del numero de entradas</span>
@@ -1652,7 +1652,7 @@
 
 
 <div class="viewcode-block" id="prueba_input"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.prueba_input">[documentos]</a><span class="k">def</span> <span class="nf">prueba_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para la ejecucion del codigo correspondiente a la prueba del controlador &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para la ejecución del código correspondiente a la prueba del controlador &quot;&quot;&quot;</span>
 
     <span class="n">ni</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InputList</span><span class="p">)</span>
     <span class="n">no</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OutputList</span><span class="p">)</span>
@@ -1669,7 +1669,7 @@
 
 
 <div class="viewcode-block" id="crear_vectores_de_widgets"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.crear_vectores_de_widgets">[documentos]</a><span class="k">def</span> <span class="nf">crear_vectores_de_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Funcion para el almacenado de widgets en listas para acceder a ellos por indices &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Función para el almacenado de widgets en listas para acceder a ellos por indices &quot;&quot;&quot;</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">inframes</span> <span class="o">=</span> <span class="p">[</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">inframe1</span><span class="p">,</span>

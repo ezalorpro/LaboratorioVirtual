@@ -1,5 +1,5 @@
 """ 
-Archivo para compilar las funciones encargadas de la simulacion en tiempo discreto utilizando numba, las funciones quedan guardadas en el archivo: discreto_sim.cp37-win32.pyd y pueden ser importadas desde el archivo como una funcion de un modulo
+Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba, las funciones quedan guardadas en el archivo: discreto_sim.cp37-win32.pyd y pueden ser importadas desde el archivo como una función de un modulo
 """
  
 
@@ -13,7 +13,7 @@ cc = CC('discreto_sim')
 @cc.export('ss_discreta', '(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)')
 def ss_discreta(A, B, C, D, x, _, inputValue):
     """
-    Funcion para calcular la respuesta del sistema por medio de la representacion discreta de las ecuaciones de espacio de estados
+    Función para calcular la respuesta del sistema por medio de la representacion discreta de las ecuaciones de espacio de estados
     
     :param ss: Representacion del sistema
     :type ss: LTI
@@ -33,7 +33,7 @@ def ss_discreta(A, B, C, D, x, _, inputValue):
 @cc.export('PID_discreto', '(f8, f8, f8, f8[::1], f8, f8, f8)')
 def PID_discreto(error, ts, s_integral, error_anterior, kp, ki, kd):
     """
-    Funcion para calcular el PID en forma discreta
+    Función para calcular el PID en forma discreta
     
     :param error: Señal de error
     :type error: float
@@ -62,7 +62,7 @@ def PID_discreto(error, ts, s_integral, error_anterior, kp, ki, kd):
 @cc.export('derivadas_discretas', '(f8, f8, f8[::1])')
 def derivadas_discretas(error, ts, error_anterior):
     """
-    Funcion para calcular la derivada del error y la segunda derivada del error
+    Función para calcular la derivada del error y la segunda derivada del error
     
     :param error: Señal de error
     :type error: float

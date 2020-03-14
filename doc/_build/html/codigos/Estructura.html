@@ -86,7 +86,13 @@
 <li class="toctree-l1"><a class="reference internal" href="HowToUse.html">1. Como usar</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. La aplicación</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#estructura-del-codigo">2.1. Estructura del código</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#interfaz-grafica">2.2. Interfaz gráfica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interfaz-grafica">2.2. Interfaz gráfica</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#funcion-de-analisis">2.2.1. Función de análisis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#funcion-de-entonacion-de-controladores-pid">2.2.2. Función de entonación de controladores PID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#funcion-de-diseno-de-controladores-difusos">2.2.3. Función de diseño de controladores difusos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#funcion-de-simulacion-de-sistemas-de-control">2.2.4. Función de simulación de sistemas de control</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Documentacion.html">3. Documentación automática</a></li>
@@ -159,7 +165,7 @@
 <div class="section" id="estructura-del-codigo">
 <h2><span class="section-number">2.1. </span>Estructura del código<a class="headerlink" href="#estructura-del-codigo" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>El código fue realizado utilizando una combinación de programación estructurada y programación orientada a objetos. En la siguiente imagen se observa un esquema que representa la jerarquía del programa:</p>
-<div class="figure align-default">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/estructuraMain.png"><img alt="Estructura" src="../_images/estructuraMain.png" style="width: 566.6px; height: 438.20000000000005px;" /></a>
 </div>
 <p>En la primera columna se encuentra el archivo main o principal, el cual se encarga de la creación de la ventana gráfica y del llamado de los archivos «handlers», los cuales se observan en la columna dos (Análisis, Entonación, Lógica difusa y Simulación), los archivos «handler» tienen la tarea de manejar la interfaz gráfica y hacer de enlace entre el usuario y las rutinas.</p>
@@ -168,46 +174,175 @@
 <div class="section" id="interfaz-grafica">
 <h2><span class="section-number">2.2. </span>Interfaz gráfica<a class="headerlink" href="#interfaz-grafica" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>La interfaz gráfica fue realizada utilizando PySide2, las funciones de Laboratorio Virtual fueron separadas en pestañas. En las siguientes imágenes se señalan cada uno de los componentes que integran cada función.</p>
-<div class="figure align-default">
+<div class="section" id="funcion-de-analisis">
+<h3><span class="section-number">2.2.1. </span>Función de análisis<a class="headerlink" href="#funcion-de-analisis" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/analisis.png"><img alt="analisis" src="../_images/analisis.png" style="width: 699.5px; height: 364.0px;" /></a>
 </div>
-<div class="figure align-default">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/analisisSS.png"><img alt="analisisSS" src="../_images/analisisSS.png" style="width: 239.0px; height: 168.0px;" /></a>
 </div>
-<table class="hlist"><tr><td><ul class="simple">
-<li><p>hola</p></li>
-<li><p>andate</p></li>
-</ul>
-</td><td><ul class="simple">
-<li><p>pelotas</p></li>
-</ul>
-</td></tr></table>
-<div class="figure align-default">
+<ol class="arabic simple">
+<li><p>Pestañas de funciones</p></li>
+<li><p>Selector de representación</p></li>
+<li><p>Coeficientes de la función de transferencia</p></li>
+<li><p>Agregado de Delay</p></li>
+<li><p>Discretización del proceso</p></li>
+<li><p>Datos del análisis</p></li>
+<li><p>Botón para realizar el análisis</p></li>
+<li><p>Pestañas de gráficas</p></li>
+<li><p>Gráfica con Matplotlib</p></li>
+<li><p>Barra de herramientas de la gráfica</p></li>
+<li><p>Matrices de estados</p></li>
+</ol>
+</div>
+<div class="section" id="funcion-de-entonacion-de-controladores-pid">
+<h3><span class="section-number">2.2.2. </span>Función de entonación de controladores PID<a class="headerlink" href="#funcion-de-entonacion-de-controladores-pid" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/entonacionPID.png"><img alt="Estructura" src="../_images/entonacionPID.png" style="width: 691.5px; height: 371.5px;" /></a>
 </div>
-<div class="figure align-default">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/entonacionCSV.png"><img alt="Estructura" src="../_images/entonacionCSV.png" style="width: 700.5px; height: 364.0px;" /></a>
 </div>
-<div class="figure align-default">
+<ol class="arabic simple">
+<li><p>Función de entonación automática</p></li>
+<li><p>Resolución de los sliders</p></li>
+<li><p>Sliders de ganancias</p></li>
+<li><p>Sliders de tiempo y coeficiente N</p></li>
+<li><p>Gráfica con PyQtGraph</p></li>
+<li><p>Carga del archivo CSV</p></li>
+<li><p>Separador del archivo CSV</p></li>
+<li><p>SPAN de la variable del proceso</p></li>
+<li><p>SPAN de la entrada al proceso (EFC)</p></li>
+<li><p>Slider para ajustar $t_1$</p></li>
+<li><p>Gráfica de la variable del proceso</p></li>
+<li><p>Gráfica de la entrada al proceso (EFC)</p></li>
+</ol>
+</div>
+<div class="section" id="funcion-de-diseno-de-controladores-difusos">
+<h3><span class="section-number">2.2.3. </span>Función de diseño de controladores difusos<a class="headerlink" href="#funcion-de-diseno-de-controladores-difusos" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/fuzzyFront.png"><img alt="Estructura" src="../_images/fuzzyFront.png" style="width: 701.5px; height: 364.0px;" /></a>
 </div>
-<div class="figure align-default">
+<ol class="arabic simple">
+<li><p>Número de entradas y salidas</p></li>
+<li><p>Selección de esquema de control</p></li>
+<li><p>Botón para iniciar el diseño</p></li>
+<li><p>Botón para cargar un diseño</p></li>
+<li><p>Botones para salvar los diseños</p></li>
+<li><p>Botón para exportar el diseño a FIS</p></li>
+<li><p>Pestañas para el diseño</p></li>
+<li><p>Información general</p></li>
+<li><p>Estructura de entradas y salidas</p></li>
+<li><p>Esquema de control</p></li>
+</ol>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/fuzzyIO.png"><img alt="Estructura" src="../_images/fuzzyIO.png" style="width: 680.0px; height: 364.0px;" /></a>
 </div>
-<div class="figure align-default">
+<ol class="arabic simple">
+<li><p>Número de entrada/salida</p></li>
+<li><p>Nombre de la entrada/salida</p></li>
+<li><p>Número de etiquetas</p></li>
+<li><p>Rango de la entrada/salida</p></li>
+<li><p>Método de defuzzificacion</p></li>
+<li><p>Número de etiqueta</p></li>
+<li><p>Nombre de la etiqueta</p></li>
+<li><p>Tipo de función de membresía</p></li>
+<li><p>Definición de la función de membresía</p></li>
+<li><p>Gráfica de las funciones de membresía</p></li>
+</ol>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/fuzzyRules.png"><img alt="Estructura" src="../_images/fuzzyRules.png" style="width: 685.5px; height: 364.0px;" /></a>
 </div>
-<div class="figure align-default">
+<ol class="arabic simple">
+<li><p>Lista de reglas</p></li>
+<li><p>Lógica de las premisas</p></li>
+<li><p>Etiquetas de las entradas</p></li>
+<li><p>Opción para negar la entrada</p></li>
+<li><p>Etiquetas de las salidas</p></li>
+<li><p>Peso de la salida</p></li>
+<li><p>Botón para agregar una regla</p></li>
+<li><p>Botón para cambiar una regla</p></li>
+<li><p>Botón para eliminar una regla</p></li>
+<li><p>Botón para crear el controlador y realizar pruebas</p></li>
+</ol>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/fuzzyPrueba.png"><img alt="Estructura" src="../_images/fuzzyPrueba.png" style="width: 785.4px; height: 445.9px;" /></a>
 </div>
-<div class="figure align-default">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/fuzzyRespuesta.png"><img alt="Estructura" src="../_images/fuzzyRespuesta.png" style="width: 763.6999999999999px; height: 445.9px;" /></a>
 </div>
-<div class="figure align-default">
+<ol class="arabic simple">
+<li><p>Activación de reglas de forma gráfica para las entradas</p></li>
+<li><p>Slider para asignar entrada</p></li>
+<li><p>Valor de entrada</p></li>
+<li><p>Activación de reglas de forma gráfica para las salidas</p></li>
+<li><p>Valor de salida</p></li>
+<li><p>Respuesta del controlador</p></li>
+<li><p>Barra indicadora de altura (para dos entradas)</p></li>
+</ol>
+</div>
+<div class="section" id="funcion-de-simulacion-de-sistemas-de-control">
+<h3><span class="section-number">2.2.4. </span>Función de simulación de sistemas de control<a class="headerlink" href="#funcion-de-simulacion-de-sistemas-de-control" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/simulacionGeneral.png"><img alt="Estructura" src="../_images/simulacionGeneral.png" style="width: 761.6px; height: 412.16px;" /></a>
 </div>
-<div class="figure align-default">
+<div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/simulacionPlot.png"><img alt="Estructura" src="../_images/simulacionPlot.png" style="width: 718.1999999999999px; height: 446.59999999999997px;" /></a>
+</div>
+<ol class="arabic simple">
+<li><p>Pestañas de simulación</p></li>
+<li><p>Esquema de control</p></li>
+<li><p>Barras de configuración</p></li>
+<li><p>Botón para simular</p></li>
+<li><p>Gráfica de respuesta del sistema</p></li>
+<li><p>Gráfica de la señal de control</p></li>
+</ol>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/confGeneral.png"><img alt="confGeneral" src="../_images/confGeneral.png" style="width: 365.0px; height: 210.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/confAvz.png"><img alt="confAvz" src="../_images/confAvz.png" style="width: 356.0px; height: 287.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/confBloq.png"><img alt="confBloq" src="../_images/confBloq.png" style="width: 347.0px; height: 269.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/confControlador.png"><img alt="confControlador" src="../_images/confControlador.png" style="width: 316.0px; height: 292.0px;" /></a>
+</div>
+<ol class="arabic simple">
+<li><p>Barra de configuración general</p></li>
+<li><p>Selección del esquema de control</p></li>
+<li><p>Tiempo de simulación</p></li>
+<li><p>Valor del setpoint</p></li>
+<li><p>Setpoint avanzado (variable)</p></li>
+<li><p>Barra de configuración avanzada</p></li>
+<li><p>Orden del atraso por PADE</p></li>
+<li><p>Activación del filtro para la derivada</p></li>
+<li><p>Selección del método de Runge-Kutta</p></li>
+<li><p>Tolerancia relativa para el paso variable</p></li>
+<li><p>Tolerancia absoluta para el paso variable</p></li>
+<li><p>Máximo incremento del tamaño de paso</p></li>
+<li><p>Mínimo decremento del tamaño de paso</p></li>
+<li><p>Factor de seguridad para el paso variable</p></li>
+<li><p>Botón para reiniciar la configuración</p></li>
+<li><p>Barra de bloques adicionales</p></li>
+<li><p>Activación del sensor</p></li>
+<li><p>Numerador del sensor</p></li>
+<li><p>Denominador del sensor</p></li>
+<li><p>Activación del accionador</p></li>
+<li><p>Numerador del accionador</p></li>
+<li><p>Denominador del accionador</p></li>
+<li><p>Activación del saturador</p></li>
+<li><p>Límite inferior del saturador</p></li>
+<li><p>Límite superior del saturador</p></li>
+<li><p>Barra de configuración del controlador</p></li>
+<li><p>Controlador difuso</p></li>
+<li><p>Ganancia proporcional del PID</p></li>
+<li><p>Ganancia integral del PID</p></li>
+<li><p>Ganancia derivativa del PID</p></li>
+<li><p>Coeficiente N</p></li>
+</ol>
 </div>
 </div>
 </div>

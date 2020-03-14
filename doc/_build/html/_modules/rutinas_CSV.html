@@ -148,7 +148,7 @@
             
   <h1>Código fuente para rutinas_CSV</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">Archivo que contiene todas las rutinas necesarias para la funcionalidad de identificacion de modelo y tunning con csv</span>
+<span class="sd">Archivo que contiene todas las rutinas necesarias para la funcionalidad de identificación de modelo y tunning con csv</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">gaussian_filter</span>
@@ -160,7 +160,7 @@
 
 <div class="viewcode-block" id="procesar_csv"><a class="viewcode-back" href="../codigos/rutinas_CSV.html#rutinas_CSV.procesar_csv">[documentos]</a><span class="k">def</span> <span class="nf">procesar_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para procesar la data del archivo csv, se crea una nueva data en un diccionario, se normalizan las escalas con el span y se transforma el tiempo a segundos. Para la transformacion de tiempo a segundos los formatos aceptados son</span>
+<span class="sd">    Función para procesar la data del archivo csv, se crea una nueva data en un diccionario, se normalizan las escalas con el span y se transforma el tiempo a segundos. Para la transformación de tiempo a segundos los formatos aceptados son:</span>
 <span class="sd">    </span>
 <span class="sd">    hh:mm:ss</span>
 <span class="sd">    </span>
@@ -168,7 +168,7 @@
 <span class="sd">    </span>
 <span class="sd">    ss</span>
 <span class="sd">    </span>
-<span class="sd">    En cualquiera de los casos se llevara a segundos y se restara el tiempo inicial para que empiece en cero</span>
+<span class="sd">    En cualquiera de los casos se llevara a segundos y se restara el tiempo inicial para que empiece en cero.</span>
 <span class="sd">    </span>
 <span class="sd">    :param csv_data: Data del csv</span>
 <span class="sd">    :type csv_data: numpyArray</span>
@@ -195,7 +195,7 @@
 
     <span class="n">Tiempo</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="c1"># Transformacion de tiempo a segundos</span>
+    <span class="c1"># Transformación de tiempo a segundos</span>
     <span class="k">for</span> <span class="n">time_entry</span> <span class="ow">in</span> <span class="n">dict_data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]:</span>
         <span class="n">my_time</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time_entry</span><span class="p">)</span>
         <span class="n">t1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">my_time</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">3600</span><span class="p">]))</span>
@@ -208,7 +208,7 @@
     <span class="n">MinEFC</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditLEFC</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
     <span class="n">MaxEFC</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">EditUEFC</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
 
-    <span class="c1"># Normalizacion</span>
+    <span class="c1"># Normalización</span>
     <span class="n">FactorVP</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">MaxVP</span> <span class="o">-</span> <span class="n">MinVP</span>
     <span class="n">FactorEFC</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">MaxEFC</span> <span class="o">-</span> <span class="n">MinEFC</span>
 
@@ -232,7 +232,7 @@
                     <span class="n">MinEFC</span><span class="p">,</span>
                     <span class="n">MaxEFC</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fucion para calcular los parametros del modelo de primer orden</span>
+<span class="sd">    Función para calcular los parametros del modelo de primer orden</span>
 <span class="sd">    </span>
 <span class="sd">    :param dict_data: Diccionario con la data procesada del csv</span>
 <span class="sd">    :type dict_data: dict</span>
@@ -288,7 +288,7 @@
 
 <div class="viewcode-block" id="entonar_y_graficar"><a class="viewcode-back" href="../codigos/rutinas_CSV.html#rutinas_CSV.entonar_y_graficar">[documentos]</a><span class="k">def</span> <span class="nf">entonar_y_graficar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_data</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para calcular el controlador PID a partir de los datos del modelo de primer orden, ademas, se grafica la data del csv junto con algunos parametros de la identificacion del modelo</span>
+<span class="sd">    Función para calcular el controlador PID a partir de los datos del modelo de primer orden, ademas, se graficá la data del csv junto con algunos parametros de la identificación del modelo</span>
 <span class="sd">    </span>
 <span class="sd">    :param dict_data: Diccionario con la data procesada del csv</span>
 <span class="sd">    :type dict_data: dict</span>
@@ -296,13 +296,13 @@
 <span class="sd">    :type Kc: float</span>
 <span class="sd">    :param tau: Constante de tiempo del proceso</span>
 <span class="sd">    :type tau: float</span>
-<span class="sd">    :param y1: Punto y1 de la recta de identifiacion, en este punto se encuentra el mayor cambio respecto al tiempo</span>
+<span class="sd">    :param y1: Punto y1 de la recta de identificación, en este punto se encuentra el mayor cambio respecto al tiempo</span>
 <span class="sd">    :type y1: float</span>
-<span class="sd">    :param y2: Punto y2 de la recta de identificacion</span>
+<span class="sd">    :param y2: Punto y2 de la recta de identificación</span>
 <span class="sd">    :type y2: float</span>
-<span class="sd">    :param t0: Tiempo del inicio del escalon</span>
+<span class="sd">    :param t0: Tiempo del inicio del escalón</span>
 <span class="sd">    :type t0: float</span>
-<span class="sd">    :param t1: Tiempo del inicio de la respuesta del proceso ante el escalon</span>
+<span class="sd">    :param t1: Tiempo del inicio de la respuesta del proceso ante el escalón</span>
 <span class="sd">    :type t1: float</span>
 <span class="sd">    :param t2: Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</span>
 <span class="sd">    :type t2: float</span>
@@ -377,21 +377,21 @@
 
 <div class="viewcode-block" id="calculos_manual"><a class="viewcode-back" href="../codigos/rutinas_CSV.html#rutinas_CSV.calculos_manual">[documentos]</a><span class="k">def</span> <span class="nf">calculos_manual</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">GraphObjets</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">slop</span><span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para recalcular el controlador PID a partir de los datos del modelo de primer orden con el nueto tiempo t1, ademas, se grafica la data del csv junto con algunos parametros de la identificacion del modelo y la nueva recta</span>
+<span class="sd">    Función para recalcular el controlador PID a partir de los datos del modelo de primer orden con el nuevo tiempo t1, ademas, se grafica la data del csv junto con algunos parametros de la identificación del modelo y la nueva recta</span>
 <span class="sd">    </span>
 <span class="sd">    :param GraphObjets: Lista de objetos de graficacion</span>
 <span class="sd">    :type GraphObjets: list</span>
 <span class="sd">    :param Kc: Ganancia del proceso</span>
 <span class="sd">    :type Kc: float</span>
-<span class="sd">    :param t0: Tiempo del inicio del escalon</span>
+<span class="sd">    :param t0: Tiempo del inicio del escalón</span>
 <span class="sd">    :type t0: float</span>
-<span class="sd">    :param t1: Tiempo del inicio de la respuesta del proceso ante el escalon</span>
+<span class="sd">    :param t1: Tiempo del inicio de la respuesta del proceso ante el escalón</span>
 <span class="sd">    :type t1: float</span>
 <span class="sd">    :param t2: Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</span>
 <span class="sd">    :type t2: float</span>
-<span class="sd">    :param slop: Pendiente de la recta de identificacion</span>
+<span class="sd">    :param slop: Pendiente de la recta de identificación</span>
 <span class="sd">    :type slop: float</span>
-<span class="sd">    :param y1: Punto y1 de la recta de identifiacion, en este punto se encuentra el mayor cambio respecto al tiempo</span>
+<span class="sd">    :param y1: Punto y1 de la recta de identificación, en este punto se encuentra el mayor cambio respecto al tiempo</span>
 <span class="sd">    :type y1: float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">auto_tuning_method_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">csvMetodo</span><span class="o">.</span><span class="n">currentText</span><span class="p">())</span>
@@ -406,13 +406,13 @@
 
 <div class="viewcode-block" id="actualizar_Datos"><a class="viewcode-back" href="../codigos/rutinas_CSV.html#rutinas_CSV.actualizar_Datos">[documentos]</a><span class="k">def</span> <span class="nf">actualizar_Datos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para mostrar los resultados obtenidos del modelo en un TextEdit</span>
+<span class="sd">    Función para mostrar los resultados obtenidos del modelo en un TextEdit</span>
 <span class="sd">    </span>
 <span class="sd">    :param Kc: Ganancia del proceso</span>
 <span class="sd">    :type Kc: float</span>
-<span class="sd">    :param t0: Tiempo del inicio del escalon</span>
+<span class="sd">    :param t0: Tiempo del inicio del escalón</span>
 <span class="sd">    :type t0: float</span>
-<span class="sd">    :param t1: Tiempo del inicio de la respuesta del proceso ante el escalon</span>
+<span class="sd">    :param t1: Tiempo del inicio de la respuesta del proceso ante el escalón</span>
 <span class="sd">    :type t1: float</span>
 <span class="sd">    :param t2: Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</span>
 <span class="sd">    :type t2: float</span>
@@ -438,7 +438,7 @@
 
 <div class="viewcode-block" id="auto_tuning_method_csv"><a class="viewcode-back" href="../codigos/rutinas_CSV.html#rutinas_CSV.auto_tuning_method_csv">[documentos]</a><span class="k">def</span> <span class="nf">auto_tuning_method_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_proceso</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">metodo</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalon, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalon en lazo abierto</span>
+<span class="sd">    Función para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalón, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalón en lazo abierto</span>
 <span class="sd">    </span>
 <span class="sd">    :param k_proceso: Ganancia del proceso</span>
 <span class="sd">    :type k_proceso: float</span>
@@ -446,7 +446,7 @@
 <span class="sd">    :type tau: float</span>
 <span class="sd">    :param alpha: Tiempo muerto o delay del proceso</span>
 <span class="sd">    :type alpha: float</span>
-<span class="sd">    :param metodo: Metodo a utilizar</span>
+<span class="sd">    :param metodo: Método a utilizar</span>
 <span class="sd">    :type metodo: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     

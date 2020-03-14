@@ -170,26 +170,26 @@
 
 <div class="viewcode-block" id="FuzzyController"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController">[documentos]</a><span class="k">class</span> <span class="nc">FuzzyController</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Clase para administrar el controlador difuso, a partir de la misma se puede crear el controlador difuso e ir creandolo de forma programatica por medio de la interfaz grafica definida en Ui_VentanaPrincipal.py y manejada en FuzzyHandler.py</span>
+<span class="sd">    Clase para administrar el controlador difuso, a partir de la misma se puede crear el controlador difuso e ir creandolo de forma programática por medio de la interfaz grafica definida en Ui_VentanaPrincipal.py y manejada en FuzzyHandler.py</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="FuzzyController.__init__"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.__init__">[documentos]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">,</span> <span class="n">rulelist</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Se utiliza para inicializar el controlador con las entradas y salidas del mismo, en caso de que se envie el parametro opcional, rulelist, se crea el controlador a partir de las reglas suministradas y queda listo para usar</span>
+<span class="sd">        Se utiliza para inicializar el controlador con las entradas y salidas del mismo, en caso de que se envié el parametro opcional, rulelist, se crea el controlador a partir de las reglas suministradas y queda listo para usar</span>
 <span class="sd">        </span>
 <span class="sd">        :param inputlist: Lista de variables de entrada</span>
 <span class="sd">        :type inputlist: list</span>
 <span class="sd">        :param outputlist: Lista de variables de salida</span>
 <span class="sd">        :type outputlist: list</span>
 <span class="sd">        :param rulelist: Lista de reglas, defaults to []</span>
-<span class="sd">        :type rulelist: list, optional</span>
+<span class="sd">        :type rulelist: list, opcional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_input</span><span class="p">(</span><span class="n">inputlist</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crear_output</span><span class="p">(</span><span class="n">outputlist</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flagpyqt</span> <span class="o">=</span> <span class="mi">1</span>
 
-        <span class="c1"># Rotacion de colores para las funciones de membresia</span>
+        <span class="c1"># Rotación de colores para las funciones de membresía</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span>
             <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>
@@ -222,7 +222,7 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_input">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear las variables de entrada a partir de la lista de variables de entrada</span>
+<span class="sd">        Función para crear las variables de entrada a partir de la lista de variables de entrada</span>
 <span class="sd">        </span>
 <span class="sd">        :param inputlist: Lista de variables de entrada</span>
 <span class="sd">        :type inputlist: list</span>
@@ -236,7 +236,7 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_output">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear las variables de salida a partir de la lista de variables de salida</span>
+<span class="sd">        Función para crear las variables de salida a partir de la lista de variables de salida</span>
 <span class="sd">        </span>
 <span class="sd">        :param outputlist: Lista de variables de salida</span>
 <span class="sd">        :type outputlist: list</span>
@@ -252,7 +252,7 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_etiquetas_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_etiquetas_input">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_etiquetas_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear las etiquetas de una entrada a partir de la lista de variables de entrada</span>
+<span class="sd">        Función para crear las etiquetas de una entrada a partir de la lista de variables de entrada</span>
 <span class="sd">        </span>
 <span class="sd">        :param inputlist: Lista de variables de entrada</span>
 <span class="sd">        :type inputlist: list</span>
@@ -265,7 +265,7 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_etiquetas_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_etiquetas_output">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_etiquetas_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear las etiquetas de una salida a partir de la lista de variables de salida</span>
+<span class="sd">        Función para crear las etiquetas de una salida a partir de la lista de variables de salida</span>
 <span class="sd">        </span>
 <span class="sd">        :param outputlist: Lista de variables de salida</span>
 <span class="sd">        :type outputlist: list</span>
@@ -278,7 +278,7 @@
 
 <div class="viewcode-block" id="FuzzyController.graficar_mf_in"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.graficar_mf_in">[documentos]</a>    <span class="k">def</span> <span class="nf">graficar_mf_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para graficar las funciones de membresia de una entrada</span>
+<span class="sd">        Función para graficar las funciones de membresía de una entrada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -296,7 +296,7 @@
 
 <div class="viewcode-block" id="FuzzyController.graficar_mf_out"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.graficar_mf_out">[documentos]</a>    <span class="k">def</span> <span class="nf">graficar_mf_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para graficar las funciones de membresia de una salida</span>
+<span class="sd">        Función para graficar las funciones de membresía de una salida</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -314,7 +314,7 @@
 
 <div class="viewcode-block" id="FuzzyController.cambiar_nombre_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambiar_nombre_input">[documentos]</a>    <span class="k">def</span> <span class="nf">cambiar_nombre_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcio para cambiar el nombre de una entrada</span>
+<span class="sd">        Función para cambiar el nombre de una entrada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -329,7 +329,7 @@
 
 <div class="viewcode-block" id="FuzzyController.cambiar_nombre_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambiar_nombre_output">[documentos]</a>    <span class="k">def</span> <span class="nf">cambiar_nombre_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">         Funcio para cambiar el nombre de una salida</span>
+<span class="sd">        Función para cambiar el nombre de una salida</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -344,7 +344,7 @@
 
 <div class="viewcode-block" id="FuzzyController.cambio_etiquetas_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambio_etiquetas_input">[documentos]</a>    <span class="k">def</span> <span class="nf">cambio_etiquetas_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar las etiquetas de entrada del controlador</span>
+<span class="sd">        Función para actualizar las etiquetas de entrada del controlador</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -360,7 +360,7 @@
 
 <div class="viewcode-block" id="FuzzyController.cambio_etiquetas_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambio_etiquetas_output">[documentos]</a>    <span class="k">def</span> <span class="nf">cambio_etiquetas_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar las etiquetas de salida del controlador</span>
+<span class="sd">        Función para actualizar las etiquetas de salida del controlador</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -376,7 +376,7 @@
 
 <div class="viewcode-block" id="FuzzyController.update_rango_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.update_rango_input">[documentos]</a>    <span class="k">def</span> <span class="nf">update_rango_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar el universo de discurso de una entrada</span>
+<span class="sd">        Función para actualizar el universo de discurso de una entrada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -392,7 +392,7 @@
 
 <div class="viewcode-block" id="FuzzyController.update_rango_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.update_rango_output">[documentos]</a>    <span class="k">def</span> <span class="nf">update_rango_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar el universo de discurso de una salida</span>
+<span class="sd">        Función para actualizar el universo de discurso de una salida</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -408,20 +408,20 @@
 
 <div class="viewcode-block" id="FuzzyController.cambiar_metodo"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambiar_metodo">[documentos]</a>    <span class="k">def</span> <span class="nf">cambiar_metodo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">metodo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">        Funcion para cambiar el metodo de defuzzificacion de una salida</span>
+<span class="sd">        Función para cambiar el método defuzzificacion de una salida</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
 <span class="sd">        :param o: Numero de salida</span>
 <span class="sd">        :type o: int</span>
-<span class="sd">        :param metodo: Nombre del nuevo metodo de defuzzificacion</span>
+<span class="sd">        :param metodo: Nombre del nuevo método de defuzzificacion</span>
 <span class="sd">        :type o: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">defuzzify_method</span> <span class="o">=</span> <span class="n">metodo</span></div>
 
 <div class="viewcode-block" id="FuzzyController.cambio_etinombre_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambio_etinombre_input">[documentos]</a>    <span class="k">def</span> <span class="nf">cambio_etinombre_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">old_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcio para cambiar el nombre de una etiqueta en la entrada seleccionada</span>
+<span class="sd">        Función para cambiar el nombre de una etiqueta en la entrada seleccionada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -443,7 +443,7 @@
 
 <div class="viewcode-block" id="FuzzyController.cambio_etinombre_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambio_etinombre_output">[documentos]</a>    <span class="k">def</span> <span class="nf">cambio_etinombre_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">old_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcio para cambiar el nombre de una etiqueta en la salida seleccionada</span>
+<span class="sd">        Función para cambiar el nombre de una etiqueta en la salida seleccionada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -465,7 +465,7 @@
 
 <div class="viewcode-block" id="FuzzyController.update_definicion_input"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.update_definicion_input">[documentos]</a>    <span class="k">def</span> <span class="nf">update_definicion_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">inputlist</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar la definicion de una funcion de membresia en la entrada seleccionada</span>
+<span class="sd">        Función para actualizar la definicion de una función de membresía en la entrada seleccionada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -484,7 +484,7 @@
 
 <div class="viewcode-block" id="FuzzyController.update_definicion_output"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.update_definicion_output">[documentos]</a>    <span class="k">def</span> <span class="nf">update_definicion_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">outputlist</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar la definicion de una funcion de membresia en la salida seleccionada</span>
+<span class="sd">        Función para actualizar la definicion de una función de membresía en la salida seleccionada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -503,22 +503,22 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_reglas"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_reglas">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_reglas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rulelistC</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear las reglas a partir de una lista que contiene toda la informacion necesaria, esta lista es creada en FuzzyHandler.py:</span>
+<span class="sd">        Función para crear las reglas a partir de una lista que contiene toda la información necesaria, esta lista es creada en FuzzyHandler.py:</span>
 <span class="sd">        </span>
-<span class="sd">        Cada posicion en la lista contiene un set de entradas, salidas y la logica a utilizar (AND o OR), a su vez, cada set es una lista que posee en cada posicion otra lista con la etiqueta, el numero de entrada/salida y si esta o no negada para el caso de las entradas, en caso de ser salida contiene el peso asignado</span>
+<span class="sd">        Cada posición en la lista contiene un set de entradas, salidas y la lógica a utilizar (AND o OR), a su vez, cada set es una lista que posee en cada posición otra lista con la etiqueta, el numero de entrada/salida y si esta o no negada para el caso de las entradas, en caso de ser salida contiene el peso asignado</span>
 <span class="sd">        </span>
-<span class="sd">        :param rulelistC: Lista con la informacion necesaria para crear las reglas</span>
+<span class="sd">        :param rulelistC: Lista con la información necesaria para crear las reglas</span>
 <span class="sd">        :type rulelistC: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Un set por cada regla</span>
         <span class="k">for</span> <span class="n">sets</span> <span class="ow">in</span> <span class="n">rulelistC</span><span class="p">:</span>
-            <span class="n">Etiquetasin</span><span class="p">,</span> <span class="n">Etiquetasout</span><span class="p">,</span> <span class="n">logica</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sets</span><span class="p">)</span>
+            <span class="n">Etiquetasin</span><span class="p">,</span> <span class="n">Etiquetasout</span><span class="p">,</span> <span class="n">lógica</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sets</span><span class="p">)</span>
 
-            <span class="c1"># Creacion del objeto de regla de Scikit-Fuzzy</span>
+            <span class="c1"># Creación del objeto de regla de Scikit-Fuzzy</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fuzz</span><span class="o">.</span><span class="n">Rule</span><span class="p">())</span>
 
-            <span class="c1"># Los antecedentes deben inicializarce antes de poder expandirse de forma programatica</span>
+            <span class="c1"># Los antecedentes deben inicializarce antes de poder expandirse de forma programática</span>
             <span class="n">inetiqueta_ini</span><span class="p">,</span> <span class="n">ni_ini</span><span class="p">,</span> <span class="n">negacion_ini</span> <span class="o">=</span> <span class="n">Etiquetasin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">negacion_ini</span><span class="p">:</span>
@@ -526,15 +526,15 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">ni_ini</span><span class="p">][</span><span class="n">inetiqueta_ini</span><span class="p">]</span>
 
-            <span class="c1"># Los consecuentes deben inicializarce antes de poder expandirse de forma programatica</span>
+            <span class="c1"># Los consecuentes deben inicializarce antes de poder expandirse de forma programática</span>
             <span class="n">outetiqueta_oni</span><span class="p">,</span> <span class="n">no_ini</span><span class="p">,</span> <span class="n">weight_ini</span> <span class="o">=</span> <span class="n">Etiquetasout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                 <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">consequent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">no_ini</span><span class="p">][</span><span class="n">outetiqueta_oni</span><span class="p">]</span> <span class="o">%</span> <span class="n">weight_ini</span>
 
-            <span class="c1"># Expansion del antecedente de forma programatica</span>
+            <span class="c1"># Expansión del antecedente de forma programática</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Etiquetasin</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">Etiquetasin</span><span class="p">)]:</span>
-                <span class="k">if</span> <span class="n">logica</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">lógica</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                             <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
@@ -549,15 +549,15 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                             <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">|</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-            <span class="c1"># Expansion del consecuente de forma programatica</span>
+            <span class="c1"># Expansión del consecuente de forma programática</span>
             <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Etiquetasout</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">Etiquetasout</span><span class="p">)]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">consequent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">%</span> <span class="n">o</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span></div>
 
-<div class="viewcode-block" id="FuzzyController.agregar_regla"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.agregar_regla">[documentos]</a>    <span class="k">def</span> <span class="nf">agregar_regla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">Etiquetasin</span><span class="p">,</span> <span class="n">Etiquetasout</span><span class="p">,</span> <span class="n">logica</span><span class="p">):</span>
+<div class="viewcode-block" id="FuzzyController.agregar_regla"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.agregar_regla">[documentos]</a>    <span class="k">def</span> <span class="nf">agregar_regla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">Etiquetasin</span><span class="p">,</span> <span class="n">Etiquetasout</span><span class="p">,</span> <span class="n">lógica</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear una regla a partir de un set</span>
+<span class="sd">        Función para crear una regla a partir de un set</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -565,14 +565,14 @@
 <span class="sd">        :type Etiquetasin: list</span>
 <span class="sd">        :param Etiquetasout: set de salida</span>
 <span class="sd">        :type Etiquetasout: list</span>
-<span class="sd">        :param logica: Logica a utilizar</span>
-<span class="sd">        :type logica: bool</span>
+<span class="sd">        :param lógica: Lógica a utilizar</span>
+<span class="sd">        :type lógica: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># Creacion del objeto de regla de Scikit-Fuzzy</span>
+        <span class="c1"># Creación del objeto de regla de Scikit-Fuzzy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fuzz</span><span class="o">.</span><span class="n">Rule</span><span class="p">())</span>
 
-        <span class="c1"># Los antecedentes deben inicializarce antes de poder expandirse de forma programatica</span>
+        <span class="c1"># Los antecedentes deben inicializarce antes de poder expandirse de forma programática</span>
         <span class="n">inetiqueta_ini</span><span class="p">,</span> <span class="n">ni_ini</span><span class="p">,</span> <span class="n">negacion_ini</span> <span class="o">=</span> <span class="n">Etiquetasin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">negacion_ini</span><span class="p">:</span>
@@ -580,15 +580,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">ni_ini</span><span class="p">][</span><span class="n">inetiqueta_ini</span><span class="p">]</span>
 
-        <span class="c1"># Los consecuentes deben inicializarce antes de poder expandirse de forma programatica</span>
+        <span class="c1"># Los consecuentes deben inicializarce antes de poder expandirse de forma programática</span>
         <span class="n">outetiqueta_oni</span><span class="p">,</span> <span class="n">no_ini</span><span class="p">,</span> <span class="n">weight_ini</span> <span class="o">=</span> <span class="n">Etiquetasout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
             <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">consequent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">no_ini</span><span class="p">][</span><span class="n">outetiqueta_oni</span><span class="p">]</span> <span class="o">%</span> <span class="n">weight_ini</span>
 
-        <span class="c1"># Expansion del antecedente de forma programatica</span>
+        <span class="c1"># Expansión del antecedente de forma programática</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Etiquetasin</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">Etiquetasin</span><span class="p">)]:</span>
-            <span class="k">if</span> <span class="n">logica</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lógica</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                         <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
@@ -603,7 +603,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                         <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">|</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-        <span class="c1"># Expansion del consecuente de forma programatica</span>
+        <span class="c1"># Expansión del consecuente de forma programática</span>
         <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Etiquetasout</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">Etiquetasout</span><span class="p">)]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">consequent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">%</span> <span class="n">o</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
@@ -611,16 +611,16 @@
 
 <div class="viewcode-block" id="FuzzyController.eliminar_regla"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.eliminar_regla">[documentos]</a>    <span class="k">def</span> <span class="nf">eliminar_regla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_rule</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para eliminar una regla</span>
+<span class="sd">        Función para eliminar una regla</span>
 <span class="sd">        </span>
 <span class="sd">        :param index_rule: Indice indicando la regla a eliminar</span>
 <span class="sd">        :type index_rule: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="FuzzyController.cambiar_regla"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambiar_regla">[documentos]</a>    <span class="k">def</span> <span class="nf">cambiar_regla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">Etiquetasin</span><span class="p">,</span> <span class="n">Etiquetasout</span><span class="p">,</span> <span class="n">index_rule</span><span class="p">,</span> <span class="n">logica</span><span class="p">):</span>
+<div class="viewcode-block" id="FuzzyController.cambiar_regla"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.cambiar_regla">[documentos]</a>    <span class="k">def</span> <span class="nf">cambiar_regla</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">Etiquetasin</span><span class="p">,</span> <span class="n">Etiquetasout</span><span class="p">,</span> <span class="n">index_rule</span><span class="p">,</span> <span class="n">lógica</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para cambiar una regla a partir de un nuevo set</span>
+<span class="sd">        Función para cambiar una regla a partir de un nuevo set</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -630,16 +630,16 @@
 <span class="sd">        :type Etiquetasout: list</span>
 <span class="sd">        :param index_rule: Indice indicando la regla a cambiar</span>
 <span class="sd">        :type index_rule: int</span>
-<span class="sd">        :param logica: Logica a utilizar</span>
-<span class="sd">        :type logica: bool</span>
+<span class="sd">        :param lógica: Lógica a utilizar</span>
+<span class="sd">        :type lógica: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span>
 
-        <span class="c1"># Creacion del objeto de regla de Scikit-Fuzzy</span>
+        <span class="c1"># Creación del objeto de regla de Scikit-Fuzzy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index_rule</span><span class="p">,</span> <span class="n">fuzz</span><span class="o">.</span><span class="n">Rule</span><span class="p">())</span>
 
-        <span class="c1"># Los antecedentes deben inicializarce antes de poder expandirse de forma programatica</span>
+        <span class="c1"># Los antecedentes deben inicializarce antes de poder expandirse de forma programática</span>
         <span class="n">inetiqueta_ini</span><span class="p">,</span> <span class="n">ni_ini</span><span class="p">,</span> <span class="n">negacion_ini</span> <span class="o">=</span> <span class="n">Etiquetasin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">negacion_ini</span><span class="p">:</span>
@@ -649,15 +649,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                 <span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">ni_ini</span><span class="p">][</span><span class="n">inetiqueta_ini</span><span class="p">]</span>
 
-        <span class="c1"># Los consecuentes deben inicializarce antes de poder expandirse de forma programatica</span>
+        <span class="c1"># Los consecuentes deben inicializarce antes de poder expandirse de forma programática</span>
         <span class="n">outetiqueta_oni</span><span class="p">,</span> <span class="n">no_ini</span><span class="p">,</span> <span class="n">weight_ini</span> <span class="o">=</span> <span class="n">Etiquetasout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">consequent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">no_ini</span><span class="p">][</span>
             <span class="n">outetiqueta_oni</span><span class="p">]</span> <span class="o">%</span> <span class="n">weight_ini</span>
 
-        <span class="c1"># Expansion del antecedente de forma programatica</span>
+        <span class="c1"># Expansión del antecedente de forma programática</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Etiquetasin</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">Etiquetasin</span><span class="p">)]:</span>
-            <span class="k">if</span> <span class="n">logica</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lógica</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                         <span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
@@ -672,7 +672,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span>
                         <span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">antecedent</span> <span class="o">|</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-        <span class="c1"># Expansion del consecuente de forma programatica</span>
+        <span class="c1"># Expansión del consecuente de forma programática</span>
         <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">Etiquetasout</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">Etiquetasout</span><span class="p">)]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span><span class="o">.</span><span class="n">consequent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">%</span>
                                                         <span class="n">o</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
@@ -680,14 +680,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="FuzzyController.crear_controlador"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_controlador">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_controlador</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Funcion para crear el controlador difuso a partir de todas las reglas creadas &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Función para crear el controlador difuso a partir de todas las reglas creadas &quot;&quot;&quot;</span>
         
         <span class="n">temp</span> <span class="o">=</span> <span class="n">fuzz</span><span class="o">.</span><span class="n">ControlSystem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Controlador</span> <span class="o">=</span> <span class="n">fuzz</span><span class="o">.</span><span class="n">ControlSystemSimulation</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">flush_after_run</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FuzzyController.prueba_de_controlador"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.prueba_de_controlador">[documentos]</a>    <span class="k">def</span> <span class="nf">prueba_de_controlador</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">no</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para realizar la prueba del controlador</span>
+<span class="sd">        Función para realizar la prueba del controlador</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -717,7 +717,7 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_plots_in"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_plots_in">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_plots_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ni</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear los objetos de graficacion de PyQtGraph de la entrada, el codigo para la obtencion de los valores de salida y el graficado es una version altamente modificada de la funcion .view() de Scikit-Fuzzy. Las modificaciones realizadas fueron necesarias para cambiar matplotlib por PyQtGraph</span>
+<span class="sd">        Función para crear los objetos de graficacion de PyQtGraph de la entrada, el código para la obtención de los valores de salida y el graficado es una version altamente modificada de la función .view() de Scikit-Fuzzy. Las modificaciones realizadas fueron necesarias para cambiar matplotlib por PyQtGraph</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -765,7 +765,7 @@
                 <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">([</span><span class="n">under_plot</span><span class="p">,</span> <span class="n">over_plot</span><span class="p">]))</span>
                 <span class="n">color</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="c1"># Codigo tomado de la funcion .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
+            <span class="c1"># Código tomado de la función .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cut_mfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">output_mf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Controlador</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">crisp_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -798,7 +798,7 @@
 
 <div class="viewcode-block" id="FuzzyController.crear_plots_out"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.crear_plots_out">[documentos]</a>    <span class="k">def</span> <span class="nf">crear_plots_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">no</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para crear los objetos de graficacion de PyQtGraph de la salida, el codigo para la obtencion de los valores de salida y el graficado es una version altamente modificada de la funcion .view() de Scikit-Fuzzy. Las modificaciones realizadas fueron necesarias para cambiar matplotlib por PyQtGraph</span>
+<span class="sd">        Función para crear los objetos de graficacion de PyQtGraph de la salida, el código para la obtención de los valores de salida y el graficado es una version altamente modificada de la función .view() de Scikit-Fuzzy. Las modificaciones realizadas fueron necesarias para cambiar matplotlib por PyQtGraph</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -854,7 +854,7 @@
                 <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">([</span><span class="n">under_plot</span><span class="p">,</span> <span class="n">over_plot</span><span class="p">]))</span>
                 <span class="n">color</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="c1"># Codigo tomado de la funcion .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
+            <span class="c1"># Código tomado de la función .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cut_mfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">output_mf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Controlador</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">crisp_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -899,7 +899,7 @@
 
 <div class="viewcode-block" id="FuzzyController.graficar_prueba_pyqtgraph"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.graficar_prueba_pyqtgraph">[documentos]</a>    <span class="k">def</span> <span class="nf">graficar_prueba_pyqtgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">no</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para actualizar la grafica en funcion de las nuevas entradas, codigo tomado y modificado de la funcion .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
+<span class="sd">        Función para actualizar la grafica en función de las nuevas entradas, código tomado y modificado de la función .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -922,7 +922,7 @@
                 <span class="n">under_plot</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">ups_universe</span><span class="p">,</span> <span class="n">zeros</span><span class="p">)</span>
                 <span class="n">over_plot</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">ups_universe</span><span class="p">,</span> <span class="n">cut_mfs</span><span class="p">[</span><span class="n">label</span><span class="p">[</span><span class="s1">&#39;nombre&#39;</span><span class="p">]])</span>
 
-            <span class="c1"># Codigo tomado de la funcion .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
+            <span class="c1"># Código tomado de la función .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cut_mfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">output_mf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_inputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Controlador</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">crisp_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -959,7 +959,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">over_plot</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">ups_universe</span><span class="p">,</span> <span class="n">zeros</span><span class="p">)</span>
 
-            <span class="c1"># Codigo tomado de la funcion .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
+            <span class="c1"># Código tomado de la función .view() de Scikit-Fuzzy y adaptado para su uso con PyQtGraph</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cut_mfs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">output_mf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzz_outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Controlador</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">crisp_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1008,7 +1008,7 @@
 
 <div class="viewcode-block" id="FuzzyController.graficar_respuesta_2d"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.graficar_respuesta_2d">[documentos]</a>    <span class="k">def</span> <span class="nf">graficar_respuesta_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">inrange</span><span class="p">,</span> <span class="n">no</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para graficar la respuesta del controlador en caso de poseer una entrada</span>
+<span class="sd">        Función para graficar la respuesta del controlador en caso de poseer una entrada</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -1044,7 +1044,7 @@
 
 <div class="viewcode-block" id="FuzzyController.graficar_respuesta_3d"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.graficar_respuesta_3d">[documentos]</a>    <span class="k">def</span> <span class="nf">graficar_respuesta_3d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">inrange1</span><span class="p">,</span> <span class="n">inrange2</span><span class="p">,</span> <span class="n">no</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para graficar la superficie de respuesta del controlador en caso de poseer 2 entradas</span>
+<span class="sd">        Función para graficar la superficie de respuesta del controlador en caso de poseer 2 entradas</span>
 <span class="sd">        </span>
 <span class="sd">        :param window: Objeto que contiene a la ventana principal</span>
 <span class="sd">        :type window: object</span>
@@ -1102,11 +1102,11 @@
 
 <div class="viewcode-block" id="FuzzyController.calcular_valor"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FuzzyController.calcular_valor">[documentos]</a>    <span class="k">def</span> <span class="nf">calcular_valor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Funcion para calcular las salidas del controlador dado sus entradas, esta funcion se utiliza en la funcionalidad de simulacion de sistemas de control</span>
+<span class="sd">        Función para calcular las salidas del controlador dado sus entradas, esta función se utiliza en la funcionalidad de simulación de sistemas de control</span>
 <span class="sd">        </span>
 <span class="sd">        :param inputs: Lista con los valores de entrada</span>
 <span class="sd">        :type inputs: list</span>
-<span class="sd">        :param outputs: Lista vacia del tamaño del numero de salidas</span>
+<span class="sd">        :param outputs: Lista vaciá del tamaño del numero de salidas</span>
 <span class="sd">        :type outputs: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1142,11 +1142,11 @@
 <span class="sd">        :param file: Dirección del archivo a cargar o exportar</span>
 <span class="sd">        :type file: str</span>
 <span class="sd">        :param inputlist: Lista de variables de entrada, defaults to None</span>
-<span class="sd">        :type inputlist: list, optional</span>
+<span class="sd">        :type inputlist: list, opcional</span>
 <span class="sd">        :param OutputList: Lista de variables de entrada, defaults to None</span>
-<span class="sd">        :type OutputList: list, optional</span>
+<span class="sd">        :type OutputList: list, opcional</span>
 <span class="sd">        :param RuleEtiquetas: Lista con la información necesaria para crear las reglas, defaults to None</span>
-<span class="sd">        :type RuleEtiquetas: list, optional</span>
+<span class="sd">        :type RuleEtiquetas: list, opcional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Cargar archivo .fis</span>
@@ -1169,7 +1169,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">json_to_fis</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FISParser.get_system"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FISParser.get_system">[documentos]</a>    <span class="k">def</span> <span class="nf">get_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Funcion tomada de yapflm (Yet Another Python Fuzzy Logic Module) &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Función tomada de yapflm (Yet Another Python Fuzzy Logic Module) &quot;&quot;&quot;</span>
 
         <span class="n">end_sysblock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawlines</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">systemblock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawlines</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">end_sysblock</span><span class="p">]</span>
@@ -1182,7 +1182,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">systemList</span> <span class="o">=</span> <span class="n">fissys</span></div>
 
 <div class="viewcode-block" id="FISParser.get_var"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FISParser.get_var">[documentos]</a>    <span class="k">def</span> <span class="nf">get_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vartype</span><span class="p">,</span> <span class="n">varnum</span><span class="p">,</span> <span class="n">start_line</span><span class="p">,</span> <span class="n">end_line</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Funcion tomada de yapflm (Yet Another Python Fuzzy Logic Module) &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Función tomada de yapflm (Yet Another Python Fuzzy Logic Module) &quot;&quot;&quot;</span>
 
         <span class="n">varblock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawlines</span><span class="p">[</span><span class="n">start_line</span><span class="p">:</span><span class="n">end_line</span><span class="p">]</span>
         <span class="n">fisargs</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">parse</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{arg}</span><span class="s1">=</span><span class="si">{val}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">varblock</span><span class="p">)</span>

@@ -1,5 +1,5 @@
 """ 
-Archivo para definir las clases MlpWidget, MlpWidgetNoToolbar, MlpWidgetSubplot y MlpWidget3D, estas clases son utilizadas por qtdesigner para promocionar un QGraphicsView a las clases aca definidas en orden de mostrar las graficas en un QGraphicsView
+Archivo para definir las clases MlpWidget, MlpWidgetNoToolbar, MlpWidgetSubplot y MlpWidget3D, estas clases son utilizadas por qtdesigner para promocionar un QGraphicsView a las clases aca definidas en orden de mostrar las gráficas en un QGraphicsView
 """
 
 
@@ -13,7 +13,7 @@ from matplotlib.figure import Figure
 
 class MlpWidget(QGraphicsView):
     """
-    Clase basica para mostrar graficas utilizando Matplotlib
+    Clase básica para mostrar gráficas utilizando Matplotlib
     
     :param QGraphicsView: Clase base del QGraphicsView
     :type QGraphicsView: objectType
@@ -42,7 +42,7 @@ class MlpWidget(QGraphicsView):
 
 class MlpWidgetNoToolbar(QGraphicsView):
     """
-    Clase para mostrar graficas utilizando Matplotlib sin el toolbar
+    Clase para mostrar gráficas utilizando Matplotlib sin el toolbar
     
     :param QGraphicsView: Clase base del QGraphicsView
     :type QGraphicsView: objectType
@@ -63,7 +63,7 @@ class MlpWidgetNoToolbar(QGraphicsView):
 
 class MlpWidgetSubplot(QGraphicsView):
     """
-    Clase para mostrar graficas en subplots utilizando Matplotlib
+    Clase para mostrar gráficas en subplots utilizando Matplotlib
     
     :param QGraphicsView: Clase base del QGraphicsView
     :type QGraphicsView: objectType
@@ -88,7 +88,7 @@ class MlpWidgetSubplot(QGraphicsView):
 
 class MlpWidget3D(QGraphicsView):
     """
-    Clase basica para mostrar graficas en 3D utilizando Matplotlib
+    Clase básica para mostrar gráficas en 3D utilizando Matplotlib
     
     :param QGraphicsView: Clase base del QGraphicsView
     :type QGraphicsView: objectType

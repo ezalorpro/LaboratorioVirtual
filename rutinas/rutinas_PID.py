@@ -12,7 +12,7 @@ import json
 
 def system_creator_tf(self, numerador, denominador):
     """
-    Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia
+    Función para la creación del sistema a partir de los coeficientes del numerador y del denominador de la función de transferencia.
     
     :param numerador: Coeficientes del numerador
     :type numerador: list
@@ -80,8 +80,7 @@ def system_creator_tf(self, numerador, denominador):
 
 def system_creator_ss(self, A, B, C, D):
     """
-    Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y
-     la matriz de transmision directa la ecuacion de espacio de estados
+    Función para la creación del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmisión directa.
     
     :param A: Matriz de estados
     :type A: list
@@ -89,7 +88,7 @@ def system_creator_ss(self, A, B, C, D):
     :type B: list
     :param C: Matriz de salida
     :type C: list
-    :param D: Matriz de transmision directa
+    :param D: Matriz de transmisión directa
     :type D: list
     """
 
@@ -158,7 +157,7 @@ def system_creator_ss(self, A, B, C, D):
 
 def system_creator_tf_tuning(self, numerador, denominador):
     """
-    Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia, adicionalmente se realiza el auto tuning utilizando el metodo escojido por le usuario
+    Función para la creación del sistema a partir de los coeficientes del numerador y del denominador de la función de transferencia, adicionalmente se realiza el auto tuning utilizando el método escogido por el usuario.
     
     :param A: Matriz de estados
     :type A: list
@@ -166,7 +165,7 @@ def system_creator_tf_tuning(self, numerador, denominador):
     :type B: list
     :param C: Matriz de salida
     :type C: list
-    :param D: Matriz de transmision directa
+    :param D: Matriz de transmisión directa
     :type D: list
     """
 
@@ -231,7 +230,7 @@ def system_creator_tf_tuning(self, numerador, denominador):
 
 def system_creator_ss_tuning(self, A, B, C, D):
     """
-    Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmision directa la ecuacion de espacio de estados, adicionalmente se realiza el auto tuning utilizando el metodo escojido por le usuario
+    Función para la creación del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmisión directa, adicionalmente se realiza el auto tuning utilizando el método escogido por el usuario.
     
     :param A: Matriz de estados
     :type A: list
@@ -239,7 +238,7 @@ def system_creator_ss_tuning(self, A, B, C, D):
     :type B: list
     :param C: Matriz de salida
     :type C: list
-    :param D: Matriz de transmision directa
+    :param D: Matriz de transmisión directa
     :type D: list
     """
 
@@ -306,7 +305,7 @@ def system_creator_ss_tuning(self, A, B, C, D):
 
 def model_method(self, t, y, dc_gain):
     """
-    Funcion para obtener los parametros del modelo de primer orden de un sistema a partir de su respuesta escalon
+    Función para obtener los parametros del modelo de primer orden de un sistema a partir de su respuesta escalón.
     
     :param t: Vector de tiempo
     :type t: numpyArray
@@ -342,7 +341,7 @@ def model_method(self, t, y, dc_gain):
 
 def auto_tuning_method(self, k_proceso, tau, alpha, metodo):
     """
-    Funcion para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalon, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalon en lazo abierto
+    Función para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalón, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalón en lazo abierto.
     
     :param k_proceso: Ganancia del proceso
     :type k_proceso: float
@@ -350,7 +349,7 @@ def auto_tuning_method(self, k_proceso, tau, alpha, metodo):
     :type tau: float
     :param alpha: Tiempo muerto o delay del proceso
     :type alpha: float
-    :param metodo: Metodo a utilizar
+    :param metodo: Método a utilizar
     :type metodo: str
     """
 
@@ -436,7 +435,7 @@ def auto_tuning_method(self, k_proceso, tau, alpha, metodo):
 
 def rutina_step_plot(self, system, T, kp, ki, kd):
     """
-    Funcion para obtener la respuesta escalon del sistema en lazo cerrado en combinacion con un controlador PID y su respectiva graficacion
+    Función para obtener la respuesta escalón del sistema en lazo cerrado en combinación con un controlador PID y su respectiva graficacion.
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -452,7 +451,7 @@ def rutina_step_plot(self, system, T, kp, ki, kd):
 
     U = np.ones_like(T)
 
-    # Discriminacion entre continue y discreto, con delay o sin delay, delay realizado con pade
+    # Discriminación entre continue y discreto, con delay o sin delay, delay realizado con pade
     if ctrl.isdtime(system, strict=True):
         t, y, _ = ctrl.forced_response(system, T, U)
     elif (
@@ -496,7 +495,7 @@ def rutina_step_plot(self, system, T, kp, ki, kd):
 
 def rutina_system_info(self, system, T, y, kp=0, ki=0, kd=0, autotuning=False):
     """
-    Funcion para mostrar los resultados obtenidos de los calculos en un TextEdit
+    Función para mostrar los resultados obtenidos de los calculos en un TextEdit
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -505,13 +504,13 @@ def rutina_system_info(self, system, T, y, kp=0, ki=0, kd=0, autotuning=False):
     :param y: Vector de respuesta
     :type y: numpyArray
     :param kp: Ganancia proporcional, defaults to 0
-    :type kp: float, optional
+    :type kp: float, opcional
     :param ki: Ganancia integral, defaults to 0
-    :type ki: float, optional
+    :type ki: float, opcional
     :param kd: Ganancia derivativa, defaults to 0
-    :type kd: float, optional
-    :param autotuning: Bandera para señar si es o no una operacion con auto tunning, defaults to False
-    :type autotuning: bool, optional
+    :type kd: float, opcional
+    :param autotuning: Bandera para señalar si es o no una operación con auto tunning, defaults to False
+    :type autotuning: bool, opcional
     """
 
     # Informacion del step

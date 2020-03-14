@@ -145,11 +145,11 @@ def update_definicionmf(self, old_mf, definicion, new_mf):
 
 def validacion_mf(self, _, mf):
     """
-    Funcion para validar las definiciones ingresadas por el usuario
+    Función para validar las definiciones ingresadas por el usuario
     
-    :param _: Definicion
+    :param _: Definición
     :type _: list
-    :param mf: Nombre de la funcion de membresia a validar
+    :param mf: Nombre de la función de membresía a validar
     :type mf: str
     """
     
@@ -157,13 +157,13 @@ def validacion_mf(self, _, mf):
         if not len(_) < 3 and not len(_) > 3:
             if not _[0] <= _[1] or not _[1] <= _[2]:
                 self.error_dialog.setInformativeText(
-                    "Formato de definicion invalido para la funcion de membresia: " + mf +
+                    "Formato de definición invalido para la función de membresía: " + mf +
                     "\nDebe ser: a <= b <= c")
                 self.error_dialog.exec_()
                 raise AssertionError
         else:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 3 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -172,13 +172,13 @@ def validacion_mf(self, _, mf):
         if not len(_) < 4 and not len(_) > 4:
             if not _[0] <= _[1] or not _[1] <= _[2] or not _[2] <= _[3]:
                 self.error_dialog.setInformativeText(
-                    "Formato de definicion invalido para la funcion de membresia: " + mf +
+                    "Formato de definición invalido para la función de membresía: " + mf +
                     "\nDebe ser: a <= b <= c <= d")
                 self.error_dialog.exec_()
                 raise AssertionError
         else:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 4 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -186,7 +186,7 @@ def validacion_mf(self, _, mf):
     if mf == 'gaussmf':
         if len(_) < 2 or len(_) > 2:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 2 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -195,13 +195,13 @@ def validacion_mf(self, _, mf):
         if not len(_) < 4 and not len(_) > 4:
             if not _[1] <= _[3]:
                 self.error_dialog.setInformativeText(
-                    "Formato de definicion invalido para la funcion de membresia: " + mf +
+                    "Formato de definición invalido para la función de membresía: " + mf +
                     "\nDebe ser: media1 <= media2")
                 self.error_dialog.exec_()
                 raise AssertionError
         else:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 4 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -210,13 +210,13 @@ def validacion_mf(self, _, mf):
         if not len(_) < 2 and not len(_) > 2:
             if not _[0] <= _[1]:
                 self.error_dialog.setInformativeText(
-                    "Formato de definicion invalido para la funcion de membresia: " + mf +
+                    "Formato de definición invalido para la función de membresía: " + mf +
                     "\nDebe ser: a <= b")
                 self.error_dialog.exec_()
                 raise AssertionError
         else:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 2 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -224,7 +224,7 @@ def validacion_mf(self, _, mf):
     if mf == 'sigmf':
         if len(_) < 2 or len(_) > 2:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 2 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -232,7 +232,7 @@ def validacion_mf(self, _, mf):
     if mf == 'dsigmf':
         if len(_) < 4 or len(_) > 4:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 4 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -240,7 +240,7 @@ def validacion_mf(self, _, mf):
     if mf == 'psigmf':
         if len(_) < 4 or len(_) > 4:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 4 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -249,13 +249,13 @@ def validacion_mf(self, _, mf):
         if not len(_) < 4 and not len(_) > 4:
             if not _[0] <= _[1] or not _[1] <= _[2] or not _[2] <= _[3]:
                 self.error_dialog.setInformativeText(
-                    "Formato de definicion invalido para la funcion de membresia: " + mf +
+                    "Formato de definición invalido para la función de membresía: " + mf +
                     "\nDebe ser: a <= b <= c <= d")
                 self.error_dialog.exec_()
                 raise AssertionError
         else:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 4 valores")
             self.error_dialog.exec_()
             raise AssertionError
@@ -263,7 +263,7 @@ def validacion_mf(self, _, mf):
     if mf == 'gbellmf':
         if len(_) < 3 or len(_) > 3:
             self.error_dialog.setInformativeText(
-                "Formato de definicion invalido para la funcion de membresia: " + mf +
+                "Formato de definición invalido para la función de membresía: " + mf +
                 "\nDebe poseer 3 valores")
             self.error_dialog.exec_()
             raise AssertionError

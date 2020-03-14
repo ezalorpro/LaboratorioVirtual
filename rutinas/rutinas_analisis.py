@@ -14,7 +14,7 @@ import json
 
 def system_creator_tf(self, numerador, denominador):
     """
-    Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia
+    Función para la creación del sistema a partir de los coeficientes del numerador y del denominador de la función de transferencia.
     
     :param numerador: Coeficientes del numerador
     :type numerador: list
@@ -59,7 +59,7 @@ def system_creator_tf(self, numerador, denominador):
 
 def system_creator_ss(self, A, B, C, D):
     """
-    Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmision directa la ecuacion de espacio de estados
+    Función para la creación del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmisión directa la ecuación de espacio de estados.
     
     :param A: Matriz de estados
     :type A: list
@@ -67,7 +67,7 @@ def system_creator_ss(self, A, B, C, D):
     :type B: list
     :param C: Matriz de salida
     :type C: list
-    :param D: Matriz de transmision directa
+    :param D: Matriz de transmisión directa
     :type D: list
     """
 
@@ -113,7 +113,7 @@ def system_creator_ss(self, A, B, C, D):
 
 def rutina_step_plot(self, system, T):
     """
-    Funcion para obtener la respuesta escalon del sistema y su respectiva graficacion
+    Función para obtener la respuesta escalón del sistema y su respectiva graficacion.
     
     
     :param system: Representacion del sistema
@@ -155,7 +155,7 @@ def rutina_step_plot(self, system, T):
 
 def rutina_impulse_plot(self, system, T):
     """
-    Funcion para obtener la respuesta impulso del sistema y su respectiva graficacion
+    Función para obtener la respuesta impulso del sistema y su respectiva graficacion.
     
     
     :param system: Representacion del sistema
@@ -211,7 +211,7 @@ def rutina_impulse_plot(self, system, T):
 
 def rutina_bode_plot(self, system):
     """
-    Funcion para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de bode
+    Función para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de bode.
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -222,7 +222,7 @@ def rutina_bode_plot(self, system):
     else:
         mag, phase, omega = ctrl.bode(system)
 
-    # Grafica de amplitud en dB
+    # Gráfica de amplitud en dB
     bodeDb = 20 * np.log10(mag)
     self.main.BodeGraphicsView1.canvas.axes1.clear()
     self.main.BodeGraphicsView1.canvas.axes1.semilogx(omega, bodeDb, "tab:blue")
@@ -232,11 +232,11 @@ def rutina_bode_plot(self, system):
         mticker.FormatStrFormatter("%.1f dB")
     )
 
-    # Transformacion de grados mayores a 180
+    # Transformación de grados mayores a 180
     if np.any((phase * 180.0 / np.pi) >= 180):
         phase = phase - 2*np.pi
 
-    # Grafica de fase en grados
+    # Gráfica de fase en grados
     self.main.BodeGraphicsView1.canvas.axes2.clear()
     self.main.BodeGraphicsView1.canvas.axes2.semilogx(omega,
                                                       phase * 180.0 / np.pi,
@@ -248,7 +248,7 @@ def rutina_bode_plot(self, system):
     )
     self.main.BodeGraphicsView1.canvas.axes2.set_xlabel("rad/s")
 
-    # Calculo y graficacion del margen de ganancia y de fase
+    # Cálculo y graficacion del margen de ganancia y de fase
     gm, pm, wg, wp = margenes_ganancias(self, system, mag, phase, omega)
 
     self.main.BodeGraphicsView1.canvas.axes1.axhline(
@@ -287,7 +287,7 @@ def rutina_bode_plot(self, system):
 
 def rutina_nyquist_plot(self, system):
     """
-    Funcion para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de Nyquist
+    Función para obtener la respuesta en frecuencia del sistema y su respectiva graficacion en diagrama de Nyquist.
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -301,7 +301,7 @@ def rutina_nyquist_plot(self, system):
     self.main.NyquistGraphicsView1.canvas.axes.cla()
     self.main.NyquistGraphicsView1.canvas.axes.plot([-1], [0], "r+")
 
-    # Flechas para la direccion
+    # Flechas para la dirección
     self.main.NyquistGraphicsView1.canvas.axes.arrow(
         real[0],
         imag[0],
@@ -349,7 +349,7 @@ def rutina_nyquist_plot(self, system):
 
 def rutina_root_locus_plot(self, system):
     """
-    Funcion para obtener el lugar de la raices del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se moodifico la funcion root_locus para poder enviar el axis y la figura
+    Función para obtener el lugar de la raíces del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se modificó la función root_locus para poder enviar el axis y la figura.
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -357,7 +357,7 @@ def rutina_root_locus_plot(self, system):
 
     self.main.rlocusGraphicsView1.canvas.axes.cla()
 
-    # Distincion entre discreto y continuo, con delay y sin delay.
+    # Distinción entre discreto y continuo, con delay y sin delay.
     if not ctrl.isdtime(system, strict=True):
         if self.main.tfdelaycheckBox1.isChecked(
         ) and self.main.AnalisisstackedWidget.currentIndex() == 0:
@@ -392,7 +392,7 @@ def rutina_root_locus_plot(self, system):
 
 def rutina_nichols_plot(self, system):
     """
-    Funcion para obtener el diagram de nichols del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se moodifico la funcion nichols_plot para poder enviar el axis y la figura, adicionalmente se realizaron algunas modificaciones para una mejor presentacion de la grafica
+    Función para obtener el diagrama de nichols del sistema y su respectiva graficacion, la graficacion se realizo de forma interna en la libreria de control, para esto se modificó la función nichols_plot para poder enviar el axis y la figura, adicionalmente se realizaron algunas modificaciones para una mejor presentación de la gráfica.
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -451,7 +451,7 @@ def rutina_nichols_plot(self, system):
 
 def rutina_system_info(self, system, T, mag, phase, omega):
     """
-    Funcion para mostrar los resultados obtenidos de los calculos en un TextEdit
+    Función para mostrar los resultados obtenidos de los calculos en un TextEdit.
     
     :param system: Representacion del sistema
     :type system: LTI
@@ -465,7 +465,7 @@ def rutina_system_info(self, system, T, mag, phase, omega):
     :type omega: numpyArray
     """
 
-    # Informacion del step
+    # Información del step
     try:
         info = ctrl.step_info(system, T)
     except:
@@ -508,7 +508,7 @@ def rutina_system_info(self, system, T, mag, phase, omega):
     dcgain = ctrl.dcgain(system)
     Datos += f"Ganancia DC: {real(dcgain):5.3f}\n"
 
-    # Calculo del margen de ganancia y de fase
+    # Cálculo del margen de ganancia y de fase
     gm, pm, wg, wp = margenes_ganancias(self, system, mag, phase, omega)
 
     if not gm == np.infty:
@@ -546,7 +546,7 @@ def rutina_system_info(self, system, T, mag, phase, omega):
 
 def margenes_ganancias(self, system, mag, phase, omega):
     """
-    Función para obtener el margen de ganancia y el margen de fase
+    Función para obtener el margen de ganancia y el margen de fase.
     
     :param system: Representación del sistema
     :type system: LTI
@@ -575,7 +575,7 @@ def margenes_ganancias(self, system, mag, phase, omega):
     indGain = np.diff(1 * (degPhase > -180) != 0)
     indGain = indGain * crossHack
 
-    # Calculo de la respuesta en frecuencia para omega = 0 rad/s y pi en caso de ser discreto
+    # Cálculo de la respuesta en frecuencia para omega = 0 rad/s y pi en caso de ser discreto
     if ctrl.isdtime(system, strict=True):
         zero_freq_response = ctrl.evalfr(system, 1)
         

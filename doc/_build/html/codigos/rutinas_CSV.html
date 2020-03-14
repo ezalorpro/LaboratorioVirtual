@@ -172,17 +172,17 @@
             
   <div class="section" id="module-rutinas_CSV">
 <span id="archivo-de-rutinas-para-la-funcion-de-entonacion-de-pid-utilizando-data-de-un-csv"></span><h1><span class="section-number">3.2.2.2. </span>Archivo de rutinas para la función de entonación de PID utilizando data de un CSV<a class="headerlink" href="#module-rutinas_CSV" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Archivo que contiene todas las rutinas necesarias para la funcionalidad de identificacion de modelo y tunning con csv</p>
+<p>Archivo que contiene todas las rutinas necesarias para la funcionalidad de identificación de modelo y tunning con csv</p>
 <dl class="function">
 <dt id="rutinas_CSV.actualizar_Datos">
 <code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">actualizar_Datos</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">Kc</em>, <em class="sig-param">t0</em>, <em class="sig-param">t1</em>, <em class="sig-param">t2</em>, <em class="sig-param">kp</em>, <em class="sig-param">ki</em>, <em class="sig-param">kd</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#actualizar_Datos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.actualizar_Datos" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Funcion para mostrar los resultados obtenidos del modelo en un TextEdit</p>
+<dd><p>Función para mostrar los resultados obtenidos del modelo en un TextEdit</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Kc</strong> (<em>float</em>) – Ganancia del proceso</p></li>
-<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalon</p></li>
-<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalon</p></li>
+<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalón</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalón</p></li>
 <li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
 <li><p><strong>kp</strong> (<em>float</em>) – Ganancia proporcional</p></li>
 <li><p><strong>ki</strong> (<em>float</em>) – Ganancia integral</p></li>
@@ -195,14 +195,14 @@
 <dl class="function">
 <dt id="rutinas_CSV.auto_tuning_method_csv">
 <code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">auto_tuning_method_csv</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">k_proceso</em>, <em class="sig-param">tau</em>, <em class="sig-param">alpha</em>, <em class="sig-param">metodo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#auto_tuning_method_csv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.auto_tuning_method_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Funcion para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalon, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalon en lazo abierto</p>
+<dd><p>Función para obtener las ganancias del controlador PID a partir de los parametros del modelo de primer orden obtenidos de una respuesta escalón, las formulas son las dadas por Ziegler-Nichols y Cohen-Coon para una respuesta escalón en lazo abierto</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>k_proceso</strong> (<em>float</em>) – Ganancia del proceso</p></li>
 <li><p><strong>tau</strong> (<em>float</em>) – Constante de tiempo del proceso</p></li>
 <li><p><strong>alpha</strong> (<em>float</em>) – Tiempo muerto o delay del proceso</p></li>
-<li><p><strong>metodo</strong> (<em>str</em>) – Metodo a utilizar</p></li>
+<li><p><strong>metodo</strong> (<em>str</em>) – Método a utilizar</p></li>
 </ul>
 </dd>
 </dl>
@@ -211,7 +211,7 @@
 <dl class="function">
 <dt id="rutinas_CSV.calcular_modelo">
 <code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">calcular_modelo</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">dict_data</em>, <em class="sig-param">indexTime</em>, <em class="sig-param">indexVp</em>, <em class="sig-param">indexEFC</em>, <em class="sig-param">MinVP</em>, <em class="sig-param">MaxVP</em>, <em class="sig-param">MinEFC</em>, <em class="sig-param">MaxEFC</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#calcular_modelo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.calcular_modelo" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Fucion para calcular los parametros del modelo de primer orden</p>
+<dd><p>Función para calcular los parametros del modelo de primer orden</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><ul class="simple">
@@ -231,17 +231,17 @@
 <dl class="function">
 <dt id="rutinas_CSV.calculos_manual">
 <code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">calculos_manual</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">GraphObjets</em>, <em class="sig-param">Kc</em>, <em class="sig-param">t0</em>, <em class="sig-param">t1</em>, <em class="sig-param">t2</em>, <em class="sig-param">slop</em>, <em class="sig-param">y1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#calculos_manual"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.calculos_manual" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Funcion para recalcular el controlador PID a partir de los datos del modelo de primer orden con el nueto tiempo t1, ademas, se grafica la data del csv junto con algunos parametros de la identificacion del modelo y la nueva recta</p>
+<dd><p>Función para recalcular el controlador PID a partir de los datos del modelo de primer orden con el nuevo tiempo t1, ademas, se grafica la data del csv junto con algunos parametros de la identificación del modelo y la nueva recta</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>GraphObjets</strong> (<em>list</em>) – Lista de objetos de graficacion</p></li>
 <li><p><strong>Kc</strong> (<em>float</em>) – Ganancia del proceso</p></li>
-<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalon</p></li>
-<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalon</p></li>
+<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalón</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalón</p></li>
 <li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
-<li><p><strong>slop</strong> (<em>float</em>) – Pendiente de la recta de identificacion</p></li>
-<li><p><strong>y1</strong> (<em>float</em>) – Punto y1 de la recta de identifiacion, en este punto se encuentra el mayor cambio respecto al tiempo</p></li>
+<li><p><strong>slop</strong> (<em>float</em>) – Pendiente de la recta de identificación</p></li>
+<li><p><strong>y1</strong> (<em>float</em>) – Punto y1 de la recta de identificación, en este punto se encuentra el mayor cambio respecto al tiempo</p></li>
 </ul>
 </dd>
 </dl>
@@ -250,17 +250,17 @@
 <dl class="function">
 <dt id="rutinas_CSV.entonar_y_graficar">
 <code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">entonar_y_graficar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">dict_data</em>, <em class="sig-param">Kc</em>, <em class="sig-param">tau</em>, <em class="sig-param">y1</em>, <em class="sig-param">y2</em>, <em class="sig-param">t0</em>, <em class="sig-param">t1</em>, <em class="sig-param">t2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#entonar_y_graficar"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.entonar_y_graficar" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Funcion para calcular el controlador PID a partir de los datos del modelo de primer orden, ademas, se grafica la data del csv junto con algunos parametros de la identificacion del modelo</p>
+<dd><p>Función para calcular el controlador PID a partir de los datos del modelo de primer orden, ademas, se graficá la data del csv junto con algunos parametros de la identificación del modelo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dict_data</strong> (<em>dict</em>) – Diccionario con la data procesada del csv</p></li>
 <li><p><strong>Kc</strong> (<em>float</em>) – Ganancia del proceso</p></li>
 <li><p><strong>tau</strong> (<em>float</em>) – Constante de tiempo del proceso</p></li>
-<li><p><strong>y1</strong> (<em>float</em>) – Punto y1 de la recta de identifiacion, en este punto se encuentra el mayor cambio respecto al tiempo</p></li>
-<li><p><strong>y2</strong> (<em>float</em>) – Punto y2 de la recta de identificacion</p></li>
-<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalon</p></li>
-<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalon</p></li>
+<li><p><strong>y1</strong> (<em>float</em>) – Punto y1 de la recta de identificación, en este punto se encuentra el mayor cambio respecto al tiempo</p></li>
+<li><p><strong>y2</strong> (<em>float</em>) – Punto y2 de la recta de identificación</p></li>
+<li><p><strong>t0</strong> (<em>float</em>) – Tiempo del inicio del escalón</p></li>
+<li><p><strong>t1</strong> (<em>float</em>) – Tiempo del inicio de la respuesta del proceso ante el escalón</p></li>
 <li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
 </ul>
 </dd>
@@ -270,11 +270,11 @@
 <dl class="function">
 <dt id="rutinas_CSV.procesar_csv">
 <code class="sig-prename descclassname">rutinas_CSV.</code><code class="sig-name descname">procesar_csv</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">csv_data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_CSV.html#procesar_csv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_CSV.procesar_csv" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Funcion para procesar la data del archivo csv, se crea una nueva data en un diccionario, se normalizan las escalas con el span y se transforma el tiempo a segundos. Para la transformacion de tiempo a segundos los formatos aceptados son</p>
+<dd><p>Función para procesar la data del archivo csv, se crea una nueva data en un diccionario, se normalizan las escalas con el span y se transforma el tiempo a segundos. Para la transformación de tiempo a segundos los formatos aceptados son:</p>
 <p>hh:mm:ss</p>
 <p>mm:ss</p>
 <p>ss</p>
-<p>En cualquiera de los casos se llevara a segundos y se restara el tiempo inicial para que empiece en cero</p>
+<p>En cualquiera de los casos se llevara a segundos y se restara el tiempo inicial para que empiece en cero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><p><strong>csv_data</strong> (<em>numpyArray</em>) – Data del csv</p>

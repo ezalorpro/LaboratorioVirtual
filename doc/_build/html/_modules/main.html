@@ -147,7 +147,7 @@
            <div itemprop="articleBody">
             
   <h1>Código fuente para main</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot; Archivo principal, en orden de ejecutar la aplicacion, este es el archivo a ejecutar &quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot; Archivo principal, en orden de ejecutar la aplicación, este es el archivo a ejecutar &quot;&quot;&quot;</span>
 
 
 <span class="kn">from</span> <span class="nn">handlers.simulacionHandler</span> <span class="kn">import</span> <span class="n">SimulacionHandler</span>
@@ -162,7 +162,7 @@
 
 <div class="viewcode-block" id="MainWindow"><a class="viewcode-back" href="../codigos/Principal.html#main.MainWindow">[documentos]</a><span class="k">class</span> <span class="nc">MainWindow</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">,</span> <span class="n">Ui_MainWindow</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definicion de toda la interfaz grafica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz grafica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les envia self y se recibe self y se sigue tratando como si fuera parte de la clase.</span>
+<span class="sd">    Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definición de toda la interfaz gráfica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz gráfica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les enviá self y se recibe self y se sigue tratando como si fuera parte de la clase.</span>
 <span class="sd">    </span>
 <span class="sd">    :param QtWidgets: Clase base de ventana ofrecida por Qt</span>
 <span class="sd">    :type QtWidgets: ObjectType</span>
@@ -175,7 +175,7 @@
 <span class="sd">        Constructor de la clase, aca se inicializan los objetos de las clases heredadas y se hacen los llamados a los Handlers</span>
 <span class="sd">        </span>
 <span class="sd">        :param parent: Sin efecto, defaults to None</span>
-<span class="sd">        :type parent: NoneType, optional</span>
+<span class="sd">        :type parent: NoneType, opcional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">MainWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -185,7 +185,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span>
 
-        <span class="c1"># Estableciendo del icono de la aplicacion</span>
+        <span class="c1"># Estableciendo del icono de la aplicación</span>
         <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">()</span>
         <span class="n">image_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_path</span><span class="p">(</span><span class="s2">&quot;icono.ico&quot;</span><span class="p">)</span>
         <span class="n">icon</span><span class="o">.</span><span class="n">addPixmap</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">image_path</span><span class="p">),</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="o">.</span><span class="n">Off</span><span class="p">)</span>
@@ -201,13 +201,13 @@
         <span class="n">AnalisisHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># Handler para la pestaña de analisis de sistemas de control</span>
         <span class="n">TuningHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># Handler para la pestaña de Tunning</span>
         <span class="n">FuzzyHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># Handler para la pestaña de diseño de controladores difusos</span>
-        <span class="n">SimulacionHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># Handler para la pestaña de simulacion de sistemas de control</span></div>
+        <span class="n">SimulacionHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># Handler para la pestaña de simulación de sistemas de control</span></div>
 
 <div class="viewcode-block" id="MainWindow.resource_path"><a class="viewcode-back" href="../codigos/Principal.html#main.MainWindow.resource_path">[documentos]</a>    <span class="k">def</span> <span class="nf">resource_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Funcion para generar direcciones absolutas a partir de direcciones relativas</span>
 <span class="sd">        </span>
-<span class="sd">        :param relative_path: direccion relativa</span>
+<span class="sd">        :param relative_path: dirección relativa</span>
 <span class="sd">        :type relative_path: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

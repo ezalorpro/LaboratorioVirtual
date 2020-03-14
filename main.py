@@ -1,4 +1,4 @@
-""" Archivo principal, en orden de ejecutar la aplicacion, este es el archivo a ejecutar """
+""" Archivo principal, en orden de ejecutar la aplicación, este es el archivo a ejecutar """
 
 
 from handlers.simulacionHandler import SimulacionHandler
@@ -13,7 +13,7 @@ import os
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     """
-    Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definicion de toda la interfaz grafica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz grafica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les envia self y se recibe self y se sigue tratando como si fuera parte de la clase.
+    Clase principal del programa, esta clase hereda de QMainWindow y Ui_MainWindow, la primera es la clase base de ventanas que ofrece Qt mientras que la segunda es la clase que se crea a partir de qtdesigner y quien posee toda la definición de toda la interfaz gráfica. Desde aca se ejecutan los archivos Handler, quienes representan los enlaces entre las rutinas y la interfaz gráfica de cada una de las funciones del laboratorio virtual, estos Handlers se tratan como si fueran una extension de esta clase, por tanto, se les enviá self y se recibe self y se sigue tratando como si fuera parte de la clase.
     
     :param QtWidgets: Clase base de ventana ofrecida por Qt
     :type QtWidgets: ObjectType
@@ -26,7 +26,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         Constructor de la clase, aca se inicializan los objetos de las clases heredadas y se hacen los llamados a los Handlers
         
         :param parent: Sin efecto, defaults to None
-        :type parent: NoneType, optional
+        :type parent: NoneType, opcional
         """
 
         super(MainWindow, self).__init__(parent)
@@ -36,7 +36,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.main.setupUi(self)
         self.showMaximized()
 
-        # Estableciendo del icono de la aplicacion
+        # Estableciendo del icono de la aplicación
         icon = QtGui.QIcon()
         image_path = self.resource_path("icono.ico")
         icon.addPixmap(QtGui.QPixmap(image_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -52,13 +52,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         AnalisisHandler(self)  # Handler para la pestaña de analisis de sistemas de control
         TuningHandler(self)  # Handler para la pestaña de Tunning
         FuzzyHandler(self)  # Handler para la pestaña de diseño de controladores difusos
-        SimulacionHandler(self)  # Handler para la pestaña de simulacion de sistemas de control
+        SimulacionHandler(self)  # Handler para la pestaña de simulación de sistemas de control
 
     def resource_path(self, relative_path):
         """
         Funcion para generar direcciones absolutas a partir de direcciones relativas
         
-        :param relative_path: direccion relativa
+        :param relative_path: dirección relativa
         :type relative_path: str
         """
 

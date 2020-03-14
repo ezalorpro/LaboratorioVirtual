@@ -294,11 +294,11 @@
 
 <div class="viewcode-block" id="validacion_mf"><a class="viewcode-back" href="../codigos/modificadorMF.html#modificadorMf.validacion_mf">[documentos]</a><span class="k">def</span> <span class="nf">validacion_mf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">mf</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para validar las definiciones ingresadas por el usuario</span>
+<span class="sd">    Función para validar las definiciones ingresadas por el usuario</span>
 <span class="sd">    </span>
-<span class="sd">    :param _: Definicion</span>
+<span class="sd">    :param _: Definición</span>
 <span class="sd">    :type _: list</span>
-<span class="sd">    :param mf: Nombre de la funcion de membresia a validar</span>
+<span class="sd">    :param mf: Nombre de la función de membresía a validar</span>
 <span class="sd">    :type mf: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
@@ -306,13 +306,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b &lt;= c&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
                 <span class="k">raise</span> <span class="ne">AssertionError</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 3 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -321,13 +321,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b &lt;= c &lt;= d&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
                 <span class="k">raise</span> <span class="ne">AssertionError</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -335,7 +335,7 @@
     <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;gaussmf&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 2 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -344,13 +344,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: media1 &lt;= media2&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
                 <span class="k">raise</span> <span class="ne">AssertionError</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -359,13 +359,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
                 <span class="k">raise</span> <span class="ne">AssertionError</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 2 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -373,7 +373,7 @@
     <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;sigmf&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 2 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -381,7 +381,7 @@
     <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;dsigmf&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -389,7 +389,7 @@
     <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;psigmf&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -398,13 +398,13 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">_</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                    <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                    <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe ser: a &lt;= b &lt;= c &lt;= d&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
                 <span class="k">raise</span> <span class="ne">AssertionError</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 4 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span>
@@ -412,7 +412,7 @@
     <span class="k">if</span> <span class="n">mf</span> <span class="o">==</span> <span class="s1">&#39;gbellmf&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">setInformativeText</span><span class="p">(</span>
-                <span class="s2">&quot;Formato de definicion invalido para la funcion de membresia: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
+                <span class="s2">&quot;Formato de definición invalido para la función de membresía: &quot;</span> <span class="o">+</span> <span class="n">mf</span> <span class="o">+</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Debe poseer 3 valores&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">error_dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span></div>

@@ -8,7 +8,7 @@ from PySide2 import QtCore, QtWidgets
 
 class FocusLineEdit(QtWidgets.QLineEdit):
     """ 
-    Clase basica para promocionar el lineEdit   
+    Clase básica para promocionar el lineEdit   
     
     :param QtWidgets: Clase base de los Widgets
     :type QtWidgets: objectType

@@ -148,7 +148,7 @@
             
   <h1>Código fuente para discreto_generator</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">Archivo para compilar las funciones encargadas de la simulacion en tiempo discreto utilizando numba, las funciones quedan guardadas en el archivo: discreto_sim.cp37-win32.pyd y pueden ser importadas desde el archivo como una funcion de un modulo</span>
+<span class="sd">Archivo para compilar las funciones encargadas de la simulación en tiempo discreto utilizando numba, las funciones quedan guardadas en el archivo: discreto_sim.cp37-win32.pyd y pueden ser importadas desde el archivo como una función de un modulo</span>
 <span class="sd">&quot;&quot;&quot;</span>
  
 
@@ -162,7 +162,7 @@
 <div class="viewcode-block" id="ss_discreta"><a class="viewcode-back" href="../codigos/discreto_generator.html#discreto_generator.ss_discreta">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;ss_discreta&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8[::1,:], f8[:,::1], f8[:,::1], f8[:,::1], f8[:,::1], f8, f8)&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">ss_discreta</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">inputValue</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para calcular la respuesta del sistema por medio de la representacion discreta de las ecuaciones de espacio de estados</span>
+<span class="sd">    Función para calcular la respuesta del sistema por medio de la representacion discreta de las ecuaciones de espacio de estados</span>
 <span class="sd">    </span>
 <span class="sd">    :param ss: Representacion del sistema</span>
 <span class="sd">    :type ss: LTI</span>
@@ -182,7 +182,7 @@
 <div class="viewcode-block" id="PID_discreto"><a class="viewcode-back" href="../codigos/discreto_generator.html#discreto_generator.PID_discreto">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;PID_discreto&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8, f8, f8, f8[::1], f8, f8, f8)&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">PID_discreto</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">s_integral</span><span class="p">,</span> <span class="n">error_anterior</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para calcular el PID en forma discreta</span>
+<span class="sd">    Función para calcular el PID en forma discreta</span>
 <span class="sd">    </span>
 <span class="sd">    :param error: Señal de error</span>
 <span class="sd">    :type error: float</span>
@@ -211,7 +211,7 @@
 <div class="viewcode-block" id="derivadas_discretas"><a class="viewcode-back" href="../codigos/discreto_generator.html#discreto_generator.derivadas_discretas">[documentos]</a><span class="nd">@cc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;derivadas_discretas&#39;</span><span class="p">,</span> <span class="s1">&#39;(f8, f8, f8[::1])&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">derivadas_discretas</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">error_anterior</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Funcion para calcular la derivada del error y la segunda derivada del error</span>
+<span class="sd">    Función para calcular la derivada del error y la segunda derivada del error</span>
 <span class="sd">    </span>
 <span class="sd">    :param error: Señal de error</span>
 <span class="sd">    :type error: float</span>

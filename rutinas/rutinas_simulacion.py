@@ -1,5 +1,5 @@
 """ 
-Archivo que contiene la clase SimpleThread la cual ejecuta la simulacion de sistemas de control en hilo diferente al principal, esto se realiza de esta forma debido a que la simulacion puede tardar en algunos casos varios segundos, de ejecutarse en el hilo principal presentaria un comportamiento de bloqueo en la ventana principal 
+Archivo que contiene la clase SimpleThread la cual ejecuta la simulación de sistemas de control en hilo diferente al principal, esto se realiza de esta forma debido a que la simulación puede tardar en algunos casos varios segundos, de ejecutarse en el hilo principal presentaria un comportamiento de bloqueo en la ventana principal 
 """
 
 
@@ -18,7 +18,7 @@ import json
 
 class SimpleThread(QtCore.QThread):
     """
-    Clase para realizar la simulacion de sistemas de control en un hilo diferente al principal
+    Clase para realizar la simulación de sistemas de control en un hilo diferente al principal
     
     :param QThread: Clase para crear un hilo paralelo al principal
     :type QThread: ObjectType
@@ -34,16 +34,16 @@ class SimpleThread(QtCore.QThread):
         
         :param window: Objeto que contiene a la ventana principal
         :type window: object
-        :param regresar: Funcion a la que regresa una vez terminada la simulacion, plot_final_results de simulacionHandler.py
+        :param regresar: Función a la que regresa una vez terminada la simulación, plot_final_results de simulacionHandler.py
         :type regresar: function
-        :param update_bar: Funcion para actualizar la barra de progreso, update_progresBar_function de simulacionHandler.py
+        :param update_bar: Función para actualizar la barra de progreso, update_progresBar_function de simulacionHandler.py
         :type update_bar: function
-        :param error_gui: Funcion para mostrar los errores ocurridos durante la simulacion, error_gui de simulacionHandler.py
+        :param error_gui: Función para mostrar los errores ocurridos durante la simulación, error_gui de simulacionHandler.py
         :type error_gui: function
-        :param list_info: Lista con toda la informacion necesaria
+        :param list_info: Lista con toda la información necesaria
         :type list_info: list
         :param parent: Sin efecto, defaults to None
-        :type parent: NoneType, optional
+        :type parent: NoneType, opcional
         """
 
         QtCore.QThread.__init__(self, parent)
@@ -72,13 +72,13 @@ class SimpleThread(QtCore.QThread):
         self.flag_filtro = self.list_info[13]
 
     def stop(self):
-        """ Funcion para detener el hilo """
+        """ Función para detener el hilo """
         self._isRunning = False
 
     def run(self):
-        """ Funcion a ejecutar cuando se hace el llamado a self.start() """
+        """ Función a ejecutar cuando se hace el llamado a self.start() """
 
-        # PID Clasico
+        # PID Clásico
         if self.esquema in [0]:
             try:
                 Tiempo, y, sc, u = self.run_pid()
@@ -108,7 +108,7 @@ class SimpleThread(QtCore.QThread):
                 self.stop()
 
     def run_pid(self):
-        """ Funcion para realizar la simulacion de sistemas de control con controlador PID clasico """
+        """ Función para realizar la simulación de sistemas de control con controlador PID clásico """
 
         # Captura de las ganancias
         if self.window.main.kpCheck.isChecked():
@@ -126,7 +126,7 @@ class SimpleThread(QtCore.QThread):
         else:
             kd = 0.0
 
-        # Transformando a ecuaciones de espacio de estados en caso de que sea funcion de transferencia
+        # Transformando a ecuaciones de espacio de estados en caso de que sea función de transferencia
         if isinstance(self.system, ctrl.TransferFunction):
             self.system = ctrl.tf2ss(self.system)
 
@@ -137,11 +137,11 @@ class SimpleThread(QtCore.QThread):
         tiempo = 0
 
         if isinstance(self.escalon, float):
-            # Escalon simple
+            # Escalón simple
             u = self.escalon
             max_tiempo = [self.Tiempo]
         else:
-            # Escalon avanzado
+            # Escalón avanzado
             it = iter(self.escalon)
             u_value = deque([0])
             max_tiempo = []
@@ -157,7 +157,7 @@ class SimpleThread(QtCore.QThread):
             else:
                 tiempo += max_tiempo[0] - 0.0000011
 
-        # Representacion del 20% de la simulacion
+        # Representacion del 20% de la simulación
         porcentajeBar = int(tiempo_total * 33 / 100)
         if porcentajeBar == 0:
             porcentajeBar = 1
@@ -168,7 +168,7 @@ class SimpleThread(QtCore.QThread):
         sc_t = 0.0  # Señal de control cambiante
         si_t = 0.0  # Acumulador de la señal integral
 
-        # Distincion entre continuo y discreto
+        # Distinción entre continuo y discreto
         if ctrl.isdtime(self.system, strict=True):
             error_a = np.asarray([0.0, 0.0])
             solve = ss_discreta
@@ -225,7 +225,7 @@ class SimpleThread(QtCore.QThread):
             salida2 = deque([0])
 
         if self.N*kd == 0:
-            # N debe mantenerce debido al algoritmo utilizado por la libreria de control para llevar de funcion
+            # N debe mantenerse debido al algoritmo utilizado por la libreria de control para llevar de función
 			# de transferencia a ecuaciones de espacio de estados
             # Controlador PID con la forma:
             #    PID = kp + ki/s + (kd*N*s/(s + N))
@@ -262,7 +262,7 @@ class SimpleThread(QtCore.QThread):
         Tiempo_list = [0]
         setpoint = [0]
 
-        # Inicio de la simulacion
+        # Inicio de la simulación
         while tiempo < tiempo_total:
 
             # Para alternar los valores del setpoint avanzado
@@ -275,7 +275,7 @@ class SimpleThread(QtCore.QThread):
             # Calculo del error
             error = u - salida[i]
             
-            # Distincion de PID entre continuo y discreto
+            # Distinción de PID entre continuo y discreto
             if ctrl.isdtime(self.system, strict=True):
                 sc_t, si_t, error_a = PIDf(error, h, si_t, error_a, kp, ki, kd)
             else:
@@ -292,7 +292,7 @@ class SimpleThread(QtCore.QThread):
             # Salida del sistema
             y, x = solve(*system, x, h, sc_t)
 
-            # Acumulacion de la señal de control
+            # Acumulación de la señal de control
             sc_f.append(sc_t)
 
             # En caso de que se habilite el sensor
@@ -300,17 +300,17 @@ class SimpleThread(QtCore.QThread):
                 salida2.append(y)
                 y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-            # Acumulacion de la salida
+            # Acumulación de la salida
             salida.append(y)
 
             # Actualizacion de la barra de progreso cada 20% de avance
             if int(tiempo) % porcentajeBar == 0:
                 self.update_progresBar.emit(self.window, int(tiempo) * 100 / tiempo_total)
 
-            # Acumulacion del setpoint
+            # Acumulación del setpoint
             setpoint.append(u)
 
-            # Acumulacion del tiempo
+            # Acumulación del tiempo
             tiempo +=h
             Tiempo_list.append(tiempo)
             h = h_new
@@ -323,7 +323,7 @@ class SimpleThread(QtCore.QThread):
         return copy.deepcopy(Tiempo_list), copy.deepcopy(salida), copy.deepcopy(sc_f), copy.deepcopy(setpoint)
 
     def run_fuzzy(self):
-        """ Funcion para realizar la simulacion de sistemas de control de esquemas difusos """
+        """ Función para realizar la simulación de sistemas de control de esquemas difusos """
 
         # Captura de las ganancias
         if self.window.main.kpCheck.isChecked():
@@ -341,7 +341,7 @@ class SimpleThread(QtCore.QThread):
         else:
             kd = 0.0
 
-        # Creacion del controlador difuso
+        # Creación del controlador difuso
         if len(self.fuzzy_path1) > 1 and self.esquema in [1, 2, 3, 4, 5, 6, 7, 8]:
             if '.json' in self.fuzzy_path1:
                 with open(self.fuzzy_path1, "r") as f:
@@ -360,7 +360,7 @@ class SimpleThread(QtCore.QThread):
 
             fuzzy_c1 = FuzzyController(InputList1, OutputList1, RuleEtiquetas1)
 
-        # Creacion del controlador difuso 2 (PD)
+        # Creación del controlador difuso 2 (PD)
         if len(self.fuzzy_path2) > 1 and self.esquema in [4]:
             if '.json' in self.fuzzy_path2:
                 with open(self.fuzzy_path2, "r") as f:
@@ -379,7 +379,7 @@ class SimpleThread(QtCore.QThread):
 
             fuzzy_c2 = FuzzyController(InputList2, OutputList2, RuleEtiquetas2)
 
-        # Transformando a ecuaciones de espacio de estados en caso de que sea funcion de transferencia
+        # Transformando a ecuaciones de espacio de estados en caso de que sea función de transferencia
         if isinstance(self.system, ctrl.TransferFunction):
             self.system = ctrl.tf2ss(self.system)
 
@@ -390,11 +390,11 @@ class SimpleThread(QtCore.QThread):
         tiempo = 0
 
         if isinstance(self.escalon, float):
-            # Escalon simple
+            # Escalón simple
             u = self.escalon
             max_tiempo = [self.Tiempo]
         else:
-            # Escalon avanzado
+            # Escalón avanzado
             it = iter(self.escalon)
             u_value = deque([0])
             max_tiempo = []
@@ -410,7 +410,7 @@ class SimpleThread(QtCore.QThread):
             else:
                 tiempo += max_tiempo[0] - 0.0000011
 
-        # Representacion del 20% de la simulacion
+        # Representacion del 20% de la simulación
         porcentajeBar = int(tiempo_total * 20 / 100)
         if porcentajeBar == 0:
             porcentajeBar = 1
@@ -421,7 +421,7 @@ class SimpleThread(QtCore.QThread):
         sc_t = 0.0  # Señal de control cambiante
         si_t = 0.0  # Acumulador de la señal integral
 
-        # Distincion entre continuo y discreto
+        # Distinción entre continuo y discreto
         if ctrl.isdtime(self.system, strict=True):
             error_a = np.asarray([0.0, 0.0])
             solve = ss_discreta
@@ -480,7 +480,7 @@ class SimpleThread(QtCore.QThread):
         Tiempo_list = [0]
         setpoint = [0]
 
-        # Particularizacion por cada esquema
+        # Particularización por cada esquema
         if self.esquema == 1:  # PID difuso
 
             f_signal_anterior = 0
@@ -528,7 +528,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -541,7 +541,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[-1]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -557,7 +557,7 @@ class SimpleThread(QtCore.QThread):
                         d_error = 0
                         d2_error = 0
 
-                # Calculo del controaldor difuso
+                # Calculo del controlador difuso
                 f_signal = fuzzy_c1.calcular_valor([error, d_error, d2_error],
                                                    [0] * 1)[0]
                 sc_t = sc_t + (f_signal + f_signal_anterior)*h/2
@@ -574,7 +574,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -582,17 +582,17 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
                 if int(tiempo) % porcentajeBar == 0:
                     self.update_progresBar.emit(self.window, int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo +=h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -632,7 +632,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -645,7 +645,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -671,7 +671,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -679,17 +679,17 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
                 if int(tiempo) % porcentajeBar == 0:
                     self.update_progresBar.emit(self.window, int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo +=h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -727,7 +727,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -740,7 +740,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -764,7 +764,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -772,17 +772,17 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
                 if int(tiempo) % porcentajeBar == 0:
                     self.update_progresBar.emit(self.window, int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo +=h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -823,7 +823,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -836,7 +836,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -846,7 +846,7 @@ class SimpleThread(QtCore.QThread):
                     else:
                         d_error = 0
 
-                # Calculo de los controaldores difusos
+                # Calculo de los controladores difusos
                 f_signal = fuzzy_c1.calcular_valor([error, d_error], [0] * 1)[0]
                 spi = spi + (f_signal + f_signal_anterior) * h/2
                 f_signal_anterior = f_signal
@@ -865,7 +865,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -873,17 +873,17 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
                 if int(tiempo) % porcentajeBar == 0:
                     self.update_progresBar.emit(self.window, int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo +=h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -895,7 +895,7 @@ class SimpleThread(QtCore.QThread):
 
             return copy.deepcopy(Tiempo_list), copy.deepcopy(salida), copy.deepcopy(sc_f), copy.deepcopy(setpoint)
 
-        if self.esquema == 5:  # PI difuso + D clasico
+        if self.esquema == 5:  # PI difuso + D clásico
 
             spi = 0
             f_signal_anterior = 0
@@ -924,7 +924,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -937,7 +937,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -965,7 +965,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -973,7 +973,7 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
@@ -981,10 +981,10 @@ class SimpleThread(QtCore.QThread):
                     self.update_progresBar.emit(self.window,
                                                 int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo += h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -996,7 +996,7 @@ class SimpleThread(QtCore.QThread):
 
             return copy.deepcopy(Tiempo_list), copy.deepcopy(salida), copy.deepcopy(sc_f), copy.deepcopy(setpoint)
 
-        if self.esquema == 6:  # PD difuso + I Clasico
+        if self.esquema == 6:  # PD difuso + I Clásico
 
             spi = 0
             error_integral = 0
@@ -1025,7 +1025,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -1038,7 +1038,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -1048,7 +1048,7 @@ class SimpleThread(QtCore.QThread):
                     else:
                         d_error = 0
 
-                # Calculo del controaldor difuso
+                # Calculo del controlador difuso
                 spi = spi + (error + error_integral)*h/2
                 error_integral = error
                 
@@ -1066,7 +1066,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -1074,7 +1074,7 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
@@ -1082,10 +1082,10 @@ class SimpleThread(QtCore.QThread):
                     self.update_progresBar.emit(self.window,
                                                 int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo += h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -1126,7 +1126,7 @@ class SimpleThread(QtCore.QThread):
                 h = 0.05
                 h_new = h
             
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -1139,7 +1139,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     d_error, d2_error, error_a = derivadas_discretas(error, h, error_a)
                 else:
@@ -1149,7 +1149,7 @@ class SimpleThread(QtCore.QThread):
                     else:
                         d_error = 0
 
-                # Calculo del controaldor difuso
+                # Calculo del controlador difuso
                 kp, ki, kd = fuzzy_c1.calcular_valor([error, d_error], [0] * 3)
 
                 spi = spi + (error + error_integral)*h/2
@@ -1169,7 +1169,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -1177,7 +1177,7 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
@@ -1185,10 +1185,10 @@ class SimpleThread(QtCore.QThread):
                     self.update_progresBar.emit(self.window,
                                                 int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo += h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -1200,10 +1200,10 @@ class SimpleThread(QtCore.QThread):
 
             return copy.deepcopy(Tiempo_list), copy.deepcopy(salida), copy.deepcopy(sc_f), copy.deepcopy(setpoint)
 
-        if self.esquema == 8:  # PID clasico + difuso simple
+        if self.esquema == 8:  # PID clásico + difuso simple
 
             if self.N*kd == 0:
-                # N debe mantenerce debido al algoritmo utilizado por la libreria de control para llevar de funcion
+                # N debe mantenerse debido al algoritmo utilizado por la libreria de control para llevar de función
 				# de transferencia a ecuaciones de espacio de estados
                 # Controlador PID con la forma:
                 #    PID = kp + ki/s + (kd*N*s/(s + N))
@@ -1235,7 +1235,7 @@ class SimpleThread(QtCore.QThread):
             x_pid = np.zeros_like(pid.B).astype('float64')
             pid = pid.A.astype('float64'), pid.B.astype('float64'), pid.C.astype('float64'), pid.D.astype('float64')
 
-            # Inicio de la simulacion
+            # Inicio de la simulación
             while tiempo < tiempo_total:
 
                 # Para alternar los valores del setpoint avanzado
@@ -1248,7 +1248,7 @@ class SimpleThread(QtCore.QThread):
                 # Calculo del error
                 error = u - salida[i]
 
-                # Distincion entre continuo y discreto
+                # Distinción entre continuo y discreto
                 if ctrl.isdtime(self.system, strict=True):
                     s_pid, si_t, error_a = PIDf(error, h, si_t, error_a, kp, ki, kd)
                 else:
@@ -1258,7 +1258,7 @@ class SimpleThread(QtCore.QThread):
                 # calculo del controlador difuso
                 s_fuzzy = fuzzy_c1.calcular_valor([error], [0] * 1)[0]
 
-                # Suma del controlador clasico y difuso
+                # Suma del controlador clásico y difuso
                 sc_t = s_pid + s_fuzzy
 
                 # En caso de que se habilite el accionador
@@ -1272,7 +1272,7 @@ class SimpleThread(QtCore.QThread):
                 # Salida del sistema
                 y, x = solve(*system, x, h, sc_t)
 
-                # Acumulacion de la señal de control
+                # Acumulación de la señal de control
                 sc_f.append(sc_t)
 
                 # En caso de que se habilite el sensor
@@ -1280,7 +1280,7 @@ class SimpleThread(QtCore.QThread):
                     salida2.append(y)
                     y, sensor_x = solve(*sensor_system, sensor_x, h, salida2[-1])
 
-                # Acumulacion de la salida
+                # Acumulación de la salida
                 salida.append(y)
 
                 # Actualizacion de la barra de progreso cada 20% de avance
@@ -1288,10 +1288,10 @@ class SimpleThread(QtCore.QThread):
                     self.update_progresBar.emit(self.window,
                                                 int(tiempo) * 100 / tiempo_total)
 
-                # Acumulacion del setpoint
+                # Acumulación del setpoint
                 setpoint.append(u)
 
-                # Acumulacion del tiempo
+                # Acumulación del tiempo
                 tiempo += h
                 Tiempo_list.append(tiempo)
                 h = h_new
@@ -1306,7 +1306,7 @@ class SimpleThread(QtCore.QThread):
 
 def system_creator_tf(self, numerador, denominador):
     """
-    Funcion para la creacion del sistema a partir de los coeficientes del numerador y del denominador de la funcion de transferencia
+    Función para la creación del sistema a partir de los coeficientes del numerador y del denominador de la función de transferencia.
     
     :param numerador: Coeficientes del numerador
     :type numerador: list
@@ -1321,7 +1321,7 @@ def system_creator_tf(self, numerador, denominador):
 
     system = ctrl.TransferFunction(numerador, denominador, delay=delay)
 
-    # Agregando delay con aproximacion por pade para sistemas continuos
+    # Agregando delay con aproximación por pade para sistemas continuos
     if delay and not self.main.tfdiscretocheckBox4.isChecked():
         pade = ctrl.TransferFunction(*ctrl.pade(delay, int(self.main.padeOrder.text())))
         system = system*pade
@@ -1342,7 +1342,7 @@ def system_creator_tf(self, numerador, denominador):
 
 def system_creator_ss(self, A, B, C, D):
     """
-    Funcion para la creacion del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmision directa la ecuacion de espacio de estados
+    Función para la creación del sistema a partir de la matriz de estado, matriz de entrada, matriz de salida y la matriz de transmisión directa.
     
     :param A: Matriz de estados
     :type A: list
@@ -1350,7 +1350,7 @@ def system_creator_ss(self, A, B, C, D):
     :type B: list
     :param C: Matriz de salida
     :type C: list
-    :param D: Matriz de transmision directa
+    :param D: Matriz de transmisión directa
     :type D: list
     """
 
@@ -1361,7 +1361,7 @@ def system_creator_ss(self, A, B, C, D):
 
     system = ctrl.StateSpace(A, B, C, D, delay=delay)
 
-    # Agregando delay con aproximacion por pade para sistemas continuos
+    # Agregando delay con aproximación por pade para sistemas continuos
     if delay and not self.main.ssdiscretocheckBox4.isChecked():
         pade = ctrl.TransferFunction(*ctrl.pade(delay, int(self.main.padeOrder.text())))
         system = system*pade
@@ -1382,7 +1382,7 @@ def system_creator_ss(self, A, B, C, D):
 
 def controlador_validator(self, esquema, InputList, OutputList, RuleEtiquetas):
     """
-    Funcion para validar los controladores difusos con respecto al esquema de control seleccionado
+    Función para validar los controladores difusos con respecto al esquema de control seleccionado
     
     :param esquema: Esquema de control seleccionado representado por un valor
     :type esquema: int
@@ -1400,7 +1400,7 @@ def controlador_validator(self, esquema, InputList, OutputList, RuleEtiquetas):
         else:
             raise AssertionError
 
-    if esquema in [2, 3, 4, 5, 6]:  # PI difuso, PD difuso, PI difuso + PD difuso, PI difuso + D Clasico, PD difuso + I Clasico
+    if esquema in [2, 3, 4, 5, 6]:  # PI difuso, PD difuso, PI difuso + PD difuso, PI difuso + D Clásico, PD difuso + I Clásico
         if len(InputList) == 2 and len(OutputList) == 1 and len(RuleEtiquetas) != 0:
             return
         else:
@@ -1412,7 +1412,7 @@ def controlador_validator(self, esquema, InputList, OutputList, RuleEtiquetas):
         else:
             raise AssertionError
 
-    if esquema == 8:  # PID Clasico + Difuso simple
+    if esquema == 8:  # PID Clásico + Difuso simple
         if len(InputList) == 1 and len(OutputList) == 1 and len(RuleEtiquetas) != 0:
             return
         else:

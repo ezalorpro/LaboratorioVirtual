@@ -1,5 +1,5 @@
 """ 
-Archivo para el manejo de la funcion de diseño de controladores difusos, sirve de intermediario entre la interfaz grafica y la clase creada para manejar el controlador difuso definida en rutinas_fuzzy.py 
+Archivo para el manejo de la función de diseño de controladores difusos, sirve de intermediario entre la interfaz grafica y la clase creada para manejar el controlador difuso definida en rutinas_fuzzy.py 
 """
 
 
@@ -16,7 +16,7 @@ import json
 
 def FuzzyHandler(self):
     """
-    Funcion principal para el manejo de diseño de controladores difusos, se crean las señales a ejecutar cuando se interactua con los widgets
+    Función principal para el manejo de diseño de controladores difusos, se crean las señales a ejecutar cuando se interactuá con los widgets
     """
 
     self.EntradasTab = self.main.fuzzyTabWidget.widget(1)
@@ -42,7 +42,7 @@ def FuzzyHandler(self):
     self.RuleList = []
     self.RuleEtiquetas = []
 
-    # Lista para para contorlar un desplazamiento de ventana
+    # Lista para para controlar un desplazamiento de ventana
     self.vector_rotacion = [-0.25, 0, 0.25, 0.5, 0.75, 1, 1.25]
     self.rotacion_windowIn = 2
     self.rotacion_windowOut = 2
@@ -142,13 +142,13 @@ def FuzzyHandler(self):
 
 
 def cerrar_prueba(self):
-    """ Funcion para cerrar las pestañas de pruebas ante cambios en el controlador difuso """
+    """ Función para cerrar las pestañas de pruebas ante cambios en el controlador difuso """
     
     self.main.fuzzyTabWidget.removeTab(5)
     self.main.fuzzyTabWidget.removeTab(4)
 
 def imagen_entradas(self):
-    """ Funcion para establecer la imagen del numero de entradas """
+    """ Función para establecer la imagen del numero de entradas """
 
     ni = self.main.estrucNumberInputs.currentIndex() + 1
     self.main.imagenInputs.setPixmap(
@@ -157,7 +157,7 @@ def imagen_entradas(self):
 
 
 def imagen_salidas(self):
-    """ Funcion para establecer la imagen del numero de salidas """
+    """ Función para establecer la imagen del numero de salidas """
     no = self.main.estrucNumberOutputs.currentIndex() + 1
     self.main.imagenOutputs.setPixmap(
         QtGui.QPixmap(":/imagenes/imagenes/salida" + str(no) + ".png")
@@ -165,7 +165,7 @@ def imagen_salidas(self):
 
 
 def check_esquema_show(self):
-    """ Funcion para mediar entre entradas y salidas genericas y esquemas de control """
+    """ Función para mediar entre entradas y salidas genéricas y esquemas de control """
 
     if not self.main.fuzzyEsquemasCheck.isChecked():
         self.main.imagenEsquemas.setPixmap(
@@ -178,7 +178,7 @@ def check_esquema_show(self):
 
 
 def show_esquema(self):
-    """ Funcion para establecer la imagen del esquema de control seleccionado """
+    """ Función para establecer la imagen del esquema de control seleccionado """
 
     if self.main.fuzzyEsquemas.currentIndex() == 0:
         self.main.imagenEsquemas.setPixmap(
@@ -229,7 +229,7 @@ def show_esquema(self):
 
 
 def crear_tabs(self):
-    """ Funcion para iniciar el entorno de diseño para entradas y salidas genericas """
+    """ Función para iniciar el entorno de diseño para entradas y salidas genéricas """
 
     if not self.main.fuzzyEsquemasCheck.isChecked():
         self.setWindowTitle(
@@ -241,7 +241,7 @@ def crear_tabs(self):
         self.main.inputNombre.setReadOnly(False)
         self.main.outputNombre.setReadOnly(False)
 
-        # Vaciado de informacion previa
+        # Vaciado de información previa
         self.current_file = ""
         self.InputList = []
         self.OutputList = []
@@ -270,7 +270,7 @@ def crear_tabs(self):
         self.main.inputNumber.clear()
         self.main.outputNumber.clear()
 
-        # Creacion de funciones de membresia genericas
+        # Creación de funciones de membresía genéricas
         for i in range(NumeroEntradas):
             self.main.inputNumber.insertItem(i, str(i + 1))
             temp_dic = inputDic_creator(self, i)
@@ -298,7 +298,7 @@ def crear_tabs(self):
         self.main.inputNumber.blockSignals(False)
         self.main.outputNumber.blockSignals(False)
 
-        # Se inicializa el controlador con la informacion actual
+        # Se inicializa el controlador con la información actual
         self.fuzzController = self.fuzzInitController(self.InputList, self.OutputList)
 
         seleccion_entrada(self)
@@ -307,13 +307,13 @@ def crear_tabs(self):
         self.fuzzController.graficar_mf_in(self, 0)
         self.fuzzController.graficar_mf_out(self, 0)
     else:
-        # En caso de que se seleccione un esquema y no entradas y salidas genericas
+        # En caso de que se seleccione un esquema y no entradas y salidas genéricas
         cargar_esquema(self)
 
 
 def inputDic_creator(self, i):
     """
-    Funcion para crear entradas genericas
+    Función para crear entradas genéricas
     
     :param i: Numero de entrada
     :type i: int
@@ -330,7 +330,7 @@ def inputDic_creator(self, i):
 
 def outputDic_creator(self, i):
     """
-    Funcion para crear salidas genericas
+    Función para crear salidas genéricas
     
     :param i: Numero de salida
     :type i: int
@@ -348,11 +348,11 @@ def outputDic_creator(self, i):
 
 def EtiquetasDic_creator(self, j, erange):
     """
-    Funcion para crear etiquetas genericas
+    Función para crear etiquetas genéricas
     
     :param j: Numero de etiqueta
     :type j: int
-    :param erange: Definicio de la funcion de membresia
+    :param erange: Definición de la función de membresía
     :type erange: list
     """
 
@@ -365,7 +365,7 @@ def EtiquetasDic_creator(self, j, erange):
 
 
 def cargar_esquema(self):
-    """ Funcion para iniciar el entorno de diseño a partir de un esquema de control seleccionado """
+    """ Función para iniciar el entorno de diseño a partir de un esquema de control seleccionado """
 
     # Carga del archivo correspondiente al esquema seleccionado
     path = self.resource_path(
@@ -409,7 +409,7 @@ def cargar_esquema(self):
     self.main.inputNumber.blockSignals(False)
     self.main.outputNumber.blockSignals(False)
 
-    # Se inicializa el controlador con la informacion actual
+    # Se inicializa el controlador con la información actual
     self.fuzzController = self.fuzzInitController(self.InputList,
                                                   self.OutputList,
                                                   self.RuleEtiquetas)
@@ -428,7 +428,7 @@ def cargar_esquema(self):
 
 
 def guardar_controlador(self):
-    """ Funcion manejar el guardado del controlador diseñado """
+    """ Función manejar el guardado del controlador diseñado """
 
     if len(self.current_file) > 0 and not '.fis' in self.current_file:
         with open(self.current_file, "w") as f:
@@ -438,7 +438,7 @@ def guardar_controlador(self):
 
 
 def guardarcomo_controlador(self):
-    """ Funcion manejar el guardado en un nuevo archivo del controlador diseñado """
+    """ Función manejar el guardado en un nuevo archivo del controlador diseñado """
 
     path_guardar = QtWidgets.QFileDialog.getSaveFileName(filter="JSON (*.json)")
     if len(path_guardar[0]) > 1:
@@ -451,7 +451,7 @@ def guardarcomo_controlador(self):
 
 
 def exportar_fis(self):
-    """ Funcion manejar el exportado del controlador diseñado a formato .FIS """
+    """ Función manejar el exportado del controlador diseñado a formato .FIS """
 
     path_guardar = QtWidgets.QFileDialog.getSaveFileName(filter="FIS (*.fis)")
     if len(path_guardar[0]) > 1:
@@ -463,7 +463,7 @@ def exportar_fis(self):
 
 
 def cargar_controlador(self):
-    """ Funcion manejar el cargado de controaldores previamente diseñados, se aceptan formatos .JSON y .FIS """
+    """ Función manejar el cargado de controladores previamente diseñados, se aceptan formatos .JSON y .FIS """
 
     self.path_cargar = QtWidgets.QFileDialog.getOpenFileName(filter="JSON/FIS (*.json *.fis)")
     if len(self.path_cargar[0]) > 1:
@@ -514,7 +514,7 @@ def cargar_controlador(self):
         self.main.inputNumber.blockSignals(False)
         self.main.outputNumber.blockSignals(False)
 
-        # Se inicializa el controlador con la informacion actual
+        # Se inicializa el controlador con la información actual
         self.fuzzController = self.fuzzInitController(self.InputList,
                                                       self.OutputList,
                                                       self.RuleEtiquetas)
@@ -533,7 +533,7 @@ def cargar_controlador(self):
 
 
 def seleccion_entrada(self):
-    """ Funcion para desplegar la informacion de la entrada seleccionada """
+    """ Función para desplegar la información de la entrada seleccionada """
 
     ni = self.main.inputNumber.currentIndex()
     self.main.inputNombre.setText(self.InputList[ni]["nombre"])
@@ -554,7 +554,7 @@ def seleccion_entrada(self):
 
 
 def seleccion_salida(self):
-    """ Funcion para desplegar la informacion de la salida seleccionada """
+    """ Función para desplegar la información de la salida seleccionada """
 
     no = self.main.outputNumber.currentIndex()
     self.main.outputNombre.setText(self.OutputList[no]["nombre"])
@@ -576,11 +576,11 @@ def seleccion_salida(self):
 
 
 def nombre_entrada(self):
-    """ Funcion para manejar el cambio de nombre de la entrada seleccionada """
+    """ Función para manejar el cambio de nombre de la entrada seleccionada """
 
     if self.main.inputNombre.text().strip() == '':
         self.error_dialog.setInformativeText(
-            "El nombre no puede estar vacio")
+            "El nombre no puede estar vació")
         self.error_dialog.exec_()
         self.main.inputNombre.setFocus()
         return
@@ -614,11 +614,11 @@ def nombre_entrada(self):
 
 
 def nombre_salida(self):
-    """ Funcion para manejar el cambio de nombre de la salida seleccionada """
+    """ Función para manejar el cambio de nombre de la salida seleccionada """
 
     if self.main.outputNombre.text().strip() == '':
         self.error_dialog.setInformativeText(
-            "El nombre no puede estar vacio")
+            "El nombre no puede estar vació")
         self.error_dialog.exec_()
         self.main.outputNombre.setFocus()
         return
@@ -652,7 +652,7 @@ def nombre_salida(self):
 
 
 def numero_de_etiquetas_in(self):
-    """ Funcion para manejar el numero de etiquetas para la entrada seleccionada """
+    """ Función para manejar el numero de etiquetas para la entrada seleccionada """
 
     try:
         _ = int(self.main.inputEtiquetasNum.text())
@@ -676,7 +676,7 @@ def numero_de_etiquetas_in(self):
     if self.InputList[ni]["numeroE"] > ne:
         self.main.etiquetaNumIn.blockSignals(True)
 
-        # Eliminacion de las reglas que dependian de las etiquetas a eliminar
+        # Eliminación de las reglas que dependían de las etiquetas a eliminar
         for n in range(self.InputList[ni]["numeroE"] - 1, ne - 1, -1):
             new_list = []
             for i, sets in enumerate(copy.deepcopy(self.RuleEtiquetas)):
@@ -693,7 +693,7 @@ def numero_de_etiquetas_in(self):
             self.RuleEtiquetas = copy.deepcopy(new_list)
             self.main.etiquetaNumIn.removeItem(n)
 
-        # Eliminacion de las etiquetas
+        # Eliminación de las etiquetas
         for _ in range(ne, self.InputList[ni]["numeroE"]):
             self.InputList[ni]["etiquetas"].pop()
 
@@ -716,7 +716,7 @@ def numero_de_etiquetas_in(self):
         self.main.etiquetaNumIn.blockSignals(True)
         rmin, rmax = self.InputList[ni]["rango"]
 
-        # Creacion de funciones de membresia trimf genericas
+        # Creación de funciones de membresía trimf genéricas
         if (ne - self.InputList[ni]["numeroE"]) == 1:
             ini_range_etiquetas = [
                 self.vector_rotacion[self.rotacion_windowIn] * (rmax-rmin) + rmin,
@@ -753,7 +753,7 @@ def numero_de_etiquetas_in(self):
 
 
 def numero_de_etiquetas_out(self):
-    """ Funcion para manejar el numero de etiquetas para la salida seleccionada """
+    """ Función para manejar el numero de etiquetas para la salida seleccionada """
 
     try:
         _ = int(self.main.outputEtiquetasNum.text())
@@ -777,7 +777,7 @@ def numero_de_etiquetas_out(self):
     if self.OutputList[no]["numeroE"] > ne:
         self.main.etiquetaNumOut.blockSignals(True)
 
-        # Eliminacion de las reglas que dependian de las etiquetas a eliminar
+        # Eliminación de las reglas que dependían de las etiquetas a eliminar
         for n in range(self.OutputList[no]["numeroE"] - 1, ne - 1, -1):
             new_list = []
             for o, sets in enumerate(copy.deepcopy(self.RuleEtiquetas)):
@@ -794,7 +794,7 @@ def numero_de_etiquetas_out(self):
             self.RuleEtiquetas = copy.deepcopy(new_list)
             self.main.etiquetaNumOut.removeItem(n)
 
-        # Eliminacion de las etiquetas
+        # Eliminación de las etiquetas
         for _ in range(ne, self.OutputList[no]["numeroE"]):
             self.OutputList[no]["etiquetas"].pop()
 
@@ -817,7 +817,7 @@ def numero_de_etiquetas_out(self):
         self.main.etiquetaNumOut.blockSignals(True)
         rmin, rmax = self.OutputList[no]["rango"]
 
-        # Creacion de funciones de membresia trimf genericas
+        # Creación de funciones de membresía trimf genéricas
         if (ne - self.OutputList[no]["numeroE"]) == 1:
             ini_range_etiquetas = [
                 self.vector_rotacion[self.rotacion_windowOut] * (rmax-rmin) + rmin,
@@ -854,7 +854,7 @@ def numero_de_etiquetas_out(self):
 
 
 def rango_in(self):
-    """ Funcion para manejar el rango para la entrada seleccionada """
+    """ Función para manejar el rango para la entrada seleccionada """
 
     try:
         _ = json.loads(self.main.inputRange.text())
@@ -880,7 +880,7 @@ def rango_in(self):
 
 
 def rango_out(self):
-    """ Funcion para manejar el rango para la salida seleccionada """
+    """ Función para manejar el rango para la salida seleccionada """
 
     try:
         _ = json.loads(self.main.outputRange.text())
@@ -906,7 +906,7 @@ def rango_out(self):
 
 
 def defuzz_metodo(self):
-    """ Funcion para manejar el metodo de defuzzificacion para la salida seleccionada """
+    """ Función para manejar el metodo de defuzzificacion para la salida seleccionada """
 
     self.main.fuzzyTabWidget.removeTab(5)
     self.main.fuzzyTabWidget.removeTab(4)
@@ -919,7 +919,7 @@ def defuzz_metodo(self):
 
 
 def seleccion_etiqueta_in(self):
-    """ Funcion para desplegar la informacion de la etiqueta seleccionada de la entrada actual """
+    """ Función para desplegar la información de la etiqueta seleccionada de la entrada actual """
 
     ni = self.main.inputNumber.currentIndex()
     ne = self.main.etiquetaNumIn.currentIndex()
@@ -934,7 +934,7 @@ def seleccion_etiqueta_in(self):
 
 
 def seleccion_etiqueta_out(self):
-    """ Funcion para desplegar la informacion de la etiqueta seleccionada de la salida actual """
+    """ Función para desplegar la información de la etiqueta seleccionada de la salida actual """
 
     no = self.main.outputNumber.currentIndex()
     ne = self.main.etiquetaNumOut.currentIndex()
@@ -948,11 +948,11 @@ def seleccion_etiqueta_out(self):
     self.main.etiquetaMfOut.blockSignals(False)
 
 def nombre_etiqueta_in(self):
-    """ Funcion para manejar el cambio de nombre de la etiqueta seleccionada de la entrada actual """
+    """ Función para manejar el cambio de nombre de la etiqueta seleccionada de la entrada actual """
 
     if self.main.etiquetaNombreIn.text().strip() == '':
         self.error_dialog.setInformativeText(
-            "El nombre no puede estar vacio")
+            "El nombre no puede estar vació")
         self.error_dialog.exec_()
         self.main.etiquetaNombreIn.setFocus()
         return
@@ -995,7 +995,7 @@ def nombre_etiqueta_in(self):
 
 def actualizar_RulesEtiquetas_in(self, ni, new_name, old_name):
     """
-    Funcion para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta
+    Función para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta
     
     :param ni: Numero de entrada
     :type ni: int
@@ -1015,11 +1015,11 @@ def actualizar_RulesEtiquetas_in(self, ni, new_name, old_name):
 
 
 def nombre_etiqueta_out(self):
-    """ Funcion para manejar el cambio de nombre de la etiqueta seleccionada de la salida actual """
+    """ Función para manejar el cambio de nombre de la etiqueta seleccionada de la salida actual """
 
     if self.main.etiquetaNombreOut.text().strip() == '':
         self.error_dialog.setInformativeText(
-            "El nombre no puede estar vacio")
+            "El nombre no puede estar vació")
         self.error_dialog.exec_()
         self.main.etiquetaNombreOut.setFocus()
         return
@@ -1064,7 +1064,7 @@ def nombre_etiqueta_out(self):
 
 def actualizar_RulesEtiquetas_out(self, no, new_name, old_name):
     """
-    Funcion para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta
+    Función para actualizar el nombre en las reglas previamente creadas con el nuevo nombre de una etiqueta
     
     :param no: Numero de salida
     :type no: int
@@ -1084,23 +1084,23 @@ def actualizar_RulesEtiquetas_out(self, no, new_name, old_name):
 
 
 def seleccion_mf_in(self):
-    """ Funcion para manejar el cambio de funcion de membresia para la etiqueta seleccionada """
+    """ Función para manejar el cambio de función de membresía para la etiqueta seleccionada """
 
     self.main.fuzzyTabWidget.removeTab(5)
     self.main.fuzzyTabWidget.removeTab(4)
     ni = self.main.inputNumber.currentIndex()
     ne = self.main.etiquetaNumIn.currentIndex()
 
-    # Se guarda el nombre de la funcion de membresia anterior
+    # Se guarda el nombre de la función de membresía anterior
     old_mf = self.InputList[ni]["etiquetas"][ne]["mf"]
 
     definicion = self.InputList[ni]["etiquetas"][ne]["definicion"]
     self.InputList[ni]["etiquetas"][ne]["mf"] = self.main.etiquetaMfIn.currentText()
 
-    # Se guarda el nombre de la funcion de membresia seleccionada
+    # Se guarda el nombre de la función de membresía seleccionada
     new_mf = self.InputList[ni]["etiquetas"][ne]["mf"]
 
-    # Se obtiene una definicion aproximada entre la antigua funcion de membresia y la seleccionada
+    # Se obtiene una definicion aproximada entre la antigua función de membresía y la seleccionada
     new_definicion, tooltip = update_definicionmf(self, old_mf, definicion, 'trimf')
     new_definicion, tooltip = update_definicionmf(self, 'trimf', new_definicion, self.main.etiquetaMfIn.currentText())
     new_definicion = round_list(new_definicion)
@@ -1114,7 +1114,7 @@ def seleccion_mf_in(self):
 
 def definicion_in(self):
     """ 
-    Funcion para manejar el cambio de definicion de la funcion de membresia correspondiente a la etiqueta actual
+    Función para manejar el cambio de definicion de la función de membresía correspondiente a la etiqueta actual
     """
 
     try:
@@ -1135,20 +1135,20 @@ def definicion_in(self):
 
 
 def deinificion_in_validator(self):
-    """ Funcion para validar las definiciones de las funciones de membresia """
+    """ Función para validar las definiciones de las funciones de membresía """
 
     mf = self.main.etiquetaMfIn.currentText()
     try:
         _ = json.loads(self.main.etiquetaDefinicionIn.text())
         try:
-            # Funcion externa para la validacion
+            # Función externa para la validacion
             validacion_mf(self, _, mf)
         except AssertionError:
             self.main.etiquetaDefinicionIn.setFocus()
             raise AssertionError
     except ValueError:
         self.error_dialog.setInformativeText(
-            "Formato de definicion invalido para la funcion de membresia: " + mf +
+            "Formato de definicion invalido para la función de membresía: " + mf +
             "\nDebe estar entre corchetes con valores separados por comas")
         self.error_dialog.exec_()
         self.main.etiquetaDefinicionIn.setFocus()
@@ -1156,22 +1156,22 @@ def deinificion_in_validator(self):
 
 
 def seleccion_mf_out(self):
-    """ Funcion para manejar el cambio de funcion de membresia para la etiqueta seleccionada """
+    """ Función para manejar el cambio de función de membresía para la etiqueta seleccionada """
 
     self.main.fuzzyTabWidget.removeTab(5)
     self.main.fuzzyTabWidget.removeTab(4)
     no = self.main.outputNumber.currentIndex()
     ne = self.main.etiquetaNumOut.currentIndex()
-    # Se guarda el nombre de la funcion de membresia anterior
+    # Se guarda el nombre de la función de membresía anterior
     old_mf = self.OutputList[no]["etiquetas"][ne]["mf"]
 
     definicion = self.OutputList[no]["etiquetas"][ne]["definicion"]
     self.OutputList[no]["etiquetas"][ne]["mf"] = self.main.etiquetaMfOut.currentText()
 
-    # Se guarda el nombre de la funcion de membresia seleccionada
+    # Se guarda el nombre de la función de membresía seleccionada
     new_mf = self.OutputList[no]["etiquetas"][ne]["mf"]
 
-    # Se obtiene una definicion aproximada entre la antigua funcion de membresia y la seleccionada
+    # Se obtiene una definicion aproximada entre la antigua función de membresía y la seleccionada
     new_definicion, tooltip = update_definicionmf(self, old_mf, definicion, 'trimf')
     new_definicion, tooltip = update_definicionmf(self, 'trimf', new_definicion, self.main.etiquetaMfOut.currentText())
 
@@ -1185,7 +1185,7 @@ def seleccion_mf_out(self):
 
 def definicion_out(self):
     """ 
-    Funcion para manejar el cambio de definicion de la funcion de membresia correspondiente a la etiqueta actual
+    Función para manejar el cambio de definicion de la función de membresía correspondiente a la etiqueta actual
     """
 
     try:
@@ -1206,20 +1206,20 @@ def definicion_out(self):
 
 
 def deinificion_out_validator(self):
-    """ Funcion para validar las definiciones de las funciones de membresia """
+    """ Función para validar las definiciones de las funciones de membresía """
 
     mf = self.main.etiquetaMfOut.currentText()
     try:
         _ = json.loads(self.main.etiquetaDefinicionOut.text())
         try:
-            # Funcion externa para la validacion
+            # Función externa para la validacion
             validacion_mf(self, _, mf)
         except AssertionError:
             self.main.etiquetaDefinicionOut.setFocus()
             raise AssertionError
     except ValueError:
         self.error_dialog.setInformativeText(
-            "Formato de definicion invalido para la funcion de membresia: " + mf +
+            "Formato de definicion invalido para la función de membresía: " + mf +
             "\nDebe estar entre corchetes con valores separados por comas")
         self.error_dialog.exec_()
         self.main.etiquetaDefinicionOut.setFocus()
@@ -1227,12 +1227,12 @@ def deinificion_out_validator(self):
 
 
 def round_list(lista):
-    """ Funcion para redondear los digitos de una lista """
+    """ Función para redondear los dígitos de una lista """
     return list(np.around(np.array(lista), 3))
 
 
 def rule_list_visualizacion(self):
-    """ Funcion para mostrar las reglas creadas para el controlador actual en un listWidget """
+    """ Función para mostrar las reglas creadas para el controlador actual en un listWidget """
 
     if self.main.fuzzyTabWidget.currentIndex() == 3:
 
@@ -1243,7 +1243,7 @@ def rule_list_visualizacion(self):
         for regla in self.RuleList:
             self.main.rulelistWidget.addItem(str(regla))
 
-        # Se ocultan los widgets necesarios en funcion del numero de entradas y salidas
+        # Se ocultan los widgets necesarios en función del numero de entradas y salidas
         for i, o in zip(self.inframes, self.outframes):
             i.hide()
             o.hide()
@@ -1254,7 +1254,7 @@ def rule_list_visualizacion(self):
 
         self.main.rulelistWidget.setCurrentRow(0)
 
-        # Se muestran los widgets necesarios en funcion del numero de entradas
+        # Se muestran los widgets necesarios en función del numero de entradas
         for i, entrada in enumerate(self.InputList):
             self.inframes[i].show()
             self.inlabels[i].setText(entrada["nombre"])
@@ -1263,7 +1263,7 @@ def rule_list_visualizacion(self):
             self.inlists[i].addItem("None")
             self.inlists[i].setCurrentRow(0)
 
-        # Se muestran los widgets necesarios en funcion del numero de salidas
+        # Se muestran los widgets necesarios en función del numero de salidas
         for o, salida in enumerate(self.OutputList):
             self.outframes[o].show()
             self.outlabels[o].setText(salida["nombre"])
@@ -1278,7 +1278,7 @@ def rule_list_visualizacion(self):
 
 def seleccionar_etiquetas(self):
     """ 
-    Funcion para seleccionar las etiquetas correspodientes a cada entrada/salida de la regla seleccionada
+    Función para seleccionar las etiquetas correspondientes a cada entrada/salida de la regla seleccionada
     """
 
     if len(self.RuleEtiquetas) > 0:
@@ -1329,7 +1329,7 @@ def seleccionar_etiquetas(self):
 
 def rule_list_agregar(self):
     """ 
-    Funcion para crear una nueva regla a partir de las etiquetas seleccionadas para cada entrada y salida
+    Función para crear una nueva regla a partir de las etiquetas seleccionadas para cada entrada y salida
     """
 
     self.main.fuzzyTabWidget.removeTab(5)
@@ -1340,14 +1340,14 @@ def rule_list_agregar(self):
     Etiquetasin = []
     Etiquetasout = []
 
-    # Informacion de la entrada para la regla
+    # Información de la entrada para la regla
     for i, entrada in enumerate(self.InputList):
         if self.inlists[i].currentItem().text() != "None":
             Etiquetasin.append(
                 [self.inlists[i].currentItem().text(), i, self.innots[i].isChecked()]
             )
 
-    # Informacion de la salida para la regla
+    # Información de la salida para la regla
     for o, salida in enumerate(self.OutputList):
         if self.outlists[o].currentItem().text() != "None":
             Etiquetasout.append(
@@ -1376,7 +1376,7 @@ def rule_list_agregar(self):
 
 
 def rule_list_eliminar(self):
-    """ Funcion para eliminar una regla """
+    """ Función para eliminar una regla """
 
     self.main.fuzzyTabWidget.removeTab(5)
     self.main.fuzzyTabWidget.removeTab(4)
@@ -1390,7 +1390,7 @@ def rule_list_eliminar(self):
 
 
 def rule_list_cambiar(self):
-    """ Funcion para modificar una regla """
+    """ Función para modificar una regla """
 
     self.main.fuzzyTabWidget.removeTab(5)
     self.main.fuzzyTabWidget.removeTab(4)
@@ -1402,14 +1402,14 @@ def rule_list_cambiar(self):
     Etiquetasin = []
     Etiquetasout = []
 
-    # Informacion de la entrada para la nueva regla
+    # Información de la entrada para la nueva regla
     for i, entrada in enumerate(self.InputList):
         if self.inlists[i].currentItem().text() != "None":
             Etiquetasin.append(
                 [self.inlists[i].currentItem().text(), i, self.innots[i].isChecked()]
             )
 
-    # Informacion de la salida para la nueva regla
+    # Información de la salida para la nueva regla
     for o, salida in enumerate(self.OutputList):
         if self.outlists[o].currentItem().text() != "None":
             Etiquetasout.append(
@@ -1445,7 +1445,7 @@ def rule_list_cambiar(self):
 
 def crear_controlador(self):
     """ 
-    Funcion para crear el controlador a partir de toda la informacion recolectada, esta creacion se realiza con el fin de realizar la prueba del controlador y observar la superficie de respuesta del controlador en caso de poseer una o dos entradas
+    Función para crear el controlador a partir de toda la información recolectada, esta creación se realiza con el fin de realizar la prueba del controlador y observar la superficie de respuesta del controlador en caso de poseer una o dos entradas
     """
 
     if self.main.rulelistWidget.count():
@@ -1458,7 +1458,7 @@ def crear_controlador(self):
         ni = len(self.InputList)
         no = len(self.OutputList)
 
-        # Se ocultan los widgets necesarios en funcion del numero de entradas y salidas
+        # Se ocultan los widgets necesarios en función del numero de entradas y salidas
         for it_f, ot_f, f2d, f3d in zip(
             self.intestframes,
             self.outtestframes,
@@ -1470,15 +1470,15 @@ def crear_controlador(self):
             f2d.hide()
             f3d.hide()
 
-        # Se muestran los widgets necesarios en funcion del numero de entradas
+        # Se muestran los widgets necesarios en función del numero de entradas
         for i, salida in enumerate(self.InputList):
             self.intestframes[i].show()
 
-        # Se muestran los widgets necesarios en funcion del numero de salidas
+        # Se muestran los widgets necesarios en función del numero de salidas
         for o, salida in enumerate(self.OutputList):
             self.outtestframes[o].show()
 
-        # Ejecucion del codigo correspondiente a la prueba del controlador
+        # Ejecucion del código correspondiente a la prueba del controlador
         prueba_input(self)
 
         # Chequeo del numero de entradas
@@ -1503,7 +1503,7 @@ def crear_controlador(self):
 
 
 def prueba_input(self):
-    """ Funcion para la ejecucion del codigo correspondiente a la prueba del controlador """
+    """ Función para la ejecución del código correspondiente a la prueba del controlador """
 
     ni = len(self.InputList)
     no = len(self.OutputList)
@@ -1520,7 +1520,7 @@ def prueba_input(self):
 
 
 def crear_vectores_de_widgets(self):
-    """ Funcion para el almacenado de widgets en listas para acceder a ellos por indices """
+    """ Función para el almacenado de widgets en listas para acceder a ellos por indices """
 
     self.inframes = [
         self.main.inframe1,

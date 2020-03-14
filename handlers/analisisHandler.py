@@ -1,5 +1,5 @@
 """ 
-Archivo para el manejo de la funcion de analisis de sistemas de control, sirve de intermediario entre la interfaz grafica y las rutinas de analisis 
+Archivo para el manejo de la función de analisis de sistemas de control, sirve de intermediario entre la interfaz gráfica y las rutinas de analisis 
 """
 
 
@@ -10,7 +10,7 @@ import json
 
 def AnalisisHandler(self):
     """
-    Funcion principal para el manejo de la funcionalida de analisis de sistemas de control, se crean las señales a ejecutar cuando se interactua con los widgets incluyendo las validaciones de entradas
+    Función principal para el manejo de la funcionalida de analisis de sistemas de control, se crean las señales a ejecutar cuando se interactuá con los widgets incluyendo las validaciones de entradas
     """
     
     self.main.tfcalcButton1.clicked.connect(lambda: calcular_analisis(self))
@@ -19,7 +19,7 @@ def AnalisisHandler(self):
     self.main.tfradioButton1.toggled.connect(lambda: analisis_stacked_to_tf(self))
     self.main.ssradioButton1.toggled.connect(lambda: analisis_stacked_to_ss(self))
 
-    # Validaciones de entradas
+    # Validaciónes de entradas
 
     self.main.tfnumEdit1.editingFinished.connect(lambda: tfnum_validator(self))
     self.main.tfdemEdit1.editingFinished.connect(lambda: tfdem_validator(self))
@@ -35,7 +35,7 @@ def AnalisisHandler(self):
 
 
 def tfnum_validator(self):
-    """ Validacion del numerador de la funcion de transferencia """
+    """ Validación del numerador de la función de transferencia """
     
     try:
         _ = json.loads(self.main.tfnumEdit1.text())
@@ -49,7 +49,7 @@ def tfnum_validator(self):
 
 
 def tfdem_validator(self):
-    """ Validacion del denominador de la funcion de transferencia """
+    """ Validación del denominador de la función de transferencia """
     
     try:
         _ = json.loads(self.main.tfdemEdit1.text())
@@ -63,7 +63,7 @@ def tfdem_validator(self):
 
 
 def tfdelay_validator(self):
-    """ Validacion del delay de la funcion de transferencia """
+    """ Validación del delay de la función de transferencia """
     
     try:
         _ = float(self.main.tfdelayEdit1.text())
@@ -77,7 +77,7 @@ def tfdelay_validator(self):
 
 
 def tfperiodo_validator(self):
-    """ Validacion del periodo de muestreo de la funcion de transferencia """
+    """ Validación del periodo de muestreo de la función de transferencia """
     
     try:
         _ = float(self.main.tfperiodoEdit1.text())
@@ -92,13 +92,13 @@ def tfperiodo_validator(self):
 
 
 def ssA_validator(self):
-    """ Validacion de la matriz de estados de la ecuacion de espacio de estados """
+    """ Validación de la matriz de estados de la ecuación de espacio de estados """
     
     try:
         _ = json.loads(self.main.ssAEdit1.text())
     except ValueError:
         self.error_dialog.setInformativeText(
-            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
+            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor deberá ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
         )
         self.error_dialog.exec_()
         self.main.ssAEdit1.setFocus()
@@ -106,13 +106,13 @@ def ssA_validator(self):
 
 
 def ssB_validator(self):
-    """ Validacion de la matriz de entrada de la ecuacion de espacio de estados """
+    """ Validación de la matriz de entrada de la ecuación de espacio de estados """
     
     try:
         _ = json.loads(self.main.ssBEdit1.text())
     except ValueError:
         self.error_dialog.setInformativeText(
-            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
+            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor deberá ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
         )
         self.error_dialog.exec_()
         self.main.ssBEdit1.setFocus()
@@ -120,13 +120,13 @@ def ssB_validator(self):
 
 
 def ssC_validator(self):
-    """ Validacion de la matriz de salida de la ecuacion de espacio de estados """
+    """ Validación de la matriz de salida de la ecuación de espacio de estados """
     
     try:
         _ = json.loads(self.main.ssCEdit1.text())
     except ValueError:
         self.error_dialog.setInformativeText(
-            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
+            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor deberá ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
         )
         self.error_dialog.exec_()
         self.main.ssCEdit1.setFocus()
@@ -134,13 +134,13 @@ def ssC_validator(self):
 
 
 def ssD_validator(self):
-    """ Validacion de la matriz de transmision directa de la ecuacion de espacio de estados """
+    """ Validación de la matriz de transmisión directa de la ecuación de espacio de estados """
     
     try:
         _ = json.loads(self.main.ssDEdit1.text())
     except ValueError:
         self.error_dialog.setInformativeText(
-            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor debera ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
+            "Formato no valido, las matrices deben estar definidas entre corchetes con cada fila delimitada por otro par de corchetes y separadas entre si por comas, cada valor deberá ir separado por coma.\n i.g., [[1, 1], [1, -1]]"
         )
         self.error_dialog.exec_()
         self.main.ssDEdit1.setFocus()
@@ -148,7 +148,7 @@ def ssD_validator(self):
 
 
 def ssdelay_validator(self):
-    """ Validacion del delay de la ecuacion de espacio de estados """
+    """ Validación del delay de la ecuación de espacio de estados """
     
     try:
         _ = float(self.main.ssdelayEdit1.text())
@@ -162,7 +162,7 @@ def ssdelay_validator(self):
 
 
 def ssperiodo_validator(self):
-    """ Validacion del periodo de muestreo de la ecuacion de espacio de estados """
+    """ Validación del periodo de muestreo de la ecuación de espacio de estados """
     
     try:
         _ = float(self.main.ssperiodoEdit1.text())
@@ -178,7 +178,7 @@ def ssperiodo_validator(self):
 
 def calcular_analisis(self):
     """
-    Funcion para realizar el los calculos necesarios para la funcionalidad de analisis de sistemas de control, el llamado a esta funcion se realiza por medio del boton calcular
+    Función para realizar el los calculos necesarios para la funcionalidad de analisis de sistemas de control, el llamado a esta función se realiza por medio del botón calcular
     """
     
     system_ss = 0
@@ -197,11 +197,11 @@ def calcular_analisis(self):
         self.dt = None
 
     if self.main.AnalisisstackedWidget.currentIndex() == 0:
-        # caso: Funcion de transferencia
+        # caso: Función de transferencia
         num = json.loads(self.main.tfnumEdit1.text())
         dem = json.loads(self.main.tfdemEdit1.text())
 
-        # Validacion de funcion propia
+        # Validación de función propia
         if len(num) > len(dem):
             self.error_dialog.setInformativeText(
                 "Funcion de transferencia impropia, el numerador debe ser de un grado menor o igual al denominador")
@@ -242,7 +242,7 @@ def calcular_analisis(self):
 
 
 def analisis_bool_discreto(self):
-    """ Funcion para habilitar y deshabilitar el periodo de muestreo """
+    """ Función para habilitar y deshabilitar el periodo de muestreo """
     
     if self.main.tfdiscretocheckBox1.isChecked():
         self.main.tfperiodoEdit1.setEnabled(True)
@@ -251,10 +251,10 @@ def analisis_bool_discreto(self):
 
 
 def analisis_stacked_to_tf(self):
-    """ Funcion para cambiar de ecuacion de espacio de estados a funcion de transferencia """
+    """ Función para cambiar de ecuación de espacio de estados a función de transferencia """
     self.main.AnalisisstackedWidget.setCurrentIndex(0)
 
 
 def analisis_stacked_to_ss(self):
-    """ Funcion para cambiar de funcion de transferencia a ecuacion de espacio de estados """
+    """ Función para cambiar de función de transferencia a ecuación de espacio de estados """
     self.main.AnalisisstackedWidget.setCurrentIndex(1)
