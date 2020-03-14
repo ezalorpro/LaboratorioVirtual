@@ -56,7 +56,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def resource_path(self, relative_path):
         """
-        Funcion para generar direcciones absolutas a partir de direcciones relativas
+        Función para generar direcciones absolutas a partir de direcciones relativas
         
         :param relative_path: dirección relativa
         :type relative_path: str
