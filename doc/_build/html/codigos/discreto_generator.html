@@ -190,6 +190,12 @@
 <li><p><strong>kd</strong> (<em>float</em>) – Ganancia derivativa</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>La salida del controlador PID discreto y el error actual</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, float, deque[float])</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -204,6 +210,15 @@
 <li><p><strong>ts</strong> (<em>float</em>) – Periodo de muestreo</p></li>
 <li><p><strong>error_anterior</strong> (<em>deque Object</em>) – deque con el error anterior</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>La salida del controlador PID discreto</p>
+</dd>
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>La primera y segunda derivada de la señal de error y el error actual</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>tuple(float, float, deque[float])</p>
 </dd>
 </dl>
 </dd></dl>
@@ -220,6 +235,12 @@
 <li><p><strong>_</strong> (<em>float</em>) – No importa</p></li>
 <li><p><strong>inputValue</strong> (<em>float</em>) – Valor de entrada al sistema</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>La salida del sistema y el vector de estado</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, numpyArray)</p>
 </dd>
 </dl>
 </dd></dl>

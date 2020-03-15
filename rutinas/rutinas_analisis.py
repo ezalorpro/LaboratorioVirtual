@@ -20,6 +20,8 @@ def system_creator_tf(self, numerador, denominador):
     :type numerador: list
     :param denominador: Coeficientes del denominador
     :type denominador: list
+    :return: El sistema, el vector de tiempo y el sistema con delay, si el sistema no tiene delay, ambos son iguales
+    :rtype: tuple(LTI, numpyArray, LTI)
     """
 
     if not self.main.tfdiscretocheckBox1.isChecked(
@@ -69,6 +71,8 @@ def system_creator_ss(self, A, B, C, D):
     :type C: list
     :param D: Matriz de transmisión directa
     :type D: list
+    :return: El sistema, el vector de tiempo, el sistema con delay y el sistema en el espacio de estados, si el sistema no tiene delay, ambos son iguales
+    :rtype: tuple(LTI, numpyArray, LTI, LTI)
     """
 
     if not self.main.ssdiscretocheckBox1.isChecked(
@@ -120,6 +124,8 @@ def rutina_step_plot(self, system, T):
     :type system: LTI
     :param T: Vector de tiempo
     :type T: numpyArray
+    :return: Respuesta escalón separada en vector de tiempo y vector de salida
+    :rtype: tuple(numpyArray, numpyArray)
     """
 
     U = np.ones_like(T)
@@ -162,6 +168,8 @@ def rutina_impulse_plot(self, system, T):
     :type system: LTI
     :param T: Vector de tiempo
     :type T: numpyArray
+    :return: Respuesta impulso separada en vector de tiempo y vector de salida
+    :rtype: tuple(numpyArray, numpyArray)
     """
 
     U = np.zeros_like(T)
@@ -215,6 +223,8 @@ def rutina_bode_plot(self, system):
     
     :param system: Representacion del sistema
     :type system: LTI
+    :return: Respuesta en frecuencia separada en vector de magnitudes, vector de fases y vector de frecuencias
+    :rtype: tuple(numpyArray, numpyArray, numpyArray)
     """
 
     if ctrl.isdtime(system, strict=True):
@@ -291,6 +301,8 @@ def rutina_nyquist_plot(self, system):
     
     :param system: Representacion del sistema
     :type system: LTI
+    :return: Respuesta en frecuencia separada en vector de valores reales, vector de valores imaginarios y vector de frecuencias
+    :rtype: tuple(numpyArray, numpyArray, numpyArray)
     """
 
     if ctrl.isdtime(system, strict=True):
@@ -556,6 +568,8 @@ def margenes_ganancias(self, system, mag, phase, omega):
     :type phase: numpyArray
     :param omega: Frecuencias utilizadas para la respuesta en frecuencia
     :type omega: numpyArray
+    :return: Margenes de ganancia y fase separados en margen de ganancia, margen de fase, frecuencia del margen de ganancia y frecuencia del margen de fase
+    :rtype: tuple(float, float, float, float)
     """
 
     gainDb = 20 * np.log10(mag)

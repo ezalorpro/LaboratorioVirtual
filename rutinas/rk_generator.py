@@ -17,6 +17,8 @@ def norm(x):
     
     :param x: Vector
     :type x: numpyArray
+    :return: Norma rms del vector ingresado
+    :rtype: float
     """
     return np.linalg.norm(x) / x.size**0.5
 

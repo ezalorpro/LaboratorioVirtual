@@ -172,6 +172,8 @@
 <span class="sd">    :type _: float</span>
 <span class="sd">    :param inputValue: Valor de entrada al sistema</span>
 <span class="sd">    :type inputValue: float</span>
+<span class="sd">    :return: La salida del sistema y el vector de estado</span>
+<span class="sd">    :rtype: tuple(float, numpyArray)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">*</span><span class="n">inputValue</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">inputValue</span>
@@ -198,6 +200,8 @@
 <span class="sd">    :type ki: float</span>
 <span class="sd">    :param kd: Ganancia derivativa</span>
 <span class="sd">    :type kd: float</span>
+<span class="sd">    :return: La salida del controlador PID discreto y el error actual</span>
+<span class="sd">    :rtype: tuple(float, float, deque[float])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s_proporcional</span> <span class="o">=</span> <span class="n">error</span>
     <span class="n">s_integral</span> <span class="o">=</span> <span class="n">s_integral</span> <span class="o">+</span> <span class="p">(</span><span class="n">error</span> <span class="o">+</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">ts</span><span class="o">/</span><span class="mi">2</span>
@@ -219,6 +223,9 @@
 <span class="sd">    :type ts: float</span>
 <span class="sd">    :param error_anterior: deque con el error anterior</span>
 <span class="sd">    :type error_anterior: deque Object</span>
+<span class="sd">    :return: La salida del controlador PID discreto</span>
+<span class="sd">    :return: La primera y segunda derivada de la señal de error y el error actual</span>
+<span class="sd">    :rtype: tuple(float, float, deque[float])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s_derivativa</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span><span class="o">-</span><span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">ts</span>
     <span class="n">s_derivativa2</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">error_anterior</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">ts</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>

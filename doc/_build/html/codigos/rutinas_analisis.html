@@ -185,6 +185,12 @@
 <li><p><strong>omega</strong> (<em>numpyArray</em>) – Frecuencias utilizadas para la respuesta en frecuencia</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Margenes de ganancia y fase separados en margen de ganancia, margen de fase, frecuencia del margen de ganancia y frecuencia del margen de fase</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, float, float, float)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -195,6 +201,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><p><strong>system</strong> (<em>LTI</em>) – Representacion del sistema</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Respuesta en frecuencia separada en vector de magnitudes, vector de fases y vector de frecuencias</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(numpyArray, numpyArray, numpyArray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -209,6 +221,12 @@
 <li><p><strong>system</strong> (<em>LTI</em>) – Representacion del sistema</p></li>
 <li><p><strong>T</strong> (<em>numpyArray</em>) – Vector de tiempo</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Respuesta impulso separada en vector de tiempo y vector de salida</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(numpyArray, numpyArray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -231,6 +249,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><p><strong>system</strong> (<em>LTI</em>) – Representacion del sistema</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Respuesta en frecuencia separada en vector de valores reales, vector de valores imaginarios y vector de frecuencias</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(numpyArray, numpyArray, numpyArray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -256,6 +280,12 @@
 <li><p><strong>system</strong> (<em>LTI</em>) – Representacion del sistema</p></li>
 <li><p><strong>T</strong> (<em>numpyArray</em>) – Vector de tiempo</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Respuesta escalón separada en vector de tiempo y vector de salida</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(numpyArray, numpyArray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -290,6 +320,12 @@
 <li><p><strong>D</strong> (<em>list</em>) – Matriz de transmisión directa</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema, el vector de tiempo, el sistema con delay y el sistema en el espacio de estados, si el sistema no tiene delay, ambos son iguales</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(LTI, numpyArray, LTI, LTI)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -303,6 +339,12 @@
 <li><p><strong>numerador</strong> (<em>list</em>) – Coeficientes del numerador</p></li>
 <li><p><strong>denominador</strong> (<em>list</em>) – Coeficientes del denominador</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema, el vector de tiempo y el sistema con delay, si el sistema no tiene delay, ambos son iguales</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(LTI, numpyArray, LTI)</p>
 </dd>
 </dl>
 </dd></dl>

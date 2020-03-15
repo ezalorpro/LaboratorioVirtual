@@ -18,6 +18,8 @@ def system_creator_tf(self, numerador, denominador):
     :type numerador: list
     :param denominador: Coeficientes del denominador
     :type denominador: list
+    :return: El sistema, el vector de tiempo, el sistema con delay y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales
+    :rtype: tuple(LTI, numpyArray, LTI, float, float, float)
     """
 
     if not self.main.tfdiscretocheckBox2.isChecked(
@@ -90,6 +92,8 @@ def system_creator_ss(self, A, B, C, D):
     :type C: list
     :param D: Matriz de transmisión directa
     :type D: list
+    :return: El sistema, el vector de tiempo, el sistema con delay, el sistema en el espacio de estados y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales
+    :rtype: tuple(LTI, numpyArray, LTI, LTI, float, float, float)
     """
 
     if not self.main.ssdiscretocheckBox2.isChecked(
@@ -167,6 +171,8 @@ def system_creator_tf_tuning(self, numerador, denominador):
     :type C: list
     :param D: Matriz de transmisión directa
     :type D: list
+    :return: El sistema, el vector de tiempo, el sistema con delay y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales
+    :rtype: tuple(LTI, numpyArray, LTI, float, float, float)
     """
 
     if not self.main.tfdiscretocheckBox2.isChecked(
@@ -240,6 +246,8 @@ def system_creator_ss_tuning(self, A, B, C, D):
     :type C: list
     :param D: Matriz de transmisión directa
     :type D: list
+    :return: El sistema, el vector de tiempo, el sistema con delay, el sistema en el espacio de estados y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales
+    :rtype: tuple(LTI, numpyArray, LTI, LTI, float, float, float)
     """
 
     if not self.main.ssdiscretocheckBox2.isChecked(
@@ -313,6 +321,8 @@ def model_method(self, t, y, dc_gain):
     :type y: numpyArray
     :param dc_gain: Ganancia DC del sistema
     :type dc_gain: float
+    :return: Ganancia, constante de tiempo y tiempo muerto del proceso
+    :rtype: tuple(float, float, float)
     """
 
     i_max = np.argmax(np.abs(np.gradient(y)))
@@ -351,6 +361,8 @@ def auto_tuning_method(self, k_proceso, tau, alpha, metodo):
     :type alpha: float
     :param metodo: Método a utilizar
     :type metodo: str
+    :return: Ganancias kp, ki y kd
+    :rtype: tuple(float, float, float)
     """
 
     if alpha <= 0.05:
@@ -447,6 +459,8 @@ def rutina_step_plot(self, system, T, kp, ki, kd):
     :type ki: float
     :param kd: Ganancia derivativa
     :type kd: float
+    :return: Respuesta escalón separada en vector de tiempo y vector de salida
+    :rtype: tuple(numpyArray, numpyArray)
     """
 
     U = np.ones_like(T)

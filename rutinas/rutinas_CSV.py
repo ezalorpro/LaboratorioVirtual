@@ -23,6 +23,8 @@ def procesar_csv(self, csv_data):
     
     :param csv_data: Data del csv
     :type csv_data: numpyArray
+    :return: Data extraida del archivo CSV asi como indices, máximos y mínimos de la data
+    :rtype: tuple(dict, list[int, int, int, float, float, float, float])
     """
 
     # Identificacion de columnas
@@ -101,6 +103,8 @@ def calcular_modelo(self,
     :type MinEFC: float
     :param MaxEFC: Limite superior de EFC
     :type MaxEFC: float
+    :return: Datos del modelo de primer orden, recta tangente y puntos asociados a la recta
+    :rtype: tuple(float, float, float, float, float, float, float, float, float)
     """
 
     y = dict_data['vp']
@@ -157,6 +161,8 @@ def entonar_y_graficar(self, dict_data, Kc, tau, y1, y2, t0, t1, t2):
     :type t1: float
     :param t2: Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio
     :type t2: float
+    :return: Lista de objetos de gráficas y lista de parametros de la recta para el modelado
+    :rtype: tuple(list[ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType], list[float, float, float, float, float, float])
     """
 
     kp, ki, kd = auto_tuning_method_csv(self, Kc, tau, t1-t0, self.main.csvMetodo.currentText())
@@ -299,6 +305,8 @@ def auto_tuning_method_csv(self, k_proceso, tau, alpha, metodo):
     :type alpha: float
     :param metodo: Método a utilizar
     :type metodo: str
+    :return: Ganancias kp, ki y kd
+    :rtype: tuple(float, float, float)
     """
     
     if alpha <= 0.05:

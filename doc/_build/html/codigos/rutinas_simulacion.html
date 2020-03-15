@@ -212,12 +212,28 @@
 <dt id="rutinas_simulacion.SimpleThread.run_fuzzy">
 <code class="sig-name descname">run_fuzzy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.run_fuzzy"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.run_fuzzy" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Función para realizar la simulación de sistemas de control de esquemas difusos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>Respuesta obtenida en la simulación dividida en vector de tiempo, vector de salida, vector de la señal de control y vector del setpoint</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>tuple(list[float], deque[float], deque[float], list[float])</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="rutinas_simulacion.SimpleThread.run_pid">
 <code class="sig-name descname">run_pid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rutinas_simulacion.html#SimpleThread.run_pid"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#rutinas_simulacion.SimpleThread.run_pid" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Función para realizar la simulación de sistemas de control con controlador PID clásico</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>Respuesta obtenida en la simulación dividida en vector de tiempo, vector de salida, vector de la señal de control y vector del setpoint</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>tuple(list[float], deque[float], deque[float], list[float])</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -257,6 +273,12 @@
 <li><p><strong>D</strong> (<em>list</em>) – Matriz de transmisión directa</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema creado</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>LTI</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -270,6 +292,12 @@
 <li><p><strong>numerador</strong> (<em>list</em>) – Coeficientes del numerador</p></li>
 <li><p><strong>denominador</strong> (<em>list</em>) – Coeficientes del denominador</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema creado</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>LTI</p>
 </dd>
 </dl>
 </dd></dl>

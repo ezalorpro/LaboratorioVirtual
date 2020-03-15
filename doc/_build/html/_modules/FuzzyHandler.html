@@ -466,6 +466,8 @@
 <span class="sd">    </span>
 <span class="sd">    :param i: Numero de entrada</span>
 <span class="sd">    :type i: int</span>
+<span class="sd">    :return: Diccionario con la información de la entrada</span>
+<span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">inputDic</span> <span class="o">=</span> <span class="p">{</span>
@@ -483,6 +485,8 @@
 <span class="sd">    </span>
 <span class="sd">    :param i: Numero de salida</span>
 <span class="sd">    :type i: int</span>
+<span class="sd">    :return: Diccionario con la información de la salida</span>
+<span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">outputDic</span> <span class="o">=</span> <span class="p">{</span>
@@ -503,6 +507,8 @@
 <span class="sd">    :type j: int</span>
 <span class="sd">    :param erange: Definición de la función de membresía</span>
 <span class="sd">    :type erange: list</span>
+<span class="sd">    :return: Diccionario con la información de la etiqueta</span>
+<span class="sd">    :rtype: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">etiquetaDic</span> <span class="o">=</span> <span class="p">{</span>
@@ -1376,7 +1382,14 @@
 
 
 <div class="viewcode-block" id="round_list"><a class="viewcode-back" href="../codigos/FuzzyHandler.html#FuzzyHandler.round_list">[documentos]</a><span class="k">def</span> <span class="nf">round_list</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Función para redondear los dígitos de una lista &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Función para redondear los dígitos de una lista</span>
+<span class="sd">    </span>
+<span class="sd">    :param lista: Lista con valores a redondear</span>
+<span class="sd">    :type lista: list</span>
+<span class="sd">    :return: Lista con valores redondeados</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lista</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span></div>
 
 

@@ -169,6 +169,8 @@
 <span class="sd">    :type numerador: list</span>
 <span class="sd">    :param denominador: Coeficientes del denominador</span>
 <span class="sd">    :type denominador: list</span>
+<span class="sd">    :return: El sistema, el vector de tiempo y el sistema con delay, si el sistema no tiene delay, ambos son iguales</span>
+<span class="sd">    :rtype: tuple(LTI, numpyArray, LTI)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox1</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
@@ -218,6 +220,8 @@
 <span class="sd">    :type C: list</span>
 <span class="sd">    :param D: Matriz de transmisión directa</span>
 <span class="sd">    :type D: list</span>
+<span class="sd">    :return: El sistema, el vector de tiempo, el sistema con delay y el sistema en el espacio de estados, si el sistema no tiene delay, ambos son iguales</span>
+<span class="sd">    :rtype: tuple(LTI, numpyArray, LTI, LTI)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox1</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
@@ -269,6 +273,8 @@
 <span class="sd">    :type system: LTI</span>
 <span class="sd">    :param T: Vector de tiempo</span>
 <span class="sd">    :type T: numpyArray</span>
+<span class="sd">    :return: Respuesta escalón separada en vector de tiempo y vector de salida</span>
+<span class="sd">    :rtype: tuple(numpyArray, numpyArray)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -311,6 +317,8 @@
 <span class="sd">    :type system: LTI</span>
 <span class="sd">    :param T: Vector de tiempo</span>
 <span class="sd">    :type T: numpyArray</span>
+<span class="sd">    :return: Respuesta impulso separada en vector de tiempo y vector de salida</span>
+<span class="sd">    :rtype: tuple(numpyArray, numpyArray)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -364,6 +372,8 @@
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
+<span class="sd">    :return: Respuesta en frecuencia separada en vector de magnitudes, vector de fases y vector de frecuencias</span>
+<span class="sd">    :rtype: tuple(numpyArray, numpyArray, numpyArray)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">isdtime</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -440,6 +450,8 @@
 <span class="sd">    </span>
 <span class="sd">    :param system: Representacion del sistema</span>
 <span class="sd">    :type system: LTI</span>
+<span class="sd">    :return: Respuesta en frecuencia separada en vector de valores reales, vector de valores imaginarios y vector de frecuencias</span>
+<span class="sd">    :rtype: tuple(numpyArray, numpyArray, numpyArray)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">isdtime</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -705,6 +717,8 @@
 <span class="sd">    :type phase: numpyArray</span>
 <span class="sd">    :param omega: Frecuencias utilizadas para la respuesta en frecuencia</span>
 <span class="sd">    :type omega: numpyArray</span>
+<span class="sd">    :return: Margenes de ganancia y fase separados en margen de ganancia, margen de fase, frecuencia del margen de ganancia y frecuencia del margen de fase</span>
+<span class="sd">    :rtype: tuple(float, float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">gainDb</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span>

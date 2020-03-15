@@ -317,6 +317,8 @@ def inputDic_creator(self, i):
     
     :param i: Numero de entrada
     :type i: int
+    :return: Diccionario con la información de la entrada
+    :rtype: dict
     """
 
     inputDic = {
@@ -334,6 +336,8 @@ def outputDic_creator(self, i):
     
     :param i: Numero de salida
     :type i: int
+    :return: Diccionario con la información de la salida
+    :rtype: dict
     """
 
     outputDic = {
@@ -354,6 +358,8 @@ def EtiquetasDic_creator(self, j, erange):
     :type j: int
     :param erange: Definición de la función de membresía
     :type erange: list
+    :return: Diccionario con la información de la etiqueta
+    :rtype: dict
     """
 
     etiquetaDic = {
@@ -1227,7 +1233,14 @@ def deinificion_out_validator(self):
 
 
 def round_list(lista):
-    """ Función para redondear los dígitos de una lista """
+    """
+    Función para redondear los dígitos de una lista
+    
+    :param lista: Lista con valores a redondear
+    :type lista: list
+    :return: Lista con valores redondeados
+    :rtype: list
+    """
     return list(np.around(np.array(lista), 3))
 
 

@@ -257,7 +257,12 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SimpleThread.run_pid"><a class="viewcode-back" href="../codigos/rutinas_simulacion.html#rutinas_simulacion.SimpleThread.run_pid">[documentos]</a>    <span class="k">def</span> <span class="nf">run_pid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Función para realizar la simulación de sistemas de control con controlador PID clásico &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Función para realizar la simulación de sistemas de control con controlador PID clásico</span>
+<span class="sd">        </span>
+<span class="sd">        :return: Respuesta obtenida en la simulación dividida en vector de tiempo, vector de salida, vector de la señal de control y vector del setpoint</span>
+<span class="sd">        :rtype: tuple(list[float], deque[float], deque[float], list[float])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Captura de las ganancias</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
@@ -472,7 +477,13 @@
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">Tiempo_list</span><span class="p">),</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">salida</span><span class="p">),</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sc_f</span><span class="p">),</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">setpoint</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SimpleThread.run_fuzzy"><a class="viewcode-back" href="../codigos/rutinas_simulacion.html#rutinas_simulacion.SimpleThread.run_fuzzy">[documentos]</a>    <span class="k">def</span> <span class="nf">run_fuzzy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Función para realizar la simulación de sistemas de control de esquemas difusos &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Función para realizar la simulación de sistemas de control de esquemas difusos</span>
+<span class="sd">        </span>
+<span class="sd">        :return: Respuesta obtenida en la simulación dividida en vector de tiempo, vector de salida, vector de la señal de control y vector del setpoint</span>
+<span class="sd">        :rtype: tuple(list[float], deque[float], deque[float], list[float])</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Captura de las ganancias</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">kpCheck</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
@@ -1461,6 +1472,8 @@
 <span class="sd">    :type numerador: list</span>
 <span class="sd">    :param denominador: Coeficientes del denominador</span>
 <span class="sd">    :type denominador: list</span>
+<span class="sd">    :return: El sistema creado</span>
+<span class="sd">    :rtype: LTI</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdelaycheckBox4</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
@@ -1501,6 +1514,8 @@
 <span class="sd">    :type C: list</span>
 <span class="sd">    :param D: Matriz de transmisión directa</span>
 <span class="sd">    :type D: list</span>
+<span class="sd">    :return: El sistema creado</span>
+<span class="sd">    :rtype: LTI</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdelaycheckBox4</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>

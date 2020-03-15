@@ -816,7 +816,12 @@
 
 
 <div class="viewcode-block" id="configuration_data"><a class="viewcode-back" href="../codigos/simulacionHandler.html#simulacionHandler.configuration_data">[documentos]</a><span class="k">def</span> <span class="nf">configuration_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Función para cambiar la configuración del solver a utilizar &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Función para cambiar la configuración del solver a utilizar</span>
+<span class="sd">    </span>
+<span class="sd">    :return: Datos necesarios para el solver</span>
+<span class="sd">    :rtype: tuple(function, function, list[function, int, float, float, float, float, float])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rtol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">rtolLineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
     <span class="n">atol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">atolLineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>

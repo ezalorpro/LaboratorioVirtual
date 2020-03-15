@@ -108,7 +108,12 @@ class SimpleThread(QtCore.QThread):
                 self.stop()
 
     def run_pid(self):
-        """ Función para realizar la simulación de sistemas de control con controlador PID clásico """
+        """ 
+        Función para realizar la simulación de sistemas de control con controlador PID clásico
+        
+        :return: Respuesta obtenida en la simulación dividida en vector de tiempo, vector de salida, vector de la señal de control y vector del setpoint
+        :rtype: tuple(list[float], deque[float], deque[float], list[float])
+        """
 
         # Captura de las ganancias
         if self.window.main.kpCheck.isChecked():
@@ -323,7 +328,13 @@ class SimpleThread(QtCore.QThread):
         return copy.deepcopy(Tiempo_list), copy.deepcopy(salida), copy.deepcopy(sc_f), copy.deepcopy(setpoint)
 
     def run_fuzzy(self):
-        """ Función para realizar la simulación de sistemas de control de esquemas difusos """
+        """ 
+        Función para realizar la simulación de sistemas de control de esquemas difusos
+        
+        :return: Respuesta obtenida en la simulación dividida en vector de tiempo, vector de salida, vector de la señal de control y vector del setpoint
+        :rtype: tuple(list[float], deque[float], deque[float], list[float])
+        
+        """
 
         # Captura de las ganancias
         if self.window.main.kpCheck.isChecked():
@@ -1312,6 +1323,8 @@ def system_creator_tf(self, numerador, denominador):
     :type numerador: list
     :param denominador: Coeficientes del denominador
     :type denominador: list
+    :return: El sistema creado
+    :rtype: LTI
     """
 
     if self.main.tfdelaycheckBox4.isChecked():
@@ -1352,6 +1365,8 @@ def system_creator_ss(self, A, B, C, D):
     :type C: list
     :param D: Matriz de transmisión directa
     :type D: list
+    :return: El sistema creado
+    :rtype: LTI
     """
 
     if self.main.ssdelaycheckBox4.isChecked():

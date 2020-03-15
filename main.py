@@ -60,6 +60,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         :param relative_path: dirección relativa
         :type relative_path: str
+        :return: dirección absoluta
+        :rtype: str
         """
 
         base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))

@@ -186,6 +186,12 @@
 <li><p><strong>metodo</strong> (<em>str</em>) – Método a utilizar</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Ganancias kp, ki y kd</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, float, float)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -200,6 +206,12 @@
 <li><p><strong>y</strong> (<em>numpyArray</em>) – Vector de respuesta</p></li>
 <li><p><strong>dc_gain</strong> (<em>float</em>) – Ganancia DC del sistema</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Ganancia, constante de tiempo y tiempo muerto del proceso</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, float, float)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -217,6 +229,12 @@
 <li><p><strong>ki</strong> (<em>float</em>) – Ganancia integral</p></li>
 <li><p><strong>kd</strong> (<em>float</em>) – Ganancia derivativa</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Respuesta escalón separada en vector de tiempo y vector de salida</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(numpyArray, numpyArray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -253,6 +271,12 @@
 <li><p><strong>D</strong> (<em>list</em>) – Matriz de transmisión directa</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema, el vector de tiempo, el sistema con delay, el sistema en el espacio de estados y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(LTI, numpyArray, LTI, LTI, float, float, float)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -269,6 +293,12 @@
 <li><p><strong>D</strong> (<em>list</em>) – Matriz de transmisión directa</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema, el vector de tiempo, el sistema con delay, el sistema en el espacio de estados y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(LTI, numpyArray, LTI, LTI, float, float, float)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -282,6 +312,12 @@
 <li><p><strong>numerador</strong> (<em>list</em>) – Coeficientes del numerador</p></li>
 <li><p><strong>denominador</strong> (<em>list</em>) – Coeficientes del denominador</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema, el vector de tiempo, el sistema con delay y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(LTI, numpyArray, LTI, float, float, float)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -298,6 +334,12 @@
 <li><p><strong>C</strong> (<em>list</em>) – Matriz de salida</p></li>
 <li><p><strong>D</strong> (<em>list</em>) – Matriz de transmisión directa</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>El sistema, el vector de tiempo, el sistema con delay y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(LTI, numpyArray, LTI, float, float, float)</p>
 </dd>
 </dl>
 </dd></dl>

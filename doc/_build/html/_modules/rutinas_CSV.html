@@ -172,6 +172,8 @@
 <span class="sd">    </span>
 <span class="sd">    :param csv_data: Data del csv</span>
 <span class="sd">    :type csv_data: numpyArray</span>
+<span class="sd">    :return: Data extraida del archivo CSV asi como indices y máximos y mínimos de la data</span>
+<span class="sd">    :rtype: tuple(dict, list[int, int, int, float, float, float, float])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Identificacion de columnas</span>
@@ -250,6 +252,8 @@
 <span class="sd">    :type MinEFC: float</span>
 <span class="sd">    :param MaxEFC: Limite superior de EFC</span>
 <span class="sd">    :type MaxEFC: float</span>
+<span class="sd">    :return: Datos del modelo de primer orden, recta tangente y puntos asociados a la recta</span>
+<span class="sd">    :rtype: tuple(float, float, float, float, float, float, float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">y</span> <span class="o">=</span> <span class="n">dict_data</span><span class="p">[</span><span class="s1">&#39;vp&#39;</span><span class="p">]</span>
@@ -306,6 +310,8 @@
 <span class="sd">    :type t1: float</span>
 <span class="sd">    :param t2: Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</span>
 <span class="sd">    :type t2: float</span>
+<span class="sd">    :return: Lista de objetos de gráficas y lista de parametros de la recta para el modelado</span>
+<span class="sd">    :rtype: tuple(list[ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType], list[float, float, float, float, float, float])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span> <span class="o">=</span> <span class="n">auto_tuning_method_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Kc</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">csvMetodo</span><span class="o">.</span><span class="n">currentText</span><span class="p">())</span>
@@ -448,6 +454,8 @@
 <span class="sd">    :type alpha: float</span>
 <span class="sd">    :param metodo: Método a utilizar</span>
 <span class="sd">    :type metodo: str</span>
+<span class="sd">    :return: Ganancias kp, ki y kd</span>
+<span class="sd">    :rtype: tuple(float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">:</span>

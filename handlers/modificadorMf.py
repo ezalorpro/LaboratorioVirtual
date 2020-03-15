@@ -18,6 +18,8 @@ def update_definicionmf(self, old_mf, definicion, new_mf):
     :type definicion: list
     :param new_mf: Nombre de la nueva función de membresía
     :type new_mf: str
+    :return: Definición de la función de membresía y tooltip
+    :rtype: tuple(list[:], str)
     """
     
     if old_mf == 'trimf':

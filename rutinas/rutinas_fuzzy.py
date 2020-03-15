@@ -77,6 +77,8 @@ class FuzzyController:
         
         :param inputlist: Lista de variables de entrada
         :type inputlist: list
+        :return: Variables de entrada
+        :rtype: list
         """
 
         vector = []
@@ -91,6 +93,8 @@ class FuzzyController:
         
         :param outputlist: Lista de variables de salida
         :type outputlist: list
+        :return: Variables de de salida
+        :rtype: list
         """
 
         vector = []
@@ -360,6 +364,8 @@ class FuzzyController:
         
         :param rulelistC: Lista con la información necesaria para crear las reglas
         :type rulelistC: list
+        :return: Lista de reglas
+        :rtype: list
         """
 
         # Un set por cada regla
@@ -418,6 +424,8 @@ class FuzzyController:
         :type Etiquetasout: list
         :param lógica: Lógica a utilizar
         :type lógica: bool
+        :return: Ultima regla agregada
+        :rtype: ObjectType
         """
 
         # Creación del objeto de regla de Scikit-Fuzzy
@@ -483,6 +491,8 @@ class FuzzyController:
         :type index_rule: int
         :param lógica: Lógica a utilizar
         :type lógica: bool
+        :return: Regla cambiada
+        :rtype: ObjectType
         """
 
         del self.rulelist[index_rule]
@@ -959,6 +969,8 @@ class FuzzyController:
         :type inputs: list
         :param outputs: Lista vaciá del tamaño del numero de salidas
         :type outputs: list
+        :return: Lista de valores de salida del controlador difuso
+        :rtype: list
         """
 
         for i, value in enumerate(inputs):
@@ -1105,7 +1117,12 @@ class FISParser:
                 self.RuleList.append(r)
 
     def fis_to_json(self):
-        """ Función para completar la creación del controlador a partir de un archivo .fis """
+        """ 
+        Función para completar la creación del controlador a partir de un archivo .fis
+        
+        :return: Conjunto de entradas, salidas y reglas
+        :rtype: tuple(list)
+        """
 
         # Datos del controlador
         ni = int(self.systemList['numinputs'])
@@ -1324,5 +1341,4 @@ class FISParser:
                 rule_str += f"({str(rules_no_format[i][ni+no])})" + " "
                 rule_str += f": {str(rules_no_format[i][ni+no+1])}\n"
                 f.write(rule_str)
-        return
 

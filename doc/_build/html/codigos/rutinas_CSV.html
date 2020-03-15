@@ -205,6 +205,12 @@
 <li><p><strong>metodo</strong> (<em>str</em>) – Método a utilizar</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Ganancias kp, ki y kd</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, float, float)</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -224,6 +230,12 @@
 <li><p><strong>MinEFC</strong> (<em>float</em>) – Limite inferior de EFC</p></li>
 <li><p><strong>MaxEFC</strong> (<em>float</em>) – Limite superior de EFC</p></li>
 </ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Datos del modelo de primer orden, recta tangente y puntos asociados a la recta</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(float, float, float, float, float, float, float, float, float)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -264,6 +276,12 @@
 <li><p><strong>t2</strong> (<em>float</em>) – Tiempo en el que el proceso alcanza el 63% de su valor final respecto al cambio</p></li>
 </ul>
 </dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Lista de objetos de gráficas y lista de parametros de la recta para el modelado</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(list[ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType, ObjectType], list[float, float, float, float, float, float])</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -278,6 +296,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><p><strong>csv_data</strong> (<em>numpyArray</em>) – Data del csv</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Data extraida del archivo CSV asi como indices y máximos y mínimos de la data</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>tuple(dict, list[int, int, int, float, float, float, float])</p>
 </dd>
 </dl>
 </dd></dl>

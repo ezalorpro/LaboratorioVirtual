@@ -49,6 +49,8 @@ def rk_doble_paso_adaptativo(systema,
     :type min_step_decrease: float
     :param safety_factor: Factor de seguridad
     :type safety_factor: float
+    :return: El tamaño de paso anterior, el nuevo tamaño de paso, la salida y el vector de estado
+    :rtype: tuple(float, float, float, numpyArray)
     """
 
     while True:
@@ -129,6 +131,8 @@ def rk_embebido_adaptativo(systema,
     :type min_step_decrease: float
     :param safety_factor: Factor de seguridad
     :type safety_factor: float
+    :return: El tamaño de paso anterior, el nuevo tamaño de paso, la salida y el vector de estado
+    :rtype: tuple(float, float, float, numpyArray)
     """
 
     while True:

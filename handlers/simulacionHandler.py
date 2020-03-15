@@ -667,7 +667,12 @@ def get_pathcontroller2(self):
 
 
 def configuration_data(self):
-    """ Función para cambiar la configuración del solver a utilizar """
+    """ 
+    Función para cambiar la configuración del solver a utilizar
+    
+    :return: Datos necesarios para el solver
+    :rtype: tuple(function, function, list[function, int, float, float, float, float, float])
+    """
 
     rtol = float(self.main.rtolLineEdit.text())
     atol = float(self.main.atolLineEdit.text())

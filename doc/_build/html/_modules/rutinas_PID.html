@@ -167,6 +167,8 @@
 <span class="sd">    :type numerador: list</span>
 <span class="sd">    :param denominador: Coeficientes del denominador</span>
 <span class="sd">    :type denominador: list</span>
+<span class="sd">    :return: El sistema, el vector de tiempo, el sistema con delay y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</span>
+<span class="sd">    :rtype: tuple(LTI, numpyArray, LTI, float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
@@ -239,6 +241,8 @@
 <span class="sd">    :type C: list</span>
 <span class="sd">    :param D: Matriz de transmisión directa</span>
 <span class="sd">    :type D: list</span>
+<span class="sd">    :return: El sistema, el vector de tiempo, el sistema con delay, el sistema en el espacio de estados y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</span>
+<span class="sd">    :rtype: tuple(LTI, numpyArray, LTI, LTI, float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
@@ -316,6 +320,8 @@
 <span class="sd">    :type C: list</span>
 <span class="sd">    :param D: Matriz de transmisión directa</span>
 <span class="sd">    :type D: list</span>
+<span class="sd">    :return: El sistema, el vector de tiempo, el sistema con delay y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</span>
+<span class="sd">    :rtype: tuple(LTI, numpyArray, LTI, float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">tfdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
@@ -389,6 +395,8 @@
 <span class="sd">    :type C: list</span>
 <span class="sd">    :param D: Matriz de transmisión directa</span>
 <span class="sd">    :type D: list</span>
+<span class="sd">    :return: El sistema, el vector de tiempo, el sistema con delay, el sistema en el espacio de estados y las ganancias kp, ki y kd. Si el sistema no tiene delay, ambos son iguales</span>
+<span class="sd">    :rtype: tuple(LTI, numpyArray, LTI, LTI, float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">ssdiscretocheckBox2</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(</span>
@@ -462,6 +470,8 @@
 <span class="sd">    :type y: numpyArray</span>
 <span class="sd">    :param dc_gain: Ganancia DC del sistema</span>
 <span class="sd">    :type dc_gain: float</span>
+<span class="sd">    :return: Ganancia, constante de tiempo y tiempo muerto del proceso</span>
+<span class="sd">    :rtype: tuple(float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">i_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
@@ -500,6 +510,8 @@
 <span class="sd">    :type alpha: float</span>
 <span class="sd">    :param metodo: Método a utilizar</span>
 <span class="sd">    :type metodo: str</span>
+<span class="sd">    :return: Ganancias kp, ki y kd</span>
+<span class="sd">    :rtype: tuple(float, float, float)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">:</span>
@@ -596,6 +608,8 @@
 <span class="sd">    :type ki: float</span>
 <span class="sd">    :param kd: Ganancia derivativa</span>
 <span class="sd">    :type kd: float</span>
+<span class="sd">    :return: Respuesta escalón separada en vector de tiempo y vector de salida</span>
+<span class="sd">    :rtype: tuple(numpyArray, numpyArray)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>

@@ -226,6 +226,8 @@
 <span class="sd">        </span>
 <span class="sd">        :param inputlist: Lista de variables de entrada</span>
 <span class="sd">        :type inputlist: list</span>
+<span class="sd">        :return: Variables de entrada</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">vector</span> <span class="o">=</span> <span class="p">[]</span>
@@ -240,6 +242,8 @@
 <span class="sd">        </span>
 <span class="sd">        :param outputlist: Lista de variables de salida</span>
 <span class="sd">        :type outputlist: list</span>
+<span class="sd">        :return: Variables de de salida</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">vector</span> <span class="o">=</span> <span class="p">[]</span>
@@ -509,6 +513,8 @@
 <span class="sd">        </span>
 <span class="sd">        :param rulelistC: Lista con la información necesaria para crear las reglas</span>
 <span class="sd">        :type rulelistC: list</span>
+<span class="sd">        :return: Lista de reglas</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Un set por cada regla</span>
@@ -567,6 +573,8 @@
 <span class="sd">        :type Etiquetasout: list</span>
 <span class="sd">        :param lógica: Lógica a utilizar</span>
 <span class="sd">        :type lógica: bool</span>
+<span class="sd">        :return: Ultima regla agregada</span>
+<span class="sd">        :rtype: ObjectType</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Creación del objeto de regla de Scikit-Fuzzy</span>
@@ -632,6 +640,8 @@
 <span class="sd">        :type index_rule: int</span>
 <span class="sd">        :param lógica: Lógica a utilizar</span>
 <span class="sd">        :type lógica: bool</span>
+<span class="sd">        :return: Regla cambiada</span>
+<span class="sd">        :rtype: ObjectType</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">rulelist</span><span class="p">[</span><span class="n">index_rule</span><span class="p">]</span>
@@ -1108,6 +1118,8 @@
 <span class="sd">        :type inputs: list</span>
 <span class="sd">        :param outputs: Lista vaciá del tamaño del numero de salidas</span>
 <span class="sd">        :type outputs: list</span>
+<span class="sd">        :return: Lista de valores de salida del controlador difuso</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
@@ -1254,7 +1266,12 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">RuleList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FISParser.fis_to_json"><a class="viewcode-back" href="../codigos/rutinas_fuzzy.html#rutinas_fuzzy.FISParser.fis_to_json">[documentos]</a>    <span class="k">def</span> <span class="nf">fis_to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Función para completar la creación del controlador a partir de un archivo .fis &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Función para completar la creación del controlador a partir de un archivo .fis</span>
+<span class="sd">        </span>
+<span class="sd">        :return: Conjunto de entradas, salidas y reglas</span>
+<span class="sd">        :rtype: tuple(list)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Datos del controlador</span>
         <span class="n">ni</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systemList</span><span class="p">[</span><span class="s1">&#39;numinputs&#39;</span><span class="p">])</span>
@@ -1472,8 +1489,7 @@
                     <span class="n">rule_str</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rules_no_format</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
                 <span class="n">rule_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;({str(rules_no_format[i][ni+no])})&quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
                 <span class="n">rule_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;: {str(rules_no_format[i][ni+no+1])}</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rule_str</span><span class="p">)</span>
-        <span class="k">return</span></div></div>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rule_str</span><span class="p">)</span></div></div>
 
 </pre></div>
 

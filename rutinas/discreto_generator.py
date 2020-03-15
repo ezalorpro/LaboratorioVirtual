@@ -23,6 +23,8 @@ def ss_discreta(A, B, C, D, x, _, inputValue):
     :type _: float
     :param inputValue: Valor de entrada al sistema
     :type inputValue: float
+    :return: La salida del sistema y el vector de estado
+    :rtype: tuple(float, numpyArray)
     """
     x = np.dot(A, x) + B*inputValue
     y = np.dot(C, x) + D*inputValue
@@ -49,6 +51,8 @@ def PID_discreto(error, ts, s_integral, error_anterior, kp, ki, kd):
     :type ki: float
     :param kd: Ganancia derivativa
     :type kd: float
+    :return: La salida del controlador PID discreto y el error actual
+    :rtype: tuple(float, float, deque[float])
     """
     s_proporcional = error
     s_integral = s_integral + (error + error_anterior[0])*ts/2
@@ -70,6 +74,9 @@ def derivadas_discretas(error, ts, error_anterior):
     :type ts: float
     :param error_anterior: deque con el error anterior
     :type error_anterior: deque Object
+    :return: La salida del controlador PID discreto
+    :return: La primera y segunda derivada de la señal de error y el error actual
+    :rtype: tuple(float, float, deque[float])
     """
     s_derivativa = (error-error_anterior[0]) / ts
     s_derivativa2 = (error - 2 * error_anterior[0] + error_anterior[1]) / (ts**2)
